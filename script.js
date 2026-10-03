@@ -75,35 +75,48 @@
   function slide(cls, label, listTitle) {
     var s = el('section', 'slide ' + cls);
     s.setAttribute('aria-label', label);
-    add(s, el('div', 'glow'));
     stage.appendChild(s);
     slides.push(s);
     titles.push(listTitle || label);
     return s;
   }
 
+  function side(extra) {
+    var d = el('div', 'side');
+    var org = el('div', 'org', CHURCH);
+    org.appendChild(el('span', null, PLACE));
+    d.appendChild(org);
+    if (extra) d.appendChild(extra);
+    return d;
+  }
+
   // Title
   (function () {
     var s = slide('slide--title', TITLE, 'Title');
-    add(s,
-      el('div', 'cross rise'),
-      el('p', 'church rise', CHURCH),
-      el('p', 'place rise', PLACE),
-      el('div', 'rule rise'),
-      el('h1', 'rise', EVENT),
-      el('h2', 'rise', TITLE),
-      el('p', 'when rise', DATE));
+    var main = add(el('div', 't-main'),
+      el('div', 'cross'),
+      el('p', 'church', CHURCH),
+      el('p', 'place', PLACE),
+      el('h1', null, EVENT),
+      el('h2', null, TITLE));
+    var band = el('dl', 't-band');
+    [DETAILS[0], DETAILS[1], DETAILS[2]].forEach(function (row) {
+      add(band, add(el('div'), el('dt', null, row[0]), el('dd', null, row[1])));
+    });
+    add(s, main, band);
   })();
 
   // Details
   (function () {
     var s = slide('slide--info', 'Program details', 'Program details');
-    var dl = el('dl', 'info-grid rise');
+    var info = el('dl', 'info');
+    var brk = false;
     DETAILS.forEach(function (row) {
-      if (!row) { dl.appendChild(el('div', 'gap')); return; }
-      add(dl, el('dt', null, row[0]), el('dd', null, row[1]));
+      if (!row) { brk = true; return; }
+      add(info, add(el('div', 'row' + (brk ? ' break' : '')), el('dt', null, row[0]), el('dd', null, row[1])));
+      brk = false;
     });
-    add(s, el('h2', 'rise', TITLE), el('div', 'rule rise'), dl);
+    add(s, side(el('h2', null, TITLE)), add(el('div', 'main'), info));
   })();
 
   // Program items
@@ -114,7 +127,7 @@
     var s = slide('slide--item' + (blocks.length > 1 ? ' slide--multi' : ''), 'Item ' + n + ': ' + first, first);
     var body = el('div', 'body');
     blocks.forEach(function (b) {
-      var blk = el('div', 'block rise');
+      var blk = el('div', 'block');
       if (b.label) blk.appendChild(el('div', 'label', b.label));
       if (b.value) blk.appendChild(el('div', 'value' + (b.hymn ? ' hymn' : ''), b.value));
       if (b.text) blk.appendChild(el('div', 'text', b.text));
@@ -127,25 +140,22 @@
     count.appendChild(el('b', null, String(n)));
     count.appendChild(document.createTextNode(' / ' + total));
     add(foot, el('span', null, EVENT), count);
-    add(s,
-      add(el('div', 'topbar'), el('span', null, CHURCH), el('span', null, TITLE)),
-      el('div', 'cross'),
-      el('div', 'num', String(n)),
-      body,
-      foot);
+    var panel = side(el('div', 'num', String(n)));
+    add(s, panel, add(el('div', 'main'),
+      add(el('div', 'running'), el('span', null, TITLE), el('span', null, DATE)),
+      body, foot));
     s.itemNumber = n;
   });
 
   // Closing
   (function () {
     var s = slide('slide--end', 'End', 'Closing');
-    add(s,
-      el('div', 'cross rise'),
-      el('p', 'church rise', CHURCH),
-      el('p', 'place rise', PLACE),
-      el('div', 'rule rise'),
-      el('p', 'what rise', EVENT + ' · ' + TITLE),
-      el('p', 'when rise', DATE));
+    add(s, add(el('div', 't-main'),
+      el('div', 'cross'),
+      el('p', 'church', CHURCH),
+      el('p', 'place', PLACE),
+      el('h1', null, EVENT),
+      el('h2', null, TITLE + ' · ' + DATE)));
   })();
 
   var last = slides.length - 1;
@@ -243,9 +253,9 @@
     try { localStorage.setItem('program-theme', t); } catch (e) { /* ignore */ }
   }
   function toggleTheme() {
-    var t = document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+    var t = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
     setTheme(t);
-    toast(t === 'light' ? 'Light theme' : 'Dark theme');
+    toast(t === 'dark' ? 'Dark theme' : 'Light theme');
   }
   try { var saved = localStorage.getItem('program-theme'); if (saved) setTheme(saved); } catch (e) { /* ignore */ }
 
