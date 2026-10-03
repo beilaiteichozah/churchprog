@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lower Third · Mara Evangelical Church</title>
+  <meta name="description" content="Lower-third name graphic (speaker, singer, choir) for the program. Transparent background for video overlay.">
+  <link rel="stylesheet" href="lowerthird.css">
+</head>
+<body>
+  <main id="stage" class="stage" aria-label="Lower third">
+    <div class="lt" id="lt" data-state="hidden" aria-live="polite">
+      <div class="mark"><i class="cross" aria-hidden="true"></i></div>
+      <div class="plate">
+        <div class="txt">
+          <p class="role"><span id="role"></span></p>
+          <p class="name"><span id="name"></span></p>
+          <p class="detail"><span id="detail"></span></p>
+        </div>
+        <i class="timer" id="timer" aria-hidden="true"></i>
+      </div>
+    </div>
+  </main>
+
+  <div id="toast" class="toast" role="status"></div>
+
+  <section id="listPanel" class="overlay" hidden aria-label="Names">
+    <div class="panel">
+      <h2>Names</h2>
+      <ol id="items"></ol>
+      <p class="hint">Click a name to show it. Press <b>Esc</b> to close.</p>
+    </div>
+  </section>
+
+  <section id="customPanel" class="overlay" hidden aria-label="Custom lower third">
+    <form class="panel narrow" id="customForm" autocomplete="off">
+      <h2>Show something else</h2>
+      <label>Label <small>(Speaker, Singer…)</small><input id="cRole" maxlength="60" placeholder="Speaker"></label>
+      <label>Name<input id="cName" maxlength="80" placeholder="Name" required></label>
+      <label>Detail <small>(optional)</small><input id="cDetail" maxlength="80" placeholder="Title or group"></label>
+      <div class="row"><button type="submit" class="go">Show</button><button type="button" id="cCancel" class="plain">Cancel</button></div>
+      <p class="hint">Press <b>Enter</b> to show, <b>Esc</b> to cancel.</p>
+    </form>
+  </section>
+
+  <section id="helpPanel" class="overlay" hidden aria-label="Keyboard shortcuts">
+    <div class="panel narrow">
+      <h2>Keyboard shortcuts</h2>
+      <dl>
+        <dt>Space or Enter</dt><dd>Show / hide the lower third</dd>
+        <dt>→ ↓ PgDn</dt><dd>Next name</dd>
+        <dt>← ↑ PgUp</dt><dd>Previous name</dd>
+        <dt>12 then Enter</dt><dd>Show the name for program item 12</dd>
+        <dt>Esc</dt><dd>Hide the lower third</dd>
+        <dt>E</dt><dd>Type a different name and show it</dd>
+        <dt>G</dt><dd>List of names</dd>
+        <dt>A</dt><dd>Auto-hide on / off</dd>
+        <dt>V</dt><dd>Background: transparent, checker, dark, green</dd>
+        <dt>T</dt><dd>Light / dark plate</dd>
+        <dt>M</dt><dd>Full / reduced animation</dd>
+        <dt>F</dt><dd>Fullscreen</dd>
+        <dt>H</dt><dd>Open the full Help page (new tab)</dd>
+      </dl>
+      <p class="hint">Press Esc to close.</p>
+    </div>
+  </section>
+
+  <script src="lowerthird-data.js"></script>
+  <script src="lowerthird.js"></script>
+</body>
+</html>
