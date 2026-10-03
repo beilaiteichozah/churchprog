@@ -328,6 +328,116 @@
           ]
         }
       ]
+    },
+    {
+      "id": "riethei-na-taona-mothlih",
+      "title": "Riethei Na Taona Mothlih",
+      "sections": [
+        {
+          "id": "v1",
+          "label": "Verse 1",
+          "lines": [
+            "Hnabeiseih awpa na hnei vei khiah",
+            "Hnabeiseihna hneituhpa Zisu hnohta thai ngai la",
+            "Ano ta lâpi châ chhih aw ta",
+            "Panao leipa ta thatlôna ta cha pabie aw",
+            "Reipachhiena, mohnaonazy",
+            "Na chô lia vaw tlô tyh hrasala",
+            "Moleina ta cha tiah aw vei",
+            "Khazohpa ta na chhâh â châh aw"
+          ]
+        },
+        {
+          "id": "v2",
+          "label": "Verse 2",
+          "lines": [
+            "Pasataona vâta na motlihzy",
+            "Reitiah leita tla hrasala",
+            "Abeipa ta a pahno",
+            "Nâ chhuahnazy hlaotloh mawh sy",
+            "A thieh via rili a kyhpachâna",
+            "Na phaohri zydua ano pahnieh la",
+            "Lyna kipa cha Zisu hnoh deita na hmô aw",
+            "Riethei na taona mothlih zydua a hru aw"
+          ]
+        },
+        {
+          "id": "v3",
+          "label": "Verse 3",
+          "lines": [
+            "Beipa ta nâ ngiahna a pahno",
+            "Na thlhchhâna hrao lei ta pachâsa aw vei",
+            "Zisu dei lei lâthlôh hropa y vei",
+            "Eimâ ngiahna zydua pahnotuhpa a châ",
+            "Kôchâhdi chiehpazy khô ta",
+            "Hnôhsy leita hmialâ sie la",
+            "Zisu cha pathlala aw vei",
+            "Na moleina â ngiahthai haw"
+          ]
+        },
+        {
+          "id": "v4",
+          "label": "Verse 4",
+          "lines": [
+            "Pasataona vâta na motlihzy",
+            "Reitiah leita tla hrasala",
+            "Abeipa ta a pahno",
+            "Nâ chhuahnazy hlaotloh mawh sy",
+            "A thieh via rili a kyhpachâna",
+            "Na phaohri zydua ano pahnieh la",
+            "Lyna kipa cha Zisu hnoh deita na hmô aw"
+          ]
+        },
+        {
+          "id": "v5",
+          "label": "Verse 5",
+          "lines": [
+            "Na nôponazy ano pahnieh la",
+            "Na chiehleina lia Zisu ta a cha bao lymâ aw",
+            "A kyhpachâna hmoto zydua hlâ keichâta a sôh chai"
+          ]
+        },
+        {
+          "id": "v6",
+          "label": "Verse 6",
+          "lines": [
+            "Pasataona vâta na motlihzy",
+            "Reitiah leita tla hrasala",
+            "Abeipa ta a pahno",
+            "Nâ chhuahnazy hlaotloh mawh sy",
+            "A thieh via rili a kyhpachâna",
+            "Na phaohri zydua ano pahnieh la",
+            "Lyna kipa cha Zisu hnoh deita na hmô aw"
+          ]
+        },
+        {
+          "id": "v7",
+          "label": "Verse 7",
+          "lines": [
+            "Pasataona vâta na motlihzy",
+            "Reitiah leita tla hrasala",
+            "Abeipa ta a pahno",
+            "Nâ chhuahnazy hlaotloh mawh sy",
+            "A thieh via rili a kyhpachâna",
+            "Na phaohri zydua ano pahnieh la",
+            "Lyna kipa cha Zisu hnoh deita na hmô aw"
+          ]
+        },
+        {
+          "id": "v8",
+          "label": "Verse 8",
+          "lines": [
+            "Na ngiachhiena mothlih zydua a hru aw"
+          ]
+        },
+        {
+          "id": "end",
+          "label": "Ending",
+          "lines": [
+            "Riethei na taona mothlih zydua a hru aw"
+          ]
+        }
+      ]
     }
   ]
 }
