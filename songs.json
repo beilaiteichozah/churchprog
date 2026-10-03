@@ -283,6 +283,51 @@
           ]
         }
       ]
+    },
+    {
+      "id": "daithi-nah-noh-zyh-kho",
+      "title": "Daithi nah noh zyh khô",
+      "sections": [
+        {
+          "id": "v1",
+          "label": "Verse 1",
+          "lines": [
+            "Daithi nah noh zy khô lymâ",
+            "Lochhono daihtizy chhao a khô heih",
+            "Thyuthlia paw ngianazy chhao ramâ lâ",
+            "Hawh deita daiti ta a seikhei lymâ"
+          ]
+        },
+        {
+          "id": "c",
+          "label": "Chorus",
+          "lines": [
+            "Chakaona vâ dei châ thei awpi",
+            "Chakaona vâ chhao my aw mapi",
+            "Lei lia riethei nama taonazy kha",
+            "Vâ lia awhsi hawhta nama khaih aw"
+          ]
+        },
+        {
+          "id": "v2",
+          "label": "Verse 2",
+          "lines": [
+            "Khizaw pawngiana pawtihzy",
+            "Lei hneirôhna phasana zydua chhao",
+            "Palôh ta tlaichhai hr'eisa Zisu Krista moh ta Hnôchhy ta apaky khai ei"
+          ]
+        },
+        {
+          "id": "v3",
+          "label": "Verse 3",
+          "lines": [
+            "Lei liata chakaona patlô ta",
+            "Reithei mohnao reipachhienazy cha",
+            "A tovyuh châ tyh h'reisa paw hmiakô",
+            "Lia deikua pawpi hawhta a pakai aw"
+          ]
+        }
+      ]
     }
   ]
 }
