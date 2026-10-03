@@ -120,6 +120,65 @@
           ]
         }
       ]
+    },
+    {
+      "id": "hy-beipa-chonochai-eima-cha-reithai",
+      "title": "Hy, Beipa Chônôchai, eima cha reithai",
+      "composer": "Thanga 1883 - 1957",
+      "number": 15,
+      "edition": "13th Edition",
+      "sections": [
+        {
+          "id": "v1",
+          "label": "Verse 1",
+          "lines": [
+            "Hy, Beipa Chônôchai, eima cha reithai,",
+            "Khazohpa Hroh nata Atotaotheipa;",
+            "Sei, mohnaopa nata viavipa Viasa,",
+            "Hâra, rietheipazy Bei, Paw nah Khazoh."
+          ]
+        },
+        {
+          "id": "v2",
+          "label": "Verse 2",
+          "lines": [
+            "Thlahchhâna achyh-eituh Khazohpa y,",
+            "Na chyhsazy hiapa maih khâ na pie tyh;",
+            "Na sawzy chapa nah rôhpa na nahthlie,",
+            "Hmo pha a taopa maih aheihsai va chi."
+          ]
+        },
+        {
+          "id": "v3",
+          "label": "Verse 3",
+          "lines": [
+            "Molaipa, mochyhpazy hnohta chho la,",
+            "Châ dyuhtuhpa nah zawpizy hnoh chhaota;",
+            "\"Tahmâ pachha ta eima y thei n'awpa,",
+            "Khâpa eima tao aw?\" tah ei se, Amen."
+          ]
+        },
+        {
+          "id": "v4",
+          "label": "Verse 4",
+          "lines": [
+            "Pho to zohna apuasaipa ly ei sy,",
+            "“Chônôchai ta Khazohpa rônah mawh sy,",
+            "Lei chô liata adyhna charei mawh sy,",
+            "Hôzana, Hôzana,\" tahpa ta sa se."
+          ]
+        },
+        {
+          "id": "v5",
+          "label": "Verse 5",
+          "lines": [
+            "Chyhsa zydua hnohta na moh zachhih se,",
+            "Na khinarâh rônahpa vaw tlô mawh sy;",
+            "Vâmo ama taopa hawhta lei mo chhao,",
+            "Na khopa tao ei se, râh to ta, Amen."
+          ]
+        }
+      ]
     }
   ]
 }
