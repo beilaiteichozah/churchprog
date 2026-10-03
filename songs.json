@@ -179,6 +179,63 @@
           ]
         }
       ]
+    },
+    {
+      "id": "palyupalih-reithaina",
+      "title": "Palyupalih reithaina",
+      "composer": "St. Si Tha",
+      "sections": [
+        {
+          "id": "v1",
+          "label": "Verse 1",
+          "lines": [
+            "Palyupalih reithaina,",
+            "A to tlâhpa Khazohpa",
+            "Lei nah vâ zydua chôlia",
+            "Na hmotaopa ei sai châh ta",
+            "Â ngia zie reih thei vana",
+            "Na hmotao rônahpazy",
+            "Pachâ châh ta noâhna ta na bie."
+          ]
+        },
+        {
+          "id": "c",
+          "label": "Chorus",
+          "lines": [
+            "Na moh rônah chai se,",
+            "Lei nah vâ zydua ataotuh Khazoh",
+            "Eima cha reithai aw",
+            "Namoh tlyzaw reithai ta y mawh sy",
+            "Beichaipa"
+          ]
+        },
+        {
+          "id": "v2",
+          "label": "Verse 2",
+          "lines": [
+            "Noh nah thlâpâ awhsi zy,",
+            "Tilaipi nah tlâhpi zy",
+            "Pawpi pawngiazy to",
+            "Na rônah zie palâsa ei",
+            "A rônah tah lei thei va",
+            "Sôh pavaw aongiapazy",
+            "No moh rônah zachhihpa cha reithai ei."
+          ]
+        },
+        {
+          "id": "v3",
+          "label": "Verse 3",
+          "lines": [
+            "Na moh rônah chai mawh sy",
+            "Lei nah vâ zydua chô lia",
+            "palyupalih reithaina",
+            "Zydua he nâ eih châsala",
+            "Na moh za a chhih mawh sy",
+            "Eima ao hnei chhôhpazy",
+            "Tlyzaw ta eima cha reithai lymâ aw"
+          ]
+        }
+      ]
     }
   ]
 }
