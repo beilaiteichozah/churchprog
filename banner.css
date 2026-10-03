@@ -1,0 +1,133 @@
+/* Main banner — fixed 1920x1080 artboard scaled to the screen. */
+
+:root {
+  --bg: #0e0d0c;
+  --ink: #f6f0e4;
+  --muted: #9c9386;
+  --line: rgba(246, 240, 228, .16);
+  --red: #c1272d;
+  --red-deep: #8f1a20;
+  --accent: #ef5b50;
+  --sans: "Segoe UI", "Helvetica Neue", Helvetica, Arial, "Liberation Sans", sans-serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+  background: #060505;
+  color: var(--ink);
+  font-family: var(--sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+body.idle { cursor: none; }
+
+.stage {
+  position: absolute;
+  left: 50%; top: 50%;
+  width: 1920px; height: 1080px;
+  transform: translate(-50%, -50%) scale(var(--s, 1));
+  background: var(--bg);
+  overflow: hidden;
+}
+
+/* ---------- Artwork ---------- */
+.art { position: absolute; inset: 0; width: 1920px; height: 1080px; }
+.art .arm { transform-box: fill-box; transform-origin: center; }
+.art .arm-h { fill: var(--red-deep); }
+.art .arm-v { fill: var(--red); }
+.art .outline { fill: none; stroke: var(--ink); stroke-opacity: .2; stroke-width: 2; transform: translate(-44px, 44px); }
+
+.plate {
+  position: absolute;
+  left: 1410px; top: 330px; width: 300px; height: 300px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  color: #fff;
+  line-height: 1;
+  text-align: center;
+}
+.plate-day   { font-size: 128px; font-weight: 800; letter-spacing: -.04em; }
+.plate-month { margin-top: 8px; font-size: 44px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; }
+.plate-year  { margin-top: 10px; font-size: 44px; font-weight: 300; letter-spacing: .12em; }
+
+/* ---------- Text ---------- */
+.content {
+  position: absolute;
+  left: 120px; top: 92px; bottom: 88px;
+  width: 1090px;
+  display: flex; flex-direction: column; justify-content: space-between;
+}
+
+.head .church {
+  display: flex; align-items: center; gap: 20px;
+  font-size: 34px; font-weight: 700; letter-spacing: .22em; text-transform: uppercase;
+}
+.mark { display: block; width: 22px; height: 22px; background: var(--red); }
+.head .place { margin: 12px 0 0 42px; font-size: 24px; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); }
+
+.mask { display: block; overflow: hidden; padding: .06em 0 .1em; margin: -.06em 0 -.1em; }
+.line { display: block; white-space: nowrap; }
+
+h1 { font-size: 100px; line-height: 1.04; font-weight: 800; letter-spacing: -.025em; text-transform: uppercase; }
+.program { margin-top: 38px; display: flex; align-items: center; gap: 28px; font-size: 44px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); }
+.program::before { content: ""; flex: 0 0 90px; height: 4px; background: var(--accent); transform-origin: left; }
+
+.facts { border-bottom: 1px solid var(--line); }
+.fact { display: grid; grid-template-columns: 230px 1fr; align-items: center; padding: 17px 0; border-top: 1px solid var(--line); }
+.fact dt { font-size: 21px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); }
+.fact dd { font-size: 38px; font-weight: 600; letter-spacing: -.005em; }
+
+/* ---------- Entrance animation (rests in its final state) ---------- */
+@keyframes grow-x { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes grow-y { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+@keyframes fade   { from { opacity: 0; } to { opacity: 1; } }
+@keyframes reveal { from { transform: translateY(110%); } to { transform: none; } }
+@keyframes rise   { from { opacity: 0; transform: translateY(26px); } to { opacity: 1; transform: none; } }
+@keyframes drift  { from { transform: translate(-44px, 44px); } to { transform: translate(-30px, 30px); } }
+@keyframes pop    { from { opacity: 0; transform: scale(.9); } to { opacity: 1; transform: none; } }
+
+.arm-h { animation: grow-x 1s .25s cubic-bezier(.7, 0, .2, 1) both; }
+.arm-v { animation: grow-y 1.1s cubic-bezier(.7, 0, .2, 1) both; }
+.outline { animation: fade 1.2s 1s both, drift 9s 2.2s ease-in-out infinite alternate; }
+.plate > * { animation: pop .7s 1.15s cubic-bezier(.2, .8, .2, 1) both; }
+.plate > :nth-child(2) { animation-delay: 1.25s; }
+.plate > :nth-child(3) { animation-delay: 1.35s; }
+
+.head .church  { animation: rise .8s .3s cubic-bezier(.2, .8, .2, 1) both; }
+.head .place   { animation: rise .8s .42s cubic-bezier(.2, .8, .2, 1) both; }
+.mask .line    { animation: reveal .9s .6s cubic-bezier(.16, 1, .3, 1) both; }
+h1 .mask:nth-child(2) .line { animation-delay: .72s; }
+.program .line { animation-delay: .95s; }
+.program::before { animation: grow-x .7s .9s cubic-bezier(.7, 0, .2, 1) both; }
+.fact { animation: rise .7s cubic-bezier(.2, .8, .2, 1) both; }
+.fact:nth-child(1) { animation-delay: 1.15s; }
+.fact:nth-child(2) { animation-delay: 1.25s; }
+.fact:nth-child(3) { animation-delay: 1.35s; }
+.fact:nth-child(4) { animation-delay: 1.45s; }
+.fact:nth-child(5) { animation-delay: 1.55s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .stage *, .stage *::before, .stage *::after { animation: none !important; }
+}
+.stage.static *, .stage.static *::before, .stage.static *::after { animation: none !important; }
+
+/* ---------- Hint ---------- */
+.hint {
+  position: fixed; left: 50%; bottom: 20px; transform: translateX(-50%);
+  padding: 9px 16px; border-radius: 3px;
+  background: rgba(20, 18, 16, .92); border: 1px solid var(--line);
+  color: var(--ink); font: 600 14px var(--sans); letter-spacing: .04em;
+  transition: opacity .6s ease; pointer-events: none;
+}
+.hint.gone { opacity: 0; }
+
+/* ---------- Print ---------- */
+@page { size: 1920px 1080px; margin: 0; }
+@media print {
+  html, body { height: auto; overflow: visible; background: none; }
+  .stage { position: static; transform: none; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .stage *, .stage *::before, .stage *::after { animation: none !important; }
+  .hint { display: none; }
+}
