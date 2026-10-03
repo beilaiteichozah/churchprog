@@ -391,18 +391,16 @@
       <p>All the words are in the page itself. Look for the title lines, the “4th October 2026” plate in the middle of the cross, and the list of five facts (Date, A su, Daihti, Directors, Chairman). Change the text between the tags and keep the tags themselves.</p>
 
       <h3>Song lyrics: <code>songs.json</code></h3>
-      <p>Each song has a title, number, book, edition and sections. A section is a label and a list of lines. The page shows one line at a time.</p>
+      <p>Each song needs a title and sections. A section is a label and a list of lines. The page shows one line at a time. Everything else is optional, so a song that is not from a hymn book needs no number, book or edition.</p>
 <pre><code>{
   "songs": [
     {
-      "title": "Amazing Grace",
-      "author": "John Newton, 1779",
-      "number": 1,
-      "book": "Sample Hymn Book",
-      "edition": "1st Edition",
+      "title": "Song title",
+      "composer": "Name of the composer",
       "sections": [
-        { "label": "Verse 1", "lines": ["First line", "Second line"] },
-        { "label": "Verse 2", "lines": ["First line", "Second line"] }
+        { "id": "v1", "label": "Verse 1", "lines": ["First line", "Second line"] },
+        { "id": "c",  "label": "Chorus",  "lines": ["First line", "Second line"] },
+        { "id": "v2", "label": "Verse 2", "lines": ["First line", "Second line"] }
       ]
     }
   ]
@@ -412,9 +410,10 @@
         <thead><tr><th>Field</th><th>Meaning</th></tr></thead>
         <tbody>
           <tr data-s><td><code>title</code></td><td>Shown large at the top. Required.</td></tr>
-          <tr data-s><td><code>author</code></td><td>Small line under the title. Optional.</td></tr>
-          <tr data-s><td><code>number</code></td><td>Song number in the gold block at the bottom right. Also used by “type a number then Enter”.</td></tr>
-          <tr data-s><td><code>book</code>, <code>edition</code></td><td>Book name and edition beside the number.</td></tr>
+          <tr data-s><td><code>composer</code></td><td>Optional. Shown under the song title on the lyrics page as “Composer: …”.</td></tr>
+          <tr data-s><td><code>author</code></td><td>Optional. Small line under the title, for the writer of the words.</td></tr>
+          <tr data-s><td><code>number</code></td><td>Optional, for songs from a hymn book. Song number in the gold block at the bottom right. Also used by <kbd>S</kbd>, number, <kbd>Enter</kbd>. A song without a number cannot be reached that way, but it can still be chosen with <kbd>G</kbd>, <kbd>N</kbd> and <kbd>P</kbd>.</td></tr>
+          <tr data-s><td><code>book</code>, <code>edition</code></td><td>Optional. Book name and edition beside the number.</td></tr>
           <tr data-s><td><code>singer</code></td><td>Optional. A singer or group name, shown in the top row of the lyrics lower third.</td></tr>
           <tr data-s><td><code>sections</code></td><td>List of <code>{ "label": "...", "lines": [...] }</code>. The label (for example “Chorus”) shows at the bottom left.</td></tr>
           <tr data-s><td><code>label</code> of a section</td><td>Used to find the part for the jump keys. A label like <code>Verse 2</code> is verse 2, and a label with <em>Chorus</em> or <em>Refrain</em> in it is the chorus. If you use other names, add <code>"verse": 2</code> to a section for a verse, or <code>"kind": "chorus"</code> for a chorus.</td></tr>
@@ -422,7 +421,7 @@
         </tbody>
       </table>
       </div>
-      <div class="note"><strong>Two songs are samples.</strong> “Amazing Grace” and “Holy, Holy, Holy” are public-domain English hymns used for testing. Replace them, and the book and edition, with your own hymnal. Take care with commas and quote marks: one missing comma makes the whole file unreadable, and the page will tell you.</div>
+      <div class="note"><strong>Check your commas and quote marks.</strong> One missing comma makes the whole file unreadable, and the page will tell you what is wrong. <code>songs.json</code> now holds one song, “Khazohpa cha a pha apha”. Add more songs after it, separated by commas. To play the chorus after every verse, add an <code>order</code> list.</div>
       <p><strong>Opening from a folder.</strong> Browsers do not let a page read <code>songs.json</code> when it is opened straight from a folder. The lyrics page then asks you to choose the file (press <kbd>O</kbd> any time), and it remembers that file. After you edit <code>songs.json</code>, press <kbd>O</kbd> and choose it again. To avoid this, open a terminal in the folder and run:</p>
 <pre><code>python3 -m http.server 8000
 # then open  http://localhost:8000/lyrics.html</code></pre>

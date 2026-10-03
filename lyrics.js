@@ -61,7 +61,7 @@
         ls.forEach(function (t, j) { lines.push({ text: t, label: sec.label || '', sec: k, n: ls.length, j: j }); });
       });
       return {
-        title: String(s.title || 'Song ' + (n + 1)), author: s.author ? String(s.author) : '',
+        title: String(s.title || 'Song ' + (n + 1)), author: s.author ? String(s.author) : '', composer: s.composer ? String(s.composer) : '',
         number: s.number != null ? String(s.number) : '', book: s.book ? String(s.book) : '',
         edition: s.edition ? String(s.edition) : '', lines: lines, meta: meta
       };
@@ -104,7 +104,7 @@
     var s = songs[si];
     var swap = function () {
       $('title').textContent = s.title;
-      $('author').textContent = s.author;
+      $('author').textContent = [s.author, s.composer ? 'Composer: ' + s.composer : ''].filter(Boolean).join('  ·  ');
       $('book').textContent = s.book;
       $('edition').textContent = s.edition;
       $('number').textContent = s.number;

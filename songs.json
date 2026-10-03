@@ -1,164 +1,65 @@
 {
-  "_readme": "Edit this file to add songs. Each song has: title, optional author and singer, number, book, edition, and sections (each with a label and a list of lines). To repeat a chorus without retyping it, give sections an id and add an 'order' list of ids, e.g. \"order\": [\"v1\", \"c\", \"v2\", \"c\"]. On the lyrics pages, keys 1-9 jump to 'Verse 1'-'Verse 9' (found from the label, or add \"verse\": 2 to a section), and C or 0 jumps to the chorus (a section whose label contains 'Chorus' or 'Refrain', or that has \"kind\": \"chorus\"). The three songs below are SAMPLES (public-domain English hymns); replace them and the book/edition with your own.",
+  "_readme": "Edit this file to add songs. Each song has: title and sections (each with a label and a list of lines). Optional: composer, author, singer, and, for songs from a hymn book, number, book and edition. The sections are shown in the order written. To repeat a chorus without retyping it, give sections an id and add an 'order' list of ids, e.g. \"order\": [\"v1\", \"c\", \"v2\", \"c\", \"v3\", \"c\"]. On the lyrics pages, keys 1-9 jump to 'Verse 1'-'Verse 9' (found from the label, or add \"verse\": 2 to a section), and C or 0 jumps to the chorus (a section whose label contains 'Chorus' or 'Refrain', or that has \"kind\": \"chorus\").",
   "songs": [
     {
-      "id": "amazing-grace",
-      "title": "Amazing Grace",
-      "author": "John Newton, 1779",
-      "number": 1,
-      "book": "Sample Hymn Book",
-      "edition": "1st Edition",
-      "sections": [
-        {
-          "label": "Verse 1",
-          "lines": [
-            "Amazing grace! how sweet the sound",
-            "That saved a wretch like me!",
-            "I once was lost, but now am found;",
-            "Was blind, but now I see."
-          ]
-        },
-        {
-          "label": "Verse 2",
-          "lines": [
-            "'Twas grace that taught my heart to fear,",
-            "And grace my fears relieved;",
-            "How precious did that grace appear",
-            "The hour I first believed."
-          ]
-        },
-        {
-          "label": "Verse 3",
-          "lines": [
-            "Through many dangers, toils and snares,",
-            "I have already come;",
-            "'Tis grace hath brought me safe thus far,",
-            "And grace will lead me home."
-          ]
-        },
-        {
-          "label": "Verse 4",
-          "lines": [
-            "The Lord has promised good to me,",
-            "His word my hope secures;",
-            "He will my shield and portion be,",
-            "As long as life endures."
-          ]
-        }
-      ]
-    },
-    {
-      "id": "holy-holy-holy",
-      "title": "Holy, Holy, Holy",
-      "author": "Reginald Heber, 1826",
-      "number": 2,
-      "book": "Sample Hymn Book",
-      "edition": "1st Edition",
+      "id": "khazohpa-cha-a-pha-apha",
+      "title": "Khazohpa cha a pha apha",
+      "composer": "Rev. Hai Dau",
       "sections": [
         {
           "id": "v1",
           "label": "Verse 1",
           "lines": [
-            "Holy, holy, holy! Lord God Almighty!",
-            "Early in the morning our song shall rise to Thee;",
-            "Holy, holy, holy! merciful and mighty!",
-            "God in three Persons, blessed Trinity!"
-          ]
-        },
-        {
-          "id": "v2",
-          "label": "Verse 2",
-          "lines": [
-            "Holy, holy, holy! all the saints adore Thee,",
-            "Casting down their golden crowns around the glassy sea;",
-            "Cherubim and seraphim falling down before Thee,",
-            "Which wert, and art, and evermore shalt be."
-          ]
-        },
-        {
-          "id": "v3",
-          "label": "Verse 3",
-          "lines": [
-            "Holy, holy, holy! though the darkness hide Thee,",
-            "Though the eye of sinful man Thy glory may not see,",
-            "Only Thou art holy; there is none beside Thee,",
-            "Perfect in power, in love, and purity."
-          ]
-        },
-        {
-          "id": "v4",
-          "label": "Verse 4",
-          "lines": [
-            "Holy, holy, holy! Lord God Almighty!",
-            "All Thy works shall praise Thy name, in earth, and sky, and sea;",
-            "Holy, holy, holy! merciful and mighty!",
-            "God in three Persons, blessed Trinity!"
-          ]
-        }
-      ],
-      "order": [
-        "v1",
-        "v2",
-        "v3",
-        "v4"
-      ]
-    },
-    {
-      "id": "blessed-assurance",
-      "title": "Blessed Assurance",
-      "author": "Fanny J. Crosby, 1873",
-      "number": 3,
-      "book": "Sample Hymn Book",
-      "edition": "1st Edition",
-      "sections": [
-        {
-          "id": "v1",
-          "label": "Verse 1",
-          "lines": [
-            "Blessed assurance, Jesus is mine!",
-            "O what a foretaste of glory divine!",
-            "Heir of salvation, purchase of God,",
-            "Born of His Spirit, washed in His blood."
+            "Khazohpa cha a pha apha",
+            "A chhâzaw kyhpachâ ryhraona ta",
+            "A sawchapaw matlu miah pie",
+            "Bei chatlaina pha paki vâ",
+            "Khazohpa palôh a tlâh haw."
           ]
         },
         {
           "id": "c",
           "label": "Chorus",
           "lines": [
-            "This is my story, this is my song,",
-            "Praising my Saviour all the day long;",
-            "This is my story, this is my song,",
-            "Praising my Saviour all the day long."
+            "Aly teh u, aly teh u",
+            "Thlaohchhipa ta eima châ haw",
+            "ABEIPA Lia khâ aly t'u",
+            "Na palôh khohna cha pie aw."
           ]
         },
         {
           "id": "v2",
           "label": "Verse 2",
           "lines": [
-            "Perfect submission, perfect delight,",
-            "Visions of rapture now burst on my sight;",
-            "Angels descending bring from above",
-            "Echoes of mercy, whispers of love."
+            "Khazohpa cha a pha apha",
+            "Zisu thina thyuheihna vâ tlai ta",
+            "A ryuto saw ta miah rao haw",
+            "Chhôkha tovyuhna hro miah pie",
+            "Cha cha khâpahmaah pha thei vei."
           ]
         },
         {
           "id": "v3",
           "label": "Verse 3",
           "lines": [
-            "Perfect submission, all is at rest,",
-            "I in my Saviour am happy and blest,",
-            "Watching and waiting, looking above,",
-            "Filled with His goodness, lost in His love."
+            "Khazohpa cha a pha, a pha",
+            "Na chheipâh nah nâma a mopa ta",
+            "Na hnabei apady khah la",
+            "Abeipa lia hnabei seih teh",
+            "Na châ â chhuahna pha a y."
+          ]
+        },
+        {
+          "id": "v4",
+          "label": "Verse 4",
+          "lines": [
+            "Khazohpa cha kyhpachâna",
+            "Moleipa hmia pasahpa a châ haw.",
+            "Phuhlapa eima châ bâ aw",
+            "Na molei maohphaona lieno",
+            "Mo hropa byhnâ na châ aw."
           ]
         }
-      ],
-      "order": [
-        "v1",
-        "c",
-        "v2",
-        "c",
-        "v3",
-        "c"
       ]
     }
   ]
