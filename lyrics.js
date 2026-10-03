@@ -61,7 +61,7 @@
         ls.forEach(function (t, j) { lines.push({ text: t, label: sec.label || '', sec: k, n: ls.length, j: j }); });
       });
       return {
-        title: String(s.title || 'Song ' + (n + 1)), author: s.author ? String(s.author) : '', composer: s.composer ? String(s.composer) : '',
+        title: String(s.title || 'Song ' + (n + 1)), author: s.author ? String(s.author) : '', composer: s.composer ? String(s.composer) : '', reference: s.reference ? String(s.reference) : '',
         number: s.number != null ? String(s.number) : '', book: s.book ? String(s.book) : '',
         edition: s.edition ? String(s.edition) : '', lines: lines, meta: meta
       };
@@ -104,7 +104,10 @@
     var s = songs[si];
     var swap = function () {
       $('title').textContent = s.title;
-      $('author').textContent = [s.author, s.composer ? 'Composer: ' + s.composer : ''].filter(Boolean).join('  ·  ');
+      $('author').textContent = [s.reference, s.author, s.composer ? 'Composer: ' + s.composer : ''].filter(Boolean).join('  ·  ');
+      // very long titles: shrink until they fit on two lines
+      var tt = $('title'), tsz = 80; tt.style.fontSize = '';
+      while (tt.offsetHeight > 176 && tsz > 36) { tsz -= 4; tt.style.fontSize = tsz + 'px'; }
       $('book').textContent = s.book;
       $('edition').textContent = s.edition;
       $('number').textContent = s.number;

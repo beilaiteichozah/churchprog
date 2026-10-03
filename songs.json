@@ -460,6 +460,53 @@
           ]
         }
       ]
+    },
+    {
+      "id": "ama-macha-tawh-chhaota",
+      "title": "AMA MACHÂ TAWH CHHAOTA KHÂ PATHEI EI TA TI TA BIE EI TA KHÂ AMA HROH SILI",
+      "reference": "(Hla 92:12-15,125 : 1-2)",
+      "sections": [
+        {
+          "id": "v1",
+          "label": "Verse 1",
+          "lines": [
+            "Mosiapa zy cha thiahrâ kô hawhta locho aw ei ta,",
+            "Lebanaw si dy tho hawh ma laiseih aw,",
+            "Âmo cha, Abeipa o liata lopa châ ei ta,",
+            "Khazohpa dôhpa chhôh lia ama pahrâ."
+          ]
+        },
+        {
+          "id": "c",
+          "label": "Chorus",
+          "lines": [
+            "Ama machâ tawh chhao ta khâ pathei eita,",
+            "Tita bie ei khâ ama hroh sili,",
+            "Beipa cha eimâ bohna thokhy nata",
+            "Thlalôhna eimâ bohna lôpanô a châ"
+          ]
+        },
+        {
+          "id": "v2",
+          "label": "Verse 2",
+          "lines": [
+            "Avy ula Beipa lâta hlasa na chôta ahnia si",
+            "Eima pachhana lôpanô lâna cha alyna",
+            "Biereipa ta ahmiakô liana chata,",
+            "A moh reithai ei sih, Haleluiah"
+          ]
+        },
+        {
+          "id": "v3",
+          "label": "Verse 3",
+          "lines": [
+            "Abeipa angâtuhpazy zai o tlâh pasie thei leipa",
+            "Chhâzaw ta y thlâhpa hawh ama châ.",
+            "Tlâhpizy Zerusale chheipâh chadôpa hawhta,",
+            "Beipa ta a chyhsa hnoh a ypâ ei."
+          ]
+        }
+      ]
     }
   ]
 }
