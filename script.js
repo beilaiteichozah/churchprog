@@ -11,7 +11,12 @@
   ------------------------------------------------------------------ */
   var CHURCH = 'Mara Evangelical Church';
   var PLACE = 'Lialaipi Pastor Bia, Lialaipi';
-  var EVENT = 'Rev. Haidau Chori Palyupalihna Nata';
+  // The title has three parts: honoring Rev. Haidau  +  "Nata" (and)  +  the blessing service program
+  var HONOR = 'Rev. Haidau Chori Palyupalihna';
+  var AND = 'Nata';
+  var HW = HONOR.split(' ');
+  var HONOR_A = HW.slice(0, -1).join(' ');   // "Rev. Haidau Chori"
+  var HONOR_B = HW[HW.length - 1];           // "Palyupalihna"
   var TITLE = 'Byhnâ Paawsana Program';
   var DATE = '4th October, 2026 (Sunday)';
 
@@ -97,7 +102,8 @@
       el('div', 'cross'),
       el('p', 'church', CHURCH),
       el('p', 'place', PLACE),
-      el('h1', null, EVENT),
+      add(el('h1'), el('span', 'ln', HONOR_A), el('span', 'ln', HONOR_B)),
+      add(el('div', 'link'), el('span', null, AND)),
       el('h2', null, TITLE));
     var band = el('dl', 't-band');
     [DETAILS[0], DETAILS[1], DETAILS[2]].forEach(function (row) {
@@ -118,7 +124,11 @@
       info.appendChild(r);
       brk = false;
     });
-    add(s, side(el('h2', null, TITLE)), add(el('div', 'main'), info));
+    var stack = add(el('div', 'stack'),
+      el('p', 'part', HONOR),
+      add(el('div', 'link'), el('span', null, AND)),
+      el('p', 'part', TITLE));
+    add(s, side(stack), add(el('div', 'main'), info));
   })();
 
   // Program items
@@ -142,10 +152,14 @@
     var count = el('span');
     count.appendChild(el('b', null, String(n)));
     count.appendChild(document.createTextNode(' / ' + total));
-    add(foot, el('span', null, EVENT), count);
+    add(foot, el('span', null, DATE), count);
+    var run = el('span', 'run');
+    run.appendChild(document.createTextNode(HONOR + ' '));
+    run.appendChild(el('em', null, AND));
+    run.appendChild(document.createTextNode(' ' + TITLE));
     var panel = side(el('div', 'num', String(n)));
     add(s, panel, add(el('div', 'main'),
-      add(el('div', 'running'), el('span', null, TITLE), el('span', null, DATE)),
+      add(el('div', 'running'), run),
       body, foot));
     s.itemNumber = n;
   });
@@ -157,8 +171,9 @@
       el('div', 'cross'),
       el('p', 'church', CHURCH),
       el('p', 'place', PLACE),
-      el('h1', null, EVENT),
-      el('h2', null, TITLE + ' · ' + DATE)));
+      add(el('h1'), el('span', 'ln', HONOR_A), el('span', 'ln', HONOR_B)),
+      add(el('div', 'link'), el('span', null, AND)),
+      el('h2', null, TITLE)));
   })();
 
   var last = slides.length - 1;
