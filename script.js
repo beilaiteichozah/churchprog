@@ -278,7 +278,7 @@
     try { localStorage.setItem('program-theme', t); } catch (e) { /* ignore */ }
   }
   function toggleTheme() {
-    var t = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    var t = document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
     setTheme(t);
     toast(t === 'dark' ? 'Dark theme' : 'Light theme');
   }

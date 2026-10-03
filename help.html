@@ -96,7 +96,7 @@
         <thead><tr><th>Page</th><th>File</th><th>What it is for</th></tr></thead>
         <tbody>
           <tr data-s><td><strong>Program slideshow</strong></td><td><code>index.html</code></td><td>Shows the order of the program, one item per slide. It has a title slide with the church name, the date, venue and time, the details slide, items 1 to 21, and a closing slide. The title reads as three parts: <em>Rev. Haidau Chori Palyupalihna</em>, <em>Nata</em> (and), <em>Byhnâ Paawsana Program</em>.</td></tr>
-          <tr data-s><td><strong>Main banner</strong></td><td><code>banner.html</code></td><td>A dark poster-style screen with a large red cross, the title, the date plate and the details. Use it on the wall before the service starts and after it ends.</td></tr>
+          <tr data-s><td><strong>Main banner</strong></td><td><code>banner.html</code></td><td>A dark poster-style screen with a large gold and teal cross, the title, the date plate and the details. Use it on the wall before the service starts and after it ends.</td></tr>
           <tr data-s><td><strong>Song lyrics</strong></td><td><code>lyrics.html</code></td><td>Shows one lyric line at a time with a smooth glide. The song title stays at the top. The song number and book edition are at the bottom right. Songs come from <code>songs.json</code>.</td></tr>
           <tr data-s><td><strong>Lower third</strong></td><td><code>lowerthird.html</code></td><td>A name graphic for the bottom of the picture: a small label such as <em>Speaker</em> or <em>Singer</em>, the name, and an optional line for the title or group. It has a see-through background so it can sit over a camera or video. Names are in <code>lowerthird-data.js</code>.</td></tr>
           <tr data-s><td><strong>Help</strong></td><td><code>help.html</code></td><td>This page.</td></tr>
@@ -185,11 +185,11 @@
       </div>
       <h3>What is on the lyrics screen</h3>
       <ul>
-        <li><strong>Top:</strong> the song title, always visible, with a red bar and the author.</li>
+        <li><strong>Top:</strong> the song title in gold, always visible, with a short teal bar and the author.</li>
         <li><strong>Middle:</strong> the current line, large and bright.</li>
         <li><strong>Bottom left:</strong> the section name, for example “Verse 2”, and a row of dots showing which line of the section you are on.</li>
-        <li><strong>Bottom right:</strong> the song number in a red block, with the book and edition beside it.</li>
-        <li><strong>Left edge:</strong> a thin red bar that grows as the song moves on.</li>
+        <li><strong>Bottom right:</strong> the song number in a gold block, with the book and edition beside it.</li>
+        <li><strong>Left edge:</strong> a thin gold bar that grows as the song moves on.</li>
       </ul>
       <p>A web address such as <code>lyrics.html#2.5</code> opens song 2 at line 5.</p>
     </section>
@@ -208,9 +208,9 @@
           <tr data-s><td class="k"><kbd>Esc</kbd></td><td>Hide the lower third.</td></tr>
           <tr data-s><td class="k"><kbd>E</kbd></td><td>Type a <strong>different</strong> label, name and detail, for example for a guest who is not in the list. Press <kbd>Enter</kbd> to show it.</td></tr>
           <tr data-s><td class="k"><kbd>G</kbd></td><td>List of all names. Click one to show it.</td></tr>
-          <tr data-s><td class="k"><kbd>A</kbd></td><td>Auto-hide on or off. When on, the lower third hides itself after 10 seconds. A thin red line along its bottom shows the time left.</td></tr>
+          <tr data-s><td class="k"><kbd>A</kbd></td><td>Auto-hide on or off. When on, the lower third hides itself after 10 seconds. A thin gold line along its bottom shows the time left.</td></tr>
           <tr data-s><td class="k"><kbd>V</kbd></td><td>Change the background used for testing: transparent, checker, dark, green.</td></tr>
-          <tr data-s><td class="k"><kbd>T</kbd></td><td>Light plate (cream, dark text) or dark plate (near black, light text).</td></tr>
+          <tr data-s><td class="k"><kbd>T</kbd></td><td>Navy plate (default, light text) or light plate (pale, dark text).</td></tr>
           <tr data-s><td class="k"><kbd>M</kbd> <kbd>F</kbd> <kbd>H</kbd> <kbd>?</kbd></td><td>As in the common list above.</td></tr>
         </tbody>
       </table>
@@ -222,7 +222,7 @@
       <p>The lower third is a graphic made to be placed <strong>on top of a picture</strong>, usually the camera or a live stream. A web page cannot draw on top of another page, so to put it over the slideshow or a camera you need a video program such as OBS Studio, vMix or a video mixer. The page itself has a see-through background so the picture shows around it.</p>
       <h3>What it shows</h3>
       <ul>
-        <li><strong>Label</strong> (small red capitals): the role, such as Speaker, Singer or Choir.</li>
+        <li><strong>Label</strong> (small gold capitals): the role, such as Speaker, Singer or Choir.</li>
         <li><strong>Name</strong> (large): the person or group. Very long names shrink so they always fit.</li>
         <li><strong>Detail</strong> (smaller, optional): the title, group or church.</li>
       </ul>
@@ -232,14 +232,14 @@
         <li><strong>Browser source.</strong> In OBS add a <em>Browser</em> source, choose <em>Local file</em> and pick <code>lowerthird.html</code>, size 1920 × 1080. The background is already transparent. To press keys, right-click the source and choose <em>Interact</em>. Add <code>?clean=1</code> if you serve the page from a web address, so no feedback messages appear in the picture.</li>
       </ol>
       <h3>Options in the web address</h3>
-      <p>Add these after <code>lowerthird.html</code>, starting with <code>?</code> and joining several with <code>&amp;</code>. Example: <code>lowerthird.html?bg=dark&amp;hide=6&amp;plate=dark</code>.</p>
+      <p>Add these after <code>lowerthird.html</code>, starting with <code>?</code> and joining several with <code>&amp;</code>. Example: <code>lowerthird.html?bg=dark&amp;hide=6&amp;plate=light</code>.</p>
       <div class="table-wrap">
       <table class="plain">
         <thead><tr><th>Option</th><th>Meaning</th></tr></thead>
         <tbody>
           <tr data-s><td><code>bg=transparent</code></td><td>Background: <code>transparent</code> (default), <code>checker</code>, <code>dark</code> or <code>green</code>.</td></tr>
           <tr data-s><td><code>hide=10</code></td><td>Seconds before it hides itself. <code>hide=0</code> keeps it on screen until you hide it.</td></tr>
-          <tr data-s><td><code>plate=dark</code></td><td>Start with the dark plate. Default is <code>light</code>.</td></tr>
+          <tr data-s><td><code>plate=light</code></td><td>Start with the light plate. The default is the navy plate (<code>dark</code>).</td></tr>
           <tr data-s><td><code>pos=center</code></td><td>Place it at the <code>left</code> (default), <code>center</code> or <code>right</code>.</td></tr>
           <tr data-s><td><code>item=13&amp;show=1</code></td><td>Select the name for item 13 and show it as soon as the page opens.</td></tr>
           <tr data-s><td><code>clean=1</code></td><td>No messages, lists or forms on screen. Use it when the page is part of a video picture.</td></tr>
@@ -275,7 +275,7 @@
         <li><strong>Choose how to show the screen.</strong> On Windows press <kbd>Win</kbd> + <kbd>P</kbd> and choose <em>Extend</em> (you see your own screen, the wall sees the page) or <em>Duplicate</em>. On a Mac use System Settings, then Displays.</li>
         <li><strong>Set the resolution</strong> of the projector to 1920 × 1080 if it offers it. It then fills the wall exactly.</li>
         <li><strong>Move the browser window</strong> onto the projector screen, then press <kbd>F</kbd>.</li>
-        <li><strong>Check from the back of the hall.</strong> Text is large, but room light and projector brightness differ. If the cream slides look too bright in a dark hall, press <kbd>T</kbd> for the dark theme.</li>
+        <li><strong>Check from the back of the hall.</strong> Text is large, but room light and projector brightness differ. The slides use dark navy by default, which suits a dim hall. In a bright room press <kbd>T</kbd> for the light theme.</li>
       </ol>
       <h3>Good to know</h3>
       <ul>
@@ -348,7 +348,7 @@
         <tbody>
           <tr data-s><td><code>title</code></td><td>Shown large at the top. Required.</td></tr>
           <tr data-s><td><code>author</code></td><td>Small line under the title. Optional.</td></tr>
-          <tr data-s><td><code>number</code></td><td>Song number in the red block at the bottom right. Also used by “type a number then Enter”.</td></tr>
+          <tr data-s><td><code>number</code></td><td>Song number in the gold block at the bottom right. Also used by “type a number then Enter”.</td></tr>
           <tr data-s><td><code>book</code>, <code>edition</code></td><td>Book name and edition beside the number.</td></tr>
           <tr data-s><td><code>sections</code></td><td>List of <code>{ "label": "...", "lines": [...] }</code>. The label (for example “Chorus”) shows at the bottom left.</td></tr>
           <tr data-s><td><code>id</code> and <code>order</code></td><td>Optional. To repeat a chorus without typing it again, give each section an <code>id</code> and add <code>"order": ["v1", "c", "v2", "c"]</code> to the song.</td></tr>
@@ -368,7 +368,7 @@
       <ul>
         <li><strong>Destination:</strong> Save as PDF (or a printer).</li>
         <li><strong>Layout:</strong> Landscape. <strong>Margins:</strong> None. <strong>Scale:</strong> Default or Fit to page.</li>
-        <li><strong>Options:</strong> turn on <em>Background graphics</em>, otherwise the red and cream colours are left out.</li>
+        <li><strong>Options:</strong> turn on <em>Background graphics</em>, otherwise the background colours are left out.</li>
       </ul>
       <p>The slideshow prints one slide per page. A PDF makes a good backup: if the computer fails, any other computer can show the PDF.</p>
     </section>

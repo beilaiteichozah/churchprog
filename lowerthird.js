@@ -1,6 +1,6 @@
 /* Lower third — keyboard-operated name graphic.
    Names come from lowerthird-data.js.  Press ? for the keys, H for the full Help page.
-   URL options:  ?bg=transparent|checker|dark|green   ?hide=SECONDS (0 = stay)   ?plate=light|dark
+   URL options:  ?bg=transparent|checker|dark|green   ?hide=SECONDS (0 = stay)   ?plate=dark|light
                  ?pos=left|center|right   ?item=N&show=1 (select / show item N)   ?clean=1 (no on-screen feedback) */
 (function () {
   'use strict';
@@ -25,8 +25,8 @@
   var bg = params.get('bg') || pref('bg') || 'transparent';
   if (BGS.indexOf(bg) < 0) bg = 'transparent';
   root.setAttribute('data-bg', bg);
-  var plate = params.get('plate') || pref('plate') || 'light';
-  root.setAttribute('data-plate', plate === 'dark' ? 'dark' : 'light');
+  var plate = params.get('plate') || pref('plate') || 'dark';   // dark = navy plate (default), light = pale plate
+  root.setAttribute('data-plate', plate === 'light' ? 'light' : 'dark');
   root.setAttribute('data-pos', ['left', 'center', 'right'].indexOf(params.get('pos')) > -1 ? params.get('pos') : 'left');
   var m0 = pref('motion');
   if (m0 !== 'full' && m0 !== 'reduced') m0 = (matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) ? 'reduced' : 'full';
@@ -165,7 +165,7 @@
   function togglePlate() {
     plate = root.getAttribute('data-plate') === 'dark' ? 'light' : 'dark';
     root.setAttribute('data-plate', plate); pref('plate', plate);
-    toast(plate === 'dark' ? 'Dark plate' : 'Light plate');
+    toast(plate === 'dark' ? 'Navy plate' : 'Light plate');
   }
   function toggleMotion() {
     var m = root.getAttribute('data-motion') === 'reduced' ? 'full' : 'reduced';
