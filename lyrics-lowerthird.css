@@ -68,7 +68,7 @@ body.clean .toast, body.clean .overlay { display: none; }
 
 .tag { display: flex; align-items: baseline; gap: 20px; overflow: hidden; white-space: nowrap; font-size: 25px; line-height: 1.4; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--role); }
 .tag .song { flex: 0 1 auto; overflow: hidden; text-overflow: ellipsis; }
-.tag .meta { flex: 1 1 0; min-width: 0; overflow: hidden; text-overflow: ellipsis; font-size: 22px; font-weight: 500; letter-spacing: .12em; color: var(--muted); }
+.tag .meta { flex: 1 1 0; min-width: 0; overflow: hidden; text-overflow: ellipsis; font-size: .88em; font-weight: 500; letter-spacing: .12em; color: var(--muted); }
 .tag .meta:empty { display: none; }
 .ll.noinfo .tag { display: none; }
 

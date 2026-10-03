@@ -460,6 +460,112 @@
           ]
         }
       ]
+    },
+    {
+      "id": "ama-macha-tawh-chhaota",
+      "title": "AMA MACHÂ TAWH CHHAOTA KHÂ PATHEI EI TA TI TA BIE EI TA KHÂ AMA HROH SILI",
+      "reference": "(Hla 92:12-15,125 : 1-2)",
+      "sections": [
+        {
+          "id": "v1",
+          "label": "Verse 1",
+          "lines": [
+            "Mosiapa zy cha thiahrâ kô hawhta locho aw ei ta,",
+            "Lebanaw si dy tho hawh ma laiseih aw,",
+            "Âmo cha, Abeipa o liata lopa châ ei ta,",
+            "Khazohpa dôhpa chhôh lia ama pahrâ."
+          ]
+        },
+        {
+          "id": "c",
+          "label": "Chorus",
+          "lines": [
+            "Ama machâ tawh chhao ta khâ pathei eita,",
+            "Tita bie ei khâ ama hroh sili,",
+            "Beipa cha eimâ bohna thokhy nata",
+            "Thlalôhna eimâ bohna lôpanô a châ"
+          ]
+        },
+        {
+          "id": "v2",
+          "label": "Verse 2",
+          "lines": [
+            "Avy ula Beipa lâta hlasa na chôta ahnia si",
+            "Eima pachhana lôpanô lâna cha alyna",
+            "Biereipa ta ahmiakô liana chata,",
+            "A moh reithai ei sih, Haleluiah"
+          ]
+        },
+        {
+          "id": "v3",
+          "label": "Verse 3",
+          "lines": [
+            "Abeipa angâtuhpazy zai o tlâh pasie thei leipa",
+            "Chhâzaw ta y thlâhpa hawh ama châ.",
+            "Tlâhpizy Zerusale chheipâh chadôpa hawhta,",
+            "Beipa ta a chyhsa hnoh a ypâ ei."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "knp-daima-zubili-hla",
+      "title": "KNP Daima Zubili Hla",
+      "composer": "Rev. Haidau",
+      "sections": [
+        {
+          "id": "v1",
+          "label": "Verse 1",
+          "lines": [
+            "Mara Krizypa Nô Py â dua tawh",
+            "Daima Zubili cha, lypa ta eima tlô haw",
+            "Vaili mahnô ta miah pathao khei",
+            "Beipa moh reithai suh vy"
+          ]
+        },
+        {
+          "id": "c",
+          "label": "Chorus",
+          "lines": [
+            "Haleluia, Haleluia",
+            "Marapa chanô zydua hecha",
+            "Duahmo pasâhpa a châ haw",
+            "Estheri hawta eima râh he",
+            "Pabohsa suh vy"
+          ]
+        },
+        {
+          "id": "v2",
+          "label": "Verse 2",
+          "lines": [
+            "MEC KNP Khazoh hmâpa",
+            "Hâra nôthlôhnô y",
+            "Kyhpachâ hawtizy",
+            "Na deichhypa, Khazohpa",
+            "Na parôhnahsa kaw aly â chhih"
+          ]
+        },
+        {
+          "id": "v3",
+          "label": "Verse 3",
+          "lines": [
+            "Hy Maraoa KNP nôthlôhnô y",
+            "Riethei thapadâh chi",
+            "Thina yrupa thlah miah palôh chi",
+            "Khazohpa cha hmâh pha via rili lymâ mawh sy"
+          ]
+        },
+        {
+          "id": "v4",
+          "label": "Verse 4",
+          "lines": [
+            "Hy Mara chanôzy ahra u la",
+            "Debora, Marizy hawh",
+            "Adona, Siana, Kyhpachâna ta",
+            "Mararâh he tobi pha lymâ bâ suh vy"
+          ]
+        }
+      ]
     }
   ]
 }

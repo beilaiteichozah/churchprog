@@ -74,7 +74,7 @@
         ls.forEach(function (t, j) { lines.push({ text: t, label: sec.label || '', sec: k, n: ls.length, j: j }); });
       });
       return {
-        title: String(s.title || 'Song ' + (n + 1)), author: s.author ? String(s.author) : '', singer: s.singer ? String(s.singer) : '',
+        title: String(s.title || 'Song ' + (n + 1)), author: s.author ? String(s.author) : '', reference: s.reference ? String(s.reference) : '', singer: s.singer ? String(s.singer) : '',
         number: s.number != null ? String(s.number) : '', book: s.book ? String(s.book) : '', edition: s.edition ? String(s.edition) : '',
         lines: lines, meta: meta
       };
@@ -94,7 +94,10 @@
   function fillSong() {
     var s = songs[si];
     $('song').textContent = s.title;
-    $('meta').textContent = [showBook ? s.book : '', showBook ? s.edition : '', singerParam || s.singer].filter(Boolean).join('  ·  ');
+    $('meta').textContent = [s.reference, showBook ? s.book : '', showBook ? s.edition : '', singerParam || s.singer].filter(Boolean).join('  ·  ');
+    // a very long title (or reference) shrinks the whole top row, down to a limit, so it stays on one line
+    var tagEl = $('tag'), sg = $('song'), mt = $('meta'), fs = 25; tagEl.style.fontSize = '';
+    while ((sg.scrollWidth > sg.clientWidth + 1 || mt.scrollWidth > mt.clientWidth + 1) && fs > 14) { fs--; tagEl.style.fontSize = fs + 'px'; }
     var mark = $('mark'), num = $('num'), number = showBook ? s.number : '';
     num.textContent = number;
     num.style.fontSize = number.length > 3 ? '60px' : '';
