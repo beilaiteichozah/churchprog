@@ -190,6 +190,7 @@ body.idle { cursor: none; }
   transition: opacity .3s ease;
 }
 body.idle .controls { opacity: 0; pointer-events: none; }
+body.nobar .controls { display: none; }
 .controls button {
   font: 600 15px/1 var(--sans); color: var(--ui-ink);
   background: transparent; border: 0; border-radius: 3px; padding: 10px 14px; cursor: pointer;

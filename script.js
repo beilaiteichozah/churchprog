@@ -287,6 +287,19 @@
     toast(m === 'full' ? 'Animation: full' : 'Animation: reduced');
   }
 
+  /* C: hide the controls bar completely (it will not reappear on mouse move) or bring it back */
+  function setBar(hidden) {
+    document.body.classList.toggle('nobar', hidden);
+    try { localStorage.setItem('program-bar', hidden ? 'hidden' : 'auto'); } catch (e) { /* ignore */ }
+  }
+  try { if (localStorage.getItem('program-bar') === 'hidden') setBar(true); } catch (e) { /* ignore */ }
+  function toggleBar() {
+    var hide = !document.body.classList.contains('nobar');
+    setBar(hide);
+    toast(hide ? 'Controls hidden (C to show)' : 'Controls shown');
+    if (!hide) wake();
+  }
+
   function toggleFullscreen() {
     var d = document, root = d.documentElement;
     if (d.fullscreenElement || d.webkitFullscreenElement) {
@@ -385,6 +398,7 @@
       case 'b': case 'B': case '.': toggleBlack(); break;
       case 't': case 'T': toggleTheme(); break;
       case 'm': case 'M': toggleMotion(); break;
+      case 'c': case 'C': toggleBar(); break;
       case 'h': case 'H': case '?': toggle(helpEl); break;
     }
   });
