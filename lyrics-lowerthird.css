@@ -60,6 +60,7 @@ body.clean .toast, body.clean .overlay { display: none; }
 .mark .cross::before, .mark .cross::after { content: ""; position: absolute; background: var(--mark-ink); }
 .mark .cross::before { left: 19px; top: 0; width: 8px; height: 66px; }
 .mark .cross::after  { left: 0; top: 17px; width: 46px; height: 8px; }
+.mark.nonum { flex-basis: 118px; }
 .mark.nonum small, .mark.nonum b { display: none; }
 .mark.nonum .cross { display: block; }
 

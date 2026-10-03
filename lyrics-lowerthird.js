@@ -2,7 +2,7 @@
    for live video while a singer or group sings. Songs come from songs.json (same file as lyrics.html).
    Press ? for the keys, H for the full Help page.
    URL options:  ?bg=transparent|checker|dark|green  ?plate=dark|light  ?clean=1 (no on-screen feedback)
-                 ?no=12 (start at song number 12)  ?line=3  ?show=1  ?singer=Name  ?info=0  ?src=other.json */
+                 ?no=12 (start at song number 12)  ?line=3  ?show=1  ?singer=Name  ?info=0  ?book=1 (show hymn-book number/edition)  ?src=other.json */
 (function () {
   'use strict';
 
@@ -34,6 +34,8 @@
   var showInfo = params.has('info') ? params.get('info') !== '0' : pref('info') !== 'off';
   ll.classList.toggle('noinfo', !showInfo);
   var singerParam = params.get('singer') || '';
+  // Hymn-book details (song number, book, edition) are off by default: not every song comes from a book.
+  var showBook = params.has('book') ? params.get('book') !== '0' : pref('book') === 'on';
 
   /* ---------- Data ---------- */
   var songs = [];
@@ -92,11 +94,11 @@
   function fillSong() {
     var s = songs[si];
     $('song').textContent = s.title;
-    $('meta').textContent = [s.book, s.edition, singerParam || s.singer].filter(Boolean).join('  ·  ');
-    var mark = $('mark'), num = $('num');
-    num.textContent = s.number;
-    num.style.fontSize = s.number.length > 3 ? '60px' : '';
-    mark.classList.toggle('nonum', !s.number);
+    $('meta').textContent = [showBook ? s.book : '', showBook ? s.edition : '', singerParam || s.singer].filter(Boolean).join('  ·  ');
+    var mark = $('mark'), num = $('num'), number = showBook ? s.number : '';
+    num.textContent = number;
+    num.style.fontSize = number.length > 3 ? '60px' : '';
+    mark.classList.toggle('nonum', !number);          // no number: the gold block shows a cross instead
   }
 
   function makeLine(text, cls) {
@@ -324,6 +326,15 @@
     var m = reduced() ? 'full' : 'reduced';
     root.setAttribute('data-motion', m); pref('motion', m); toast(m === 'full' ? 'Animation: full' : 'Animation: reduced');
   }
+  function toggleBook() {
+    showBook = !showBook; pref('book', showBook ? 'on' : 'off');
+    var s = songs[si], has = !!(s && (s.number || s.book || s.edition));
+    toast(showBook ? 'Hymn-book details: on' + (has ? '' : ' (this song has none)') : 'Hymn-book details: off');
+    if (songs.length && visible()) {
+      fillSong();
+      ['tag', 'mark'].forEach(function (id) { var e = $(id); e.classList.remove('swap'); void e.offsetWidth; e.classList.add('swap'); });
+    }
+  }
   function toggleInfo() {
     showInfo = !showInfo; ll.classList.toggle('noinfo', !showInfo); pref('info', showInfo ? 'on' : 'off');
     toast(showInfo ? 'Song title row: on' : 'Song title row: off');
@@ -389,6 +400,7 @@
       case 'j': case 'J': openPanel(panels[2]); break;
       case 's': case 'S': songEntry = true; numBuf = ''; toast('Song number, then Enter'); clearTimeout(numT); numT = setTimeout(function () { if (!numBuf) endEntry(); }, 4000); break;
       case 'i': case 'I': toggleInfo(); break;
+      case 'd': case 'D': toggleBook(); break;
       case 'v': case 'V': cycleBg(); break;
       case 't': case 'T': togglePlate(); break;
       case 'm': case 'M': toggleMotion(); break;

@@ -106,7 +106,7 @@
           <tr data-s><td><strong>Main banner</strong></td><td><code>banner.html</code></td><td>A dark poster-style screen with a large gold and teal cross, the title, the date plate and the details. Use it on the wall before the service starts and after it ends.</td></tr>
           <tr data-s><td><strong>Song lyrics</strong></td><td><code>lyrics.html</code></td><td>Shows one lyric line at a time with a smooth glide. The song title stays at the top. The song number and book edition are at the bottom right. Songs come from <code>songs.json</code>.</td></tr>
           <tr data-s><td><strong>Lower third</strong></td><td><code>lowerthird.html</code></td><td>A name graphic for the bottom of the picture: a small label such as <em>Speaker</em> or <em>Singer</em>, the name, and an optional line for the title or group. It has a see-through background so it can sit over a camera or video. Names are in <code>lowerthird-data.js</code>.</td></tr>
-          <tr data-s><td><strong>Lyrics lower third</strong></td><td><code>lyrics-lowerthird.html</code></td><td>A bar at the bottom of the picture that shows the song lyrics <strong>one line at a time</strong> while a singer or group sings on live video. It shows the song number, title and book edition, and the bar has a see-through background. Songs come from <code>songs.json</code>, the same file as the lyrics page.</td></tr>
+          <tr data-s><td><strong>Lyrics lower third</strong></td><td><code>lyrics-lowerthird.html</code></td><td>A bar at the bottom of the picture that shows the song lyrics <strong>one line at a time</strong> while a singer or group sings on live video. It shows the song title, and the singer if you set one. The hymn-book number, book and edition are left out unless you turn them on, because not every song comes from a book. The bar has a see-through background. Songs come from <code>songs.json</code>, the same file as the lyrics page.</td></tr>
           <tr data-s><td><strong>Help</strong></td><td><code>help.html</code></td><td>This page.</td></tr>
         </tbody>
       </table>
@@ -274,8 +274,8 @@
       <p>Use this while a singer or a group sings on a live video. The audience at home sees the words one line at a time at the bottom of the picture. You press a key at the end of each line, in time with the singing. Like the lower third, it is made to be placed over a camera or live stream (see “Using the lower third” for OBS).</p>
       <h3>What it shows</h3>
       <ul>
-        <li><strong>Gold block at the left:</strong> the song number.</li>
-        <li><strong>Top row:</strong> the song title in gold, then the book and edition, and the singer’s name if one is set. Press <kbd>I</kbd> to hide this row and show only the lyrics.</li>
+        <li><strong>Gold block at the left:</strong> a cross. If you turn on hymn-book details (key <kbd>D</kbd>) and the song has a number, the block shows the song number instead.</li>
+        <li><strong>Top row:</strong> the song title in gold, then the singer’s name if one is set. With hymn-book details on (<kbd>D</kbd>) the book and edition are added. Press <kbd>I</kbd> to hide this row and show only the lyrics.</li>
         <li><strong>Middle:</strong> the current line, large. When you move on, the old line lifts away and fades out first, then the new line rises in, so two lines are never on screen together. Long lines shrink so they always fit on two lines.</li>
         <li><strong>Thin teal line along the bottom:</strong> how far you are through the song.</li>
       </ul>
@@ -296,12 +296,13 @@
           <tr data-s><td class="k"><kbd>Esc</kbd></td><td>Hide the bar.</td></tr>
           <tr data-s><td class="k"><kbd>G</kbd></td><td>Song list. Click a song to start it.</td></tr>
           <tr data-s><td class="k"><kbd>I</kbd></td><td>Song title row on or off.</td></tr>
+          <tr data-s><td class="k"><kbd>D</kbd></td><td>Hymn-book <strong>d</strong>etails on or off: the song number in the gold block, and the book and edition in the top row. They are <strong>off by default</strong>, and a song with no number, book or edition shows none even when this is on.</td></tr>
           <tr data-s><td class="k"><kbd>V</kbd> <kbd>T</kbd> <kbd>M</kbd> <kbd>F</kbd> <kbd>O</kbd> <kbd>H</kbd> <kbd>?</kbd></td><td>Background for testing, navy or light plate, animation, fullscreen, load <code>songs.json</code>, Help page, quick key list. They work like the same keys on the lower-third and lyrics pages.</td></tr>
         </tbody>
       </table>
       </div>
       <h3>Showing the singer</h3>
-      <p>Add a <code>singer</code> field to a song in <code>songs.json</code>, for example <code>"singer": "Lialaipi Vaihpi KTP"</code>. It appears after the book and edition. For a single occasion you can instead add <code>?singer=Name</code> to the web address.</p>
+      <p>Add a <code>singer</code> field to a song in <code>songs.json</code>, for example <code>"singer": "Lialaipi Vaihpi KTP"</code>. It appears after the title (and after the book and edition if hymn-book details are on). For a single occasion you can instead add <code>?singer=Name</code> to the web address.</p>
       <h3>Options in the web address</h3>
       <div class="table-wrap">
       <table class="plain">
@@ -312,6 +313,7 @@
           <tr data-s><td><code>no=12&amp;show=1</code></td><td>Select song number 12 and show it as soon as the page opens. Add <code>line=3</code> to start at line 3.</td></tr>
           <tr data-s><td><code>singer=Name</code></td><td>Show this singer or group name in the top row.</td></tr>
           <tr data-s><td><code>info=0</code></td><td>Start with the song title row hidden.</td></tr>
+          <tr data-s><td><code>book=1</code></td><td>Start with hymn-book details (number, book, edition) shown. <code>book=0</code> hides them.</td></tr>
           <tr data-s><td><code>clean=1</code></td><td>No messages or lists on screen. Use it when the page is part of a video picture.</td></tr>
           <tr data-s><td><code>src=other.json</code></td><td>Read the songs from a different file.</td></tr>
         </tbody>
@@ -444,7 +446,7 @@
       <ul>
         <li>Dark or light theme, and full or reduced animation (separately for the slideshow and lyrics).</li>
         <li>Whether the controls bar is shown.</li>
-        <li>For the lower third and the lyrics lower third: the background, navy or light plate and animation. The lower third also remembers auto-hide, and the lyrics lower third whether the title row is shown.</li>
+        <li>For the lower third and the lyrics lower third: the background, navy or light plate and animation. The lower third also remembers auto-hide, and the lyrics lower third whether the title row and the hymn-book details are shown.</li>
         <li>The lyrics view (focus or one line) and the last <code>songs.json</code> you chose when opening from a folder.</li>
         <li>Where you were. The web address changes as you move, for example <code>index.html#12</code> or <code>lyrics.html#2.5</code>. Reloading the page returns to the same place.</li>
       </ul>
