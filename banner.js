@@ -1,9 +1,8 @@
 /* Main banner — scaling and small helpers.
-   F fullscreen · R replay entrance · P print / save as PDF */
+   F fullscreen · R replay entrance · P print / save as PDF · H help */
 (function () {
   'use strict';
   var stage = document.getElementById('stage');
-  var hint = document.getElementById('hint');
 
   function fit() {
     stage.style.setProperty('--s', Math.min(window.innerWidth / 1920, window.innerHeight / 1080));
@@ -33,10 +32,11 @@
       case 'f': case 'F': toggleFullscreen(); break;
       case 'r': case 'R': case ' ': e.preventDefault(); replay(); break;
       case 'p': case 'P': window.print(); break;
+      case 'h': case 'H': window.open('help.html', '_blank'); break;
     }
   });
 
-  /* Hide cursor after a pause; hide the hint after a few seconds */
+  /* Hide the cursor after a pause */
   var idleTimer;
   function wake() {
     document.body.classList.remove('idle');
@@ -45,7 +45,6 @@
   }
   ['mousemove', 'mousedown', 'keydown'].forEach(function (ev) { document.addEventListener(ev, wake, { passive: true }); });
   wake();
-  setTimeout(function () { hint.classList.add('gone'); }, 5000);
 
   /* Keep the screen awake while the banner is up */
   function keepAwake() {

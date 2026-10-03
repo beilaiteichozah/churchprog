@@ -302,17 +302,23 @@
     toast(m === 'full' ? 'Animation: full' : 'Animation: reduced');
   }
 
-  /* C: hide the controls bar completely (it will not reappear on mouse move) or bring it back */
-  function setBar(hidden) {
-    document.body.classList.toggle('nobar', hidden);
-    try { localStorage.setItem('program-bar', hidden ? 'hidden' : 'auto'); } catch (e) { /* ignore */ }
+  /* The on-screen controls bar is hidden by default so the slides stay clean.
+     C shows it (and the progress line); C again hides it. */
+  function setBar(shown) {
+    document.body.classList.toggle('nobar', !shown);
+    try { localStorage.setItem('program-controls', shown ? 'shown' : 'hidden'); } catch (e) { /* ignore */ }
   }
-  try { if (localStorage.getItem('program-bar') === 'hidden') setBar(true); } catch (e) { /* ignore */ }
+  try { if (localStorage.getItem('program-controls') === 'shown') setBar(true); } catch (e) { /* ignore */ }
   function toggleBar() {
-    var hide = !document.body.classList.contains('nobar');
-    setBar(hide);
-    toast(hide ? 'Controls hidden (C to show)' : 'Controls shown');
-    if (!hide) wake();
+    var show = document.body.classList.contains('nobar');
+    setBar(show);
+    toast(show ? 'Controls shown (C to hide)' : 'Controls hidden');
+    if (show) wake();
+  }
+
+  function openHelp() {
+    var w = window.open('help.html', '_blank');
+    if (!w) toast('Pop-up blocked. Open help.html');
   }
 
   function toggleFullscreen() {
@@ -414,7 +420,8 @@
       case 't': case 'T': toggleTheme(); break;
       case 'm': case 'M': toggleMotion(); break;
       case 'c': case 'C': toggleBar(); break;
-      case 'h': case 'H': case '?': toggle(helpEl); break;
+      case 'h': case 'H': openHelp(); break;
+      case '?': toggle(helpEl); break;
     }
   });
 

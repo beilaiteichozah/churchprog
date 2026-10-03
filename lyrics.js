@@ -236,11 +236,16 @@
     toast(mode === 'single' ? 'View: one line' : 'View: focus');
   }
 
-  function setBar(hidden) { document.body.classList.toggle('nobar', hidden); setPref('lyrics-bar', hidden ? 'hidden' : 'auto'); }
-  if (getPref('lyrics-bar') === 'hidden') setBar(true);
+  /* The controls bar is hidden by default. C shows it; C again hides it. */
+  function setBar(shown) { document.body.classList.toggle('nobar', !shown); setPref('lyrics-controls', shown ? 'shown' : 'hidden'); }
+  if (getPref('lyrics-controls') === 'shown') setBar(true);
   function toggleBar() {
-    var hide = !document.body.classList.contains('nobar'); setBar(hide);
-    toast(hide ? 'Controls hidden (C to show)' : 'Controls shown'); if (!hide) wake();
+    var show = document.body.classList.contains('nobar'); setBar(show);
+    toast(show ? 'Controls shown (C to hide)' : 'Controls hidden'); if (show) wake();
+  }
+  function openHelp() {
+    var w = window.open('help.html', '_blank');
+    if (!w) toast('Pop-up blocked. Open help.html');
   }
 
   function toggleFullscreen() {
@@ -295,6 +300,7 @@
   document.addEventListener('keydown', function (e) {
     if (e.ctrlKey || e.metaKey || e.altKey) return;
     var k = e.key;
+    if (k === 'h' || k === 'H') { if (!e.repeat) openHelp(); return; }
     if (!$('loader').hidden) { if (k === 'Escape' && songs.length) $('loader').hidden = true; return; }
     if (!songs.length) return;
 
@@ -330,7 +336,7 @@
       case 'c': case 'C': toggleBar(); break;
       case 'f': case 'F': toggleFullscreen(); break;
       case 'o': case 'O': openLoader(); break;
-      case 'h': case 'H': case '?': toggleOverlay(overlays[1]); break;
+      case '?': toggleOverlay(overlays[1]); break;
     }
   });
 

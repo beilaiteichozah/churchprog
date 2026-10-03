@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Help · Mara Evangelical Church</title>
+  <meta name="description" content="How to use the program slideshow, main banner and lyrics pages: shortcut keys, setup, editing and troubleshooting.">
+  <link rel="stylesheet" href="help.css">
+</head>
+<body>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <p class="eyebrow"><i class="mark" aria-hidden="true"></i>Mara Evangelical Church</p>
+    <h1>Help &amp; Guide</h1>
+    <p class="lede">Everything about the Byhnâ Paawsana Program screens: what each page does, every shortcut key, how to set up the projector, how to change the content, and what to do when something goes wrong.</p>
+    <p class="lede small">There are no buttons on the screens. You control everything from the keyboard, so you can run a service without touching the mouse.</p>
+
+    <div class="cards">
+      <a class="card" href="index.html">
+        <span class="card-k">Page 1</span>
+        <strong>Program slideshow</strong>
+        <span>24 slides: title, details, the 21 program items and a closing slide.</span>
+        <em>Open index.html →</em>
+      </a>
+      <a class="card" href="banner.html">
+        <span class="card-k">Page 2</span>
+        <strong>Main banner</strong>
+        <span>One wide poster-style screen to show before and after the service.</span>
+        <em>Open banner.html →</em>
+      </a>
+      <a class="card" href="lyrics.html">
+        <span class="card-k">Page 3</span>
+        <strong>Song lyrics</strong>
+        <span>Lyrics one line at a time, loaded from songs.json.</span>
+        <em>Open lyrics.html →</em>
+      </a>
+    </div>
+  </div>
+</header>
+
+<div class="wrap layout">
+
+  <nav class="toc" aria-label="Contents">
+    <div class="search">
+      <label for="q" class="sr">Search the help</label>
+      <input id="q" type="search" placeholder="Search…  ( / )" autocomplete="off" spellcheck="false">
+      <p id="count" class="count" role="status"></p>
+    </div>
+    <ol>
+      <li><a href="#quick-start">Quick start</a></li>
+      <li><a href="#pages">The pages</a></li>
+      <li><a href="#keys-common">Keys on every page</a></li>
+      <li><a href="#keys-slideshow">Slideshow keys</a></li>
+      <li><a href="#keys-banner">Banner keys</a></li>
+      <li><a href="#keys-lyrics">Lyrics keys</a></li>
+      <li><a href="#remote">Presenter remote</a></li>
+      <li><a href="#setup">Projector setup</a></li>
+      <li><a href="#service-day">Service-day checklist</a></li>
+      <li><a href="#edit">Changing the content</a></li>
+      <li><a href="#print">Print or save as PDF</a></li>
+      <li><a href="#remembered">What is remembered</a></li>
+      <li><a href="#troubleshooting">Troubleshooting</a></li>
+      <li><a href="#faq">Questions</a></li>
+    </ol>
+    <p class="toc-keys"><kbd>/</kbd> search &nbsp; <kbd>T</kbd> theme &nbsp; <kbd>P</kbd> print</p>
+  </nav>
+
+  <main class="content" id="content">
+
+    <section class="block" id="quick-start" data-section>
+      <h2>Quick start</h2>
+      <ol class="steps">
+        <li><strong>Open a page</strong> in a modern browser such as Chrome or Edge. Double-click <code>index.html</code>, <code>banner.html</code> or <code>lyrics.html</code>. No internet is needed.</li>
+        <li><strong>Move the window to the projector screen</strong>, then press <kbd>F</kbd> for fullscreen. Press <kbd>F</kbd> again or <kbd>Esc</kbd> to leave it.</li>
+        <li><strong>Click once on the page</strong> so the browser listens to your keys. After that, use the keyboard only.</li>
+        <li><strong>Move forward</strong> with <kbd>→</kbd> or <kbd>Space</kbd>, back with <kbd>←</kbd>.</li>
+        <li><strong>Need a different slide or song?</strong> Type its number and press <kbd>Enter</kbd>. For example <kbd>1</kbd><kbd>2</kbd><kbd>Enter</kbd> jumps to program item 12 or song number 12.</li>
+        <li><strong>Forgot a key?</strong> Press <kbd>?</kbd> for a quick list on the slideshow and lyrics pages, or <kbd>H</kbd> on any page to open this guide in a new tab.</li>
+      </ol>
+      <div class="note"><strong>Tip.</strong> The mouse pointer hides by itself after about three seconds. The small message at the top right that appears after some keys is only feedback and disappears quickly.</div>
+    </section>
+
+    <section class="block" id="pages" data-section>
+      <h2>The pages</h2>
+      <div class="table-wrap">
+      <table class="plain">
+        <thead><tr><th>Page</th><th>File</th><th>What it is for</th></tr></thead>
+        <tbody>
+          <tr data-s><td><strong>Program slideshow</strong></td><td><code>index.html</code></td><td>Shows the order of the program, one item per slide. It has a title slide with the church name, the date, venue and time, the details slide, items 1 to 21, and a closing slide. The title reads as three parts: <em>Rev. Haidau Chori Palyupalihna</em>, <em>Nata</em> (and), <em>Byhnâ Paawsana Program</em>.</td></tr>
+          <tr data-s><td><strong>Main banner</strong></td><td><code>banner.html</code></td><td>A dark poster-style screen with a large red cross, the title, the date plate and the details. Use it on the wall before the service starts and after it ends.</td></tr>
+          <tr data-s><td><strong>Song lyrics</strong></td><td><code>lyrics.html</code></td><td>Shows one lyric line at a time with a smooth glide. The song title stays at the top. The song number and book edition are at the bottom right. Songs come from <code>songs.json</code>.</td></tr>
+          <tr data-s><td><strong>Help</strong></td><td><code>help.html</code></td><td>This page.</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p>All screens are designed for a <strong>16:9 projector (1920 × 1080)</strong>. On other shapes they keep their proportions and add black bars at the sides or top. Text is never stretched.</p>
+      <p>Switching between pages: keep each page in its own browser tab and use <kbd>Ctrl</kbd> + <kbd>Tab</kbd> (next tab) or <kbd>Ctrl</kbd> + <kbd>1</kbd>, <kbd>2</kbd>, <kbd>3</kbd> to jump to a tab. Each tab remembers where it was.</p>
+    </section>
+
+    <section class="block" id="keys-common" data-section>
+      <h2>Keys that work on every page</h2>
+      <div class="table-wrap">
+      <table class="keys">
+        <tbody>
+          <tr data-s><td class="k"><kbd>F</kbd></td><td>Fullscreen on or off. (The browser’s own <kbd>F11</kbd> also works.)</td></tr>
+          <tr data-s><td class="k"><kbd>H</kbd></td><td>Open this Help page in a new tab.</td></tr>
+          <tr data-s><td class="k"><kbd>?</kbd></td><td>Quick list of shortcut keys on top of the screen (slideshow and lyrics). Press <kbd>Esc</kbd> to close it.</td></tr>
+          <tr data-s><td class="k"><kbd>Esc</kbd></td><td>Close a list or help box, or leave the black screen.</td></tr>
+          <tr data-s><td class="k"><kbd>B</kbd> or <kbd>.</kbd></td><td>Black screen on or off (slideshow and lyrics). Moving to another slide or line also brings the picture back.</td></tr>
+          <tr data-s><td class="k"><kbd>T</kbd></td><td>Dark or light theme (slideshow and lyrics).</td></tr>
+          <tr data-s><td class="k"><kbd>M</kbd></td><td>Full or reduced animation (slideshow and lyrics). Reduced uses simple fades only.</td></tr>
+          <tr data-s><td class="k"><kbd>C</kbd></td><td>Show or hide the small on-screen controls bar (slideshow and lyrics). It is <strong>hidden by default</strong> so the screen stays clean.</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </section>
+
+    <section class="block" id="keys-slideshow" data-section>
+      <h2>Program slideshow <code>index.html</code></h2>
+      <div class="table-wrap">
+      <table class="keys">
+        <thead><tr><th>Keys</th><th>What it does</th></tr></thead>
+        <tbody>
+          <tr data-s><td class="k"><kbd>→</kbd> <kbd>↓</kbd> <kbd>Space</kbd> <kbd>PgDn</kbd> <kbd>Enter</kbd></td><td>Next slide.</td></tr>
+          <tr data-s><td class="k"><kbd>←</kbd> <kbd>↑</kbd> <kbd>Backspace</kbd> <kbd>PgUp</kbd></td><td>Previous slide.</td></tr>
+          <tr data-s><td class="k"><kbd>Home</kbd> / <kbd>End</kbd></td><td>First slide (title) / last slide (closing).</td></tr>
+          <tr data-s><td class="k">number, then <kbd>Enter</kbd></td><td>Jump to <strong>program item</strong> 1 to 21. Type <kbd>1</kbd><kbd>2</kbd> and press <kbd>Enter</kbd>, or just wait a moment. A message at the top right shows what you typed.</td></tr>
+          <tr data-s><td class="k"><kbd>G</kbd> or <kbd>O</kbd></td><td>Program list. Use <kbd>↑</kbd> <kbd>↓</kbd> and <kbd>Enter</kbd>, or click an item. <kbd>Esc</kbd> closes it.</td></tr>
+          <tr data-s><td class="k"><kbd>P</kbd></td><td>Print, or save as a PDF with one slide per page.</td></tr>
+          <tr data-s><td class="k"><kbd>F</kbd> <kbd>B</kbd> <kbd>.</kbd> <kbd>T</kbd> <kbd>M</kbd> <kbd>C</kbd> <kbd>H</kbd> <kbd>?</kbd></td><td>As in the common list above.</td></tr>
+          <tr data-s><td class="k">Swipe left / right</td><td>On a touch screen: next / previous slide.</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <h3>Slide order</h3>
+      <p>Slide 1 is the title, slide 2 the details, slides 3 to 23 are program items 1 to 21, and slide 24 is the closing slide. The small number at the bottom right of each item slide is the <em>item</em> number. A web address such as <code>index.html#5</code> opens the page at <em>slide</em> 5.</p>
+    </section>
+
+    <section class="block" id="keys-banner" data-section>
+      <h2>Main banner <code>banner.html</code></h2>
+      <div class="table-wrap">
+      <table class="keys">
+        <thead><tr><th>Keys</th><th>What it does</th></tr></thead>
+        <tbody>
+          <tr data-s><td class="k"><kbd>F</kbd></td><td>Fullscreen.</td></tr>
+          <tr data-s><td class="k"><kbd>R</kbd> or <kbd>Space</kbd></td><td>Replay the opening animation. Useful when you bring the banner back on screen.</td></tr>
+          <tr data-s><td class="k"><kbd>P</kbd></td><td>Print, or save as a PDF.</td></tr>
+          <tr data-s><td class="k"><kbd>H</kbd></td><td>Open this Help page.</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p>The banner has no controls bar and no on-screen hints. Its outline cross drifts very slowly. If the computer is set to reduce motion, the animation is switched off.</p>
+    </section>
+
+    <section class="block" id="keys-lyrics" data-section>
+      <h2>Song lyrics <code>lyrics.html</code></h2>
+      <div class="table-wrap">
+      <table class="keys">
+        <thead><tr><th>Keys</th><th>What it does</th></tr></thead>
+        <tbody>
+          <tr data-s><td class="k"><kbd>→</kbd> <kbd>↓</kbd> <kbd>Space</kbd> <kbd>PgDn</kbd> <kbd>Enter</kbd></td><td>Next line. At the end of a song a message says so. It does not jump to the next song by itself.</td></tr>
+          <tr data-s><td class="k"><kbd>←</kbd> <kbd>↑</kbd> <kbd>Backspace</kbd> <kbd>PgUp</kbd></td><td>Previous line.</td></tr>
+          <tr data-s><td class="k"><kbd>Shift</kbd> + <kbd>→</kbd></td><td>Jump to the first line of the next verse.</td></tr>
+          <tr data-s><td class="k"><kbd>Shift</kbd> + <kbd>←</kbd></td><td>Back to the start of this verse, or the previous verse if you are already at the start.</td></tr>
+          <tr data-s><td class="k"><kbd>Home</kbd> / <kbd>End</kbd></td><td>First / last line of the song.</td></tr>
+          <tr data-s><td class="k"><kbd>N</kbd> / <kbd>P</kbd></td><td>Next song / previous song.</td></tr>
+          <tr data-s><td class="k">number, then <kbd>Enter</kbd></td><td>Jump to the song with that <strong>song number</strong> (the number shown at the bottom right). It must match the <code>number</code> in <code>songs.json</code>.</td></tr>
+          <tr data-s><td class="k"><kbd>G</kbd></td><td>Song list. Use <kbd>↑</kbd> <kbd>↓</kbd> and <kbd>Enter</kbd>, or click a song.</td></tr>
+          <tr data-s><td class="k"><kbd>L</kbd></td><td>Switch between <em>focus view</em> (the lines before and after are faint) and <em>one-line view</em> (only the current line).</td></tr>
+          <tr data-s><td class="k"><kbd>O</kbd></td><td>Choose a <code>songs.json</code> file from the computer. You can also drag the file onto the page.</td></tr>
+          <tr data-s><td class="k"><kbd>F</kbd> <kbd>B</kbd> <kbd>.</kbd> <kbd>T</kbd> <kbd>M</kbd> <kbd>C</kbd> <kbd>H</kbd> <kbd>?</kbd></td><td>As in the common list above.</td></tr>
+          <tr data-s><td class="k">Swipe left / right</td><td>On a touch screen: next / previous line.</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <h3>What is on the lyrics screen</h3>
+      <ul>
+        <li><strong>Top:</strong> the song title, always visible, with a red bar and the author.</li>
+        <li><strong>Middle:</strong> the current line, large and bright.</li>
+        <li><strong>Bottom left:</strong> the section name, for example “Verse 2”, and a row of dots showing which line of the section you are on.</li>
+        <li><strong>Bottom right:</strong> the song number in a red block, with the book and edition beside it.</li>
+        <li><strong>Left edge:</strong> a thin red bar that grows as the song moves on.</li>
+      </ul>
+      <p>A web address such as <code>lyrics.html#2.5</code> opens song 2 at line 5.</p>
+    </section>
+
+    <section class="block" id="remote" data-section>
+      <h2>Using a presenter remote (clicker)</h2>
+      <p>Most clickers act like a tiny keyboard. They usually send <kbd>PgDn</kbd> for next, <kbd>PgUp</kbd> for back, and <kbd>.</kbd> or <kbd>B</kbd> for the black screen. All of these already work on the slideshow and lyrics pages, so a clicker needs no setup.</p>
+      <ul>
+        <li>Plug the receiver in <strong>before</strong> opening the page, then click once on the page so it has focus.</li>
+        <li>If the clicker does nothing, check that no other program (for example a PowerPoint window) is capturing it.</li>
+        <li>A phone or tablet can also work as a keyboard remote through a Bluetooth keyboard app.</li>
+      </ul>
+    </section>
+
+    <section class="block" id="setup" data-section>
+      <h2>Projector setup</h2>
+      <ol class="steps">
+        <li><strong>Connect</strong> the projector with HDMI or a video adapter, and turn it on.</li>
+        <li><strong>Choose how to show the screen.</strong> On Windows press <kbd>Win</kbd> + <kbd>P</kbd> and choose <em>Extend</em> (you see your own screen, the wall sees the page) or <em>Duplicate</em>. On a Mac use System Settings, then Displays.</li>
+        <li><strong>Set the resolution</strong> of the projector to 1920 × 1080 if it offers it. It then fills the wall exactly.</li>
+        <li><strong>Move the browser window</strong> onto the projector screen, then press <kbd>F</kbd>.</li>
+        <li><strong>Check from the back of the hall.</strong> Text is large, but room light and projector brightness differ. If the cream slides look too bright in a dark hall, press <kbd>T</kbd> for the dark theme.</li>
+      </ol>
+      <h3>Good to know</h3>
+      <ul>
+        <li><strong>Works offline.</strong> No internet is used. Fonts come from the computer, so letter shapes can differ a little between computers. Always test on the computer you will use.</li>
+        <li><strong>Stays awake.</strong> The pages ask the computer not to dim or sleep while they are open. Also turn off the screen saver and notifications (Do Not Disturb) for the service.</li>
+        <li><strong>Browsers.</strong> Recent Chrome or Edge are best. Firefox and Safari work too.</li>
+      </ul>
+    </section>
+
+    <section class="block" id="service-day" data-section>
+      <h2>Service-day checklist</h2>
+      <ul class="check">
+        <li>Open <code>banner.html</code>, <code>index.html</code> and <code>lyrics.html</code> in three tabs, each with the right slide or song.</li>
+        <li>Press <kbd>F</kbd> on each tab once so you know fullscreen works on the projector.</li>
+        <li>Run through the lyrics for every song you will use: first line, a verse jump, last line.</li>
+        <li>Test your clicker on the slideshow and on the lyrics page.</li>
+        <li>Turn off the screen saver, sleep and notifications. Plug the laptop into power.</li>
+        <li>Start with the banner on screen. Press <kbd>Ctrl</kbd> + <kbd>Tab</kbd> to move on to the slideshow.</li>
+        <li>For a song, switch to the lyrics tab, press <kbd>G</kbd> or type the song number and <kbd>Enter</kbd>.</li>
+        <li>Between items, <kbd>B</kbd> gives a black screen. Press it again, or move to the next slide, to return.</li>
+      </ul>
+    </section>
+
+    <section class="block" id="edit" data-section>
+      <h2>Changing the content</h2>
+      <p>The pages are plain files. Open them in any text editor such as Notepad, change the text, save, then press <kbd>F5</kbd> (or <kbd>Ctrl</kbd> + <kbd>R</kbd>) in the browser to see the change.</p>
+
+      <h3>Program slideshow: <code>script.js</code></h3>
+      <p>The words are at the top of the file. Change the names and details there.</p>
+      <ul>
+        <li><code>CHURCH</code>, <code>PLACE</code>, <code>DATE</code>, <code>TITLE</code> are the church name, place, date and program name.</li>
+        <li><code>HONOR</code> and <code>AND</code> are the first and middle parts of the title: “Rev. Haidau Chori Palyupalihna” and “Nata”.</li>
+        <li><code>DETAILS</code> holds the date, venue, time, directors and chairman.</li>
+        <li><code>PROGRAM</code> holds the 21 items. Each item is a list of blocks.</li>
+      </ul>
+<pre><code>// a role and a person
+{ label: 'Hla solo', value: 'Ls. Centenary', sub: 'Aphapaaw Local KTP' }
+
+// a hymn title (shown in a lighter weight)
+{ label: 'Zawpi Hla sana', value: 'Hy, Beipa Chônôchai eima cha reihthai', hymn: true }
+
+// a plain line, with an optional note under it
+{ text: 'Chairman tawhta Program phuahna' }</code></pre>
+      <p>An item with more than one block (like item 5) is shown a little smaller so everything fits.</p>
+
+      <h3>Main banner: <code>banner.html</code></h3>
+      <p>All the words are in the page itself. Look for the title lines, the “4th October 2026” plate in the middle of the cross, and the list of five facts (Date, A su, Daihti, Directors, Chairman). Change the text between the tags and keep the tags themselves.</p>
+
+      <h3>Song lyrics: <code>songs.json</code></h3>
+      <p>Each song has a title, number, book, edition and sections. A section is a label and a list of lines. The page shows one line at a time.</p>
+<pre><code>{
+  "songs": [
+    {
+      "title": "Amazing Grace",
+      "author": "John Newton, 1779",
+      "number": 1,
+      "book": "Sample Hymn Book",
+      "edition": "1st Edition",
+      "sections": [
+        { "label": "Verse 1", "lines": ["First line", "Second line"] },
+        { "label": "Verse 2", "lines": ["First line", "Second line"] }
+      ]
+    }
+  ]
+}</code></pre>
+      <div class="table-wrap">
+      <table class="plain">
+        <thead><tr><th>Field</th><th>Meaning</th></tr></thead>
+        <tbody>
+          <tr data-s><td><code>title</code></td><td>Shown large at the top. Required.</td></tr>
+          <tr data-s><td><code>author</code></td><td>Small line under the title. Optional.</td></tr>
+          <tr data-s><td><code>number</code></td><td>Song number in the red block at the bottom right. Also used by “type a number then Enter”.</td></tr>
+          <tr data-s><td><code>book</code>, <code>edition</code></td><td>Book name and edition beside the number.</td></tr>
+          <tr data-s><td><code>sections</code></td><td>List of <code>{ "label": "...", "lines": [...] }</code>. The label (for example “Chorus”) shows at the bottom left.</td></tr>
+          <tr data-s><td><code>id</code> and <code>order</code></td><td>Optional. To repeat a chorus without typing it again, give each section an <code>id</code> and add <code>"order": ["v1", "c", "v2", "c"]</code> to the song.</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <div class="note"><strong>Two songs are samples.</strong> “Amazing Grace” and “Holy, Holy, Holy” are public-domain English hymns used for testing. Replace them, and the book and edition, with your own hymnal. Take care with commas and quote marks: one missing comma makes the whole file unreadable, and the page will tell you.</div>
+      <p><strong>Opening from a folder.</strong> Browsers do not let a page read <code>songs.json</code> when it is opened straight from a folder. The lyrics page then asks you to choose the file (press <kbd>O</kbd> any time), and it remembers that file. After you edit <code>songs.json</code>, press <kbd>O</kbd> and choose it again. To avoid this, open a terminal in the folder and run:</p>
+<pre><code>python3 -m http.server 8000
+# then open  http://localhost:8000/lyrics.html</code></pre>
+      <p>Then the page always reads the newest <code>songs.json</code> by itself.</p>
+    </section>
+
+    <section class="block" id="print" data-section>
+      <h2>Print or save as PDF</h2>
+      <p>Press <kbd>P</kbd> on the slideshow or the banner. In the print window choose:</p>
+      <ul>
+        <li><strong>Destination:</strong> Save as PDF (or a printer).</li>
+        <li><strong>Layout:</strong> Landscape. <strong>Margins:</strong> None. <strong>Scale:</strong> Default or Fit to page.</li>
+        <li><strong>Options:</strong> turn on <em>Background graphics</em>, otherwise the red and cream colours are left out.</li>
+      </ul>
+      <p>The slideshow prints one slide per page. A PDF makes a good backup: if the computer fails, any other computer can show the PDF.</p>
+    </section>
+
+    <section class="block" id="remembered" data-section>
+      <h2>What the pages remember</h2>
+      <p>These choices are saved in the browser on that computer, and come back next time:</p>
+      <ul>
+        <li>Dark or light theme, and full or reduced animation (separately for the slideshow and lyrics).</li>
+        <li>Whether the controls bar is shown.</li>
+        <li>The lyrics view (focus or one line) and the last <code>songs.json</code> you chose when opening from a folder.</li>
+        <li>Where you were. The web address changes as you move, for example <code>index.html#12</code> or <code>lyrics.html#2.5</code>. Reloading the page returns to the same place.</li>
+      </ul>
+      <p>To reset everything, clear the site data for the page in the browser’s settings.</p>
+    </section>
+
+    <section class="block" id="troubleshooting" data-section>
+      <h2>Troubleshooting</h2>
+      <dl class="qa">
+        <div data-s><dt>The keys do nothing.</dt><dd>Click once on the page so the browser window has focus, then try again. Make sure you are not typing in another window or in the search box.</dd></div>
+        <div data-s><dt>I am on the wrong slide or song.</dt><dd>Type the number and press <kbd>Enter</kbd>, or press <kbd>G</kbd> for the list. <kbd>Home</kbd> returns to the start.</dd></div>
+        <div data-s><dt>The screen went black.</dt><dd>You pressed <kbd>B</kbd> or <kbd>.</kbd>. Press it again or press <kbd>Esc</kbd>.</dd></div>
+        <div data-s><dt>There are no animations.</dt><dd>The computer may be set to reduce motion, so the pages use plain fades. Press <kbd>M</kbd> to switch to full animation.</dd></div>
+        <div data-s><dt>The buttons bar is missing.</dt><dd>That is on purpose. Press <kbd>C</kbd> to show it. Press <kbd>C</kbd> again to hide it.</dd></div>
+        <div data-s><dt>The lyrics page asks me to load songs.</dt><dd>The browser blocked reading <code>songs.json</code> from a folder. Choose the file in the box, or open the page through a local web server (see “Changing the content”).</dd></div>
+        <div data-s><dt>It says the songs file could not be read.</dt><dd>There is a mistake in <code>songs.json</code>, usually a missing comma, quote mark or bracket. The message says what is wrong. Fix the file and press <kbd>O</kbd> to load it again.</dd></div>
+        <div data-s><dt>Fullscreen does not start.</dt><dd>Browsers only allow fullscreen after you press a key or click on the page itself. Click the page and press <kbd>F</kbd> again. Inside a small preview window, fullscreen can be blocked; open the file in its own browser tab.</dd></div>
+        <div data-s><dt>There are black bars at the sides.</dt><dd>The projector is not 16:9. The page keeps its proportions rather than stretching. Set the projector to 1920 × 1080 if possible.</dd></div>
+        <div data-s><dt>The text looks a little different on another computer.</dt><dd>The pages use the fonts installed on the computer. Test on the computer you will use for the service.</dd></div>
+        <div data-s><dt>H does not open the Help page.</dt><dd>The browser may have blocked the new tab. Allow pop-ups for the page, or open <code>help.html</code> yourself.</dd></div>
+        <div data-s><dt>The printed PDF is missing colours.</dt><dd>Turn on <em>Background graphics</em> in the print window.</dd></div>
+      </dl>
+    </section>
+
+    <section class="block" id="faq" data-section>
+      <h2>Questions</h2>
+      <dl class="qa">
+        <div data-s><dt>How do I show program item 12 right now?</dt><dd>On the slideshow press <kbd>1</kbd> <kbd>2</kbd> <kbd>Enter</kbd>.</dd></div>
+        <div data-s><dt>How do I show a hymn by its number?</dt><dd>On the lyrics page type the number and press <kbd>Enter</kbd>. It must match the <code>number</code> in <code>songs.json</code>.</dd></div>
+        <div data-s><dt>Can I run it from a USB stick?</dt><dd>Yes. Keep all the files together in one folder: the <code>.html</code>, <code>.css</code> and <code>.js</code> files and <code>songs.json</code>.</dd></div>
+        <div data-s><dt>Does it need internet?</dt><dd>No. Nothing is loaded from the internet.</dd></div>
+        <div data-s><dt>Can I use two screens, one for the banner and one for lyrics?</dt><dd>Yes. Open each page in its own browser window, move each window to a screen, and press <kbd>F</kbd> in each.</dd></div>
+        <div data-s><dt>How do I get back to the first slide quickly?</dt><dd><kbd>Home</kbd>.</dd></div>
+        <div data-s><dt>Can the lyrics move on by themselves?</dt><dd>No. Lines change only when you press a key or use the clicker, so the singing never gets ahead of you.</dd></div>
+      </dl>
+    </section>
+
+    <footer class="foot">
+      <p>Mara Evangelical Church · Lialaipi Pastor Bia, Lialaipi</p>
+      <p><a href="#top" id="top-link">Back to top</a></p>
+    </footer>
+  </main>
+</div>
+
+<script src="help.js"></script>
+</body>
+</html>
