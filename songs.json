@@ -236,6 +236,53 @@
           ]
         }
       ]
+    },
+    {
+      "id": "krista-chata-hria-mah-y",
+      "title": "Krista châta hria mah y",
+      "composer": "K Rakie",
+      "sections": [
+        {
+          "id": "v1",
+          "label": "Verse 1",
+          "lines": [
+            "Krista chakaona rai hria awpa ta",
+            "Beipa ta atahmâ a châ tlyh haw",
+            "Riahchhie leita hria lymâ mah y",
+            "Na hnohta a cha ypâ aw"
+          ]
+        },
+        {
+          "id": "c",
+          "label": "Chorus",
+          "lines": [
+            "Na thainazy chy hrasala",
+            "Beipa ta tha a cha patlô aw",
+            "Su rietheinazy lia chhaota",
+            "Krista châta hria lymâ mah y"
+          ]
+        },
+        {
+          "id": "v2",
+          "label": "Verse 2",
+          "lines": [
+            "Krista sei phahnai leipazy saih u",
+            "Riethei rairu chai na lia chhaota",
+            "Hnôhsy lei ta hmialâ tôh mah y",
+            "Tha patlôtuh na hnohta a y"
+          ]
+        },
+        {
+          "id": "v3",
+          "label": "Verse 3",
+          "lines": [
+            "Thlapa leidiapazy tlua awpa ta",
+            "Beipa ta tahmâ a cha rao haw",
+            "Na o nah lyu zy siesaipa ta",
+            "Riethei taona chôta hria mah y"
+          ]
+        }
+      ]
     }
   ]
 }
