@@ -61,6 +61,65 @@
           ]
         }
       ]
+    },
+    {
+      "id": "eima-chakaona-va-dei-miah-thei-ei",
+      "title": "Eima chakaona vâ dei miah thei ei",
+      "composer": "LM. Tlosai Lorrain Faxall 1903 - 1968",
+      "number": 453,
+      "edition": "13th Edition",
+      "sections": [
+        {
+          "id": "v1",
+          "label": "Verse 1",
+          "lines": [
+            "Khihdei ta awhsi a diapa hawhna cha,",
+            "Ama khaihna cha noh thlaraw lia lei;",
+            "Cha hawh khizaw hriapasa siesai aw pi,"
+          ]
+        },
+        {
+          "id": "c",
+          "label": "Chorus",
+          "lines": [
+            "Eima hriana kyh vâ theipa ta y.",
+            "Eima hriana kyh, eima hriana kyh,",
+            "Eima hriana kyh vâ theipa ta y;",
+            "Cha hawh khizaw hriapasa siesai aw pi,",
+            "Eima hriana kyh vâ theipa ta y."
+          ]
+        },
+        {
+          "id": "v2",
+          "label": "Verse 2",
+          "lines": [
+            "Miah ama my ma, mo hro miah thla hr'ei sa,",
+            "Chi eima tu chiehpa ama hria no; Y,",
+            "chitupenawh hriapasa tawh sie byuh,",
+            "Ama hriana kyh vâ theipa ta y."
+          ]
+        },
+        {
+          "id": "v3",
+          "label": "Verse 3",
+          "lines": [
+            "Hrochhôh bie hmeiseih eima reipazy kha,",
+            "Khizaw lia chi eima tupa deita;",
+            "Hezy sie laih aw, keimo miah my khai no,",
+            "Sâhria thei nah eima hrianazy chhao."
+          ]
+        },
+        {
+          "id": "v4",
+          "label": "Verse 4",
+          "lines": [
+            "Miah Pachhatuh lôsôhzy a pakhy ti,",
+            "Thaphana lakho eimâ kho tita;",
+            "Cha ti ano zituh ngâchhihpazy cha,",
+            "Ama hriana vâta athei aw ei."
+          ]
+        }
+      ]
     }
   ]
 }

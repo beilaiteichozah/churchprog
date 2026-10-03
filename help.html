@@ -421,7 +421,7 @@
         </tbody>
       </table>
       </div>
-      <div class="note"><strong>Check your commas and quote marks.</strong> One missing comma makes the whole file unreadable, and the page will tell you what is wrong. <code>songs.json</code> now holds one song, “Khazohpa cha a pha apha”. Add more songs after it, separated by commas. To play the chorus after every verse, add an <code>order</code> list.</div>
+      <div class="note"><strong>Check your commas and quote marks.</strong> One missing comma makes the whole file unreadable, and the page will tell you what is wrong. <code>songs.json</code> now holds two songs, “Khazohpa cha a pha apha” and “Eima chakaona vâ dei miah thei ei” (number 453). Add more songs after them, separated by commas. To play the chorus after every verse, add an <code>order</code> list.</div>
       <p><strong>Opening from a folder.</strong> Browsers do not let a page read <code>songs.json</code> when it is opened straight from a folder. The lyrics page then asks you to choose the file (press <kbd>O</kbd> any time), and it remembers that file. After you edit <code>songs.json</code>, press <kbd>O</kbd> and choose it again. To avoid this, open a terminal in the folder and run:</p>
 <pre><code>python3 -m http.server 8000
 # then open  http://localhost:8000/lyrics.html</code></pre>
