@@ -96,8 +96,11 @@
     try { history.replaceState(null, '', location.search + '#' + (si + 1) + '.' + (li + 1)); } catch (e) { /* file:// */ }
   }
 
+  var swapT = null, swapSong = false;
+  function cancelSwap() { if (swapT) { clearTimeout(swapT); swapT = null; } swapSong = false; }
+
   function enter() {
-    clearTimers();
+    clearTimers(); cancelSwap();
     fillSong();
     lyric.textContent = '';
     lineEl = makeLine(songs[si].lines[li].text, 'first');
@@ -106,7 +109,7 @@
     later(function () { setState('shown'); }, reduced() ? 400 : 1600);
   }
   function exit(done) {
-    clearTimers();
+    clearTimers(); cancelSwap();
     setState('out');
     later(function () { setState('hidden'); lyric.textContent = ''; lineEl = null; if (done) done(); }, reduced() ? 400 : 1000);
   }
@@ -122,15 +125,38 @@
     toast((si + 1) + '/' + songs.length + ' · ' + (li + 1) + '/' + s.lines.length + ' · ' + s.lines[li].text);
   }
 
+  /* Replace the line on screen with the current one, in sequence: the old line lifts away and
+     disappears first, then the new line rises in. If keys are pressed quickly, the swap in
+     progress simply picks up the latest line when it finishes, so lines never pile up. */
+  function swapLine(withSong) {
+    if (withSong) swapSong = true;
+    if (swapT) return;
+    var old = lineEl;
+    var finish = function () {
+      swapT = null;
+      if (old && old.parentNode) old.parentNode.removeChild(old);
+      if (!visible()) { swapSong = false; return; }
+      if (swapSong) {
+        swapSong = false;
+        fillSong();
+        ['tag', 'mark'].forEach(function (id) { var e = $(id); e.classList.remove('swap'); void e.offsetWidth; e.classList.add('swap'); });
+      }
+      lineEl = makeLine(songs[si].lines[li].text, 'pre');
+      void lineEl.offsetWidth;            // start from the hidden state, then let it rise in
+      lineEl.classList.remove('pre');
+    };
+    if (old) {
+      old.classList.remove('first', 'enter');
+      old.classList.add('leave');
+      swapT = setTimeout(finish, reduced() ? 0 : 260);
+    } else finish();
+  }
+
   function setLine(n) {
     var s = songs[si];
     li = Math.max(0, Math.min(s.lines.length - 1, n));
     setProgress();
-    if (visible()) {
-      var old = lineEl;
-      if (old) { old.classList.remove('first', 'enter'); old.classList.add('leave'); later(function () { if (old.parentNode) old.parentNode.removeChild(old); }, 500); }
-      lineEl = makeLine(s.lines[li].text, 'enter');
-    } else preview();
+    if (visible()) swapLine(false); else preview();
   }
 
   function next() {
@@ -158,11 +184,8 @@
     si = n; li = 0;
     refreshList();
     if (visible()) {
-      fillSong(); setProgress();
-      ['tag', 'mark'].forEach(function (id) { var e = $(id); e.classList.remove('swap'); void e.offsetWidth; e.classList.add('swap'); });
-      var old = lineEl;
-      if (old) { old.classList.remove('first', 'enter'); old.classList.add('leave'); later(function () { if (old.parentNode) old.parentNode.removeChild(old); }, 500); }
-      lineEl = makeLine(songs[si].lines[0].text, 'enter');
+      setProgress();
+      swapLine(true);
     } else if (show) { present(); }
     else { setProgress(); toast('Song ' + (songs[si].number || (si + 1)) + ' · ' + songs[si].title); }
   }

@@ -73,7 +73,12 @@ body.clean .toast, body.clean .overlay { display: none; }
 
 .lyric { position: relative; height: 144px; margin-top: 6px; overflow: hidden; }
 .ll.noinfo .lyric { margin-top: 0; }
-.lyric .ln { position: absolute; inset: 0; display: flex; align-items: center; font-size: 60px; line-height: 1.16; font-weight: 700; letter-spacing: -.005em; }
+.lyric .ln {
+  position: absolute; inset: 0; display: flex; align-items: center;
+  font-size: 60px; line-height: 1.16; font-weight: 700; letter-spacing: -.005em;
+  opacity: 1; transform: none;
+  transition: opacity .35s ease-out, transform .5s var(--ease-out);   /* the new line rising in */
+}
 .lyric .ln span { display: block; width: 100%; text-wrap: balance; }
 
 .prog { position: absolute; left: 0; right: 0; bottom: 0; height: 6px; background: var(--prog); transform-origin: left; transform: scaleX(var(--p, 0)); transition: transform .6s var(--ease-out); }
@@ -96,9 +101,10 @@ body.clean .toast, body.clean .overlay { display: none; }
 .ll[data-state="out"] .plate { animation: ll-plate-out .55s .12s var(--ease) both; }
 .ll[data-state="out"] .mark  { animation: ll-mark-out .4s .45s var(--ease) both; }
 
-/* one lyric line replaces another */
-.lyric .ln.enter { animation: ll-rise .6s var(--ease-out) both; }
-.lyric .ln.leave { animation: ll-lift .4s ease-in both; pointer-events: none; }
+/* One lyric line replaces another, one after the other (never both on screen at once):
+   the old line lifts away and fades out first (.leave), then the new line rises in (.pre -> normal). */
+.lyric .ln.pre   { opacity: 0; transform: translateY(28px); }
+.lyric .ln.leave { opacity: 0; transform: translateY(-22px); transition: opacity .2s ease-in, transform .24s ease-in; pointer-events: none; }
 .swap { animation: ll-rise .55s var(--ease-out) both; }
 
 /* Reduced motion (OS setting or M key): plain fades */
@@ -106,7 +112,7 @@ body.clean .toast, body.clean .overlay { display: none; }
 :root[data-motion="reduced"] .ll { opacity: 0; visibility: visible; transition: opacity .35s ease; }
 :root[data-motion="reduced"] .ll[data-state="in"], :root[data-motion="reduced"] .ll[data-state="shown"] { opacity: 1; }
 :root[data-motion="reduced"] .ll[data-state="hidden"] { visibility: hidden; transition: opacity .35s ease, visibility 0s .35s; }
-:root[data-motion="reduced"] .lyric .ln.leave { display: none; }
+:root[data-motion="reduced"] .lyric .ln, :root[data-motion="reduced"] .lyric .ln.pre, :root[data-motion="reduced"] .lyric .ln.leave { transform: none !important; transition: opacity .2s ease; }
 :root[data-motion="reduced"] .prog { transition: none; }
 
 /* ---------- Operator UI (never shown in ?clean mode) ---------- */
