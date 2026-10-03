@@ -27,6 +27,17 @@
   fit();
 
   /* ---------- Data ---------- */
+  /* Sections: each played section (verse, chorus, bridge…) with where it starts, so a key can jump to it. */
+  function kindOf(sec) {
+    var k = String(sec.kind || '').toLowerCase();
+    if (k === 'chorus' || k === 'refrain') return 'chorus';
+    if (k === 'verse') return 'verse';
+    if (k) return 'other';
+    var l = sec.label || '';
+    if (/chorus|refrain/i.test(l)) return 'chorus';
+    if (/bridge|coda|tag|intro|outro|interlude|ending|amen/i.test(l)) return 'other';
+    return 'verse';
+  }
   function normalize(data) {
     var list = Array.isArray(data) ? data : data && data.songs;
     if (!Array.isArray(list)) throw new Error('songs.json must contain a "songs" list.');
@@ -37,15 +48,22 @@
       secs.forEach(function (x) { if (x && x.id) byId[x.id] = x; });
       var seq = Array.isArray(s.order) && s.order.length
         ? s.order.map(function (id) { return byId[id]; }).filter(Boolean) : secs;
-      var lines = [];
+      var lines = [], meta = [], unnumbered = [];
       seq.forEach(function (sec, k) {
         var ls = (sec.lines || []).map(String);
+        var kind = kindOf(sec), no = null;
+        if (kind === 'verse') {
+          if (sec.verse != null && !isNaN(+sec.verse)) no = +sec.verse;
+          else { var m = /(\d+)/.exec(sec.label || ''); if (m) no = +m[1]; }
+          if (no == null) { var u = unnumbered.indexOf(sec); if (u < 0) { unnumbered.push(sec); u = unnumbered.length - 1; } no = u + 1; }
+        }
+        meta.push({ label: sec.label || '', kind: kind, no: no, start: lines.length, first: ls[0] || '' });
         ls.forEach(function (t, j) { lines.push({ text: t, label: sec.label || '', sec: k, n: ls.length, j: j }); });
       });
       return {
         title: String(s.title || 'Song ' + (n + 1)), author: s.author ? String(s.author) : '',
         number: s.number != null ? String(s.number) : '', book: s.book ? String(s.book) : '',
-        edition: s.edition ? String(s.edition) : '', lines: lines
+        edition: s.edition ? String(s.edition) : '', lines: lines, meta: meta
       };
     }).filter(function (s) { return s.lines.length; });
     if (!out.length) throw new Error('No songs with lyrics were found.');
@@ -103,6 +121,7 @@
       setLine(li, true);
       void track.offsetWidth;
       track.classList.remove('instant');
+      buildSecList(); highlightSec();
       document.title = s.title + (s.number ? ' · No. ' + s.number : '') + ' · Lyrics';
       stage.classList.remove('leaving');
       stage.classList.remove('enter');
@@ -148,6 +167,7 @@
     var di = $('dots').children;
     for (var k2 = 0; k2 < di.length; k2++) di[k2].classList.toggle('on', k2 === ln.j);
 
+    highlightSec();
     $('rail').style.height = ((li + 1) / s.lines.length * 100) + '%';
     $('counter').textContent = (si + 1) + '/' + songs.length + ' · ' + (li + 1) + '/' + s.lines.length;
     try { history.replaceState(null, '', '#' + (si + 1) + '.' + (li + 1)); } catch (e) { /* file:// */ }
@@ -194,13 +214,40 @@
   }
   function highlightSong() { songBtns.forEach(function (b, i) { b.classList.toggle('current', i === si); }); }
 
+  /* ---------- Jump to a verse, the chorus, or any part ---------- */
+  var secBtns = [];
+  function curSecIdx() { return songs[si].lines[li].sec; }
+  function buildSecList() {
+    var ol = $('secItems'); ol.textContent = ''; secBtns = [];
+    songs[si].meta.forEach(function (m, i) {
+      var li_ = el('li'), b = el('button'); b.type = 'button';
+      b.appendChild(el('span', 'n', String(i + 1)));
+      b.appendChild(el('span', 't', m.label || ('Part ' + (i + 1))));
+      b.appendChild(el('span', 'b', m.first));
+      b.addEventListener('click', function () { closeOverlays(); toggleBlack(false); setLine(m.start); });
+      li_.appendChild(b); ol.appendChild(li_); secBtns.push(b);
+    });
+  }
+  function highlightSec() { var c = curSecIdx(); secBtns.forEach(function (b, i) { b.classList.toggle('current', i === c); }); }
+  function jumpSection(kind, no) {
+    var s = songs[si], cs = curSecIdx(), cand = [];
+    s.meta.forEach(function (m, i) { if (m.kind === kind && (kind !== 'verse' || m.no === no)) cand.push(i); });
+    if (!cand.length) { toast(kind === 'chorus' ? 'No chorus in this song' : 'No verse ' + no + ' in this song'); return; }
+    var target;
+    if (cand.indexOf(cs) > -1) target = cs;                       // already there: start it again
+    else { var fwd = cand.filter(function (i) { return i > cs; }); target = fwd.length ? fwd[0] : cand[cand.length - 1]; }
+    toggleBlack(false);
+    setLine(s.meta[target].start);
+  }
+
   /* ---------- Overlays, toast, black, theme, motion, bar, fullscreen ---------- */
-  var overlays = [$('songList'), $('help')];
+  var overlays = [$('songList'), $('help'), $('secList')];
   function overlayOpen() { return overlays.some(function (o) { return !o.hidden; }); }
   function closeOverlays() { overlays.forEach(function (o) { o.hidden = true; }); }
   function toggleOverlay(o) {
     var open = o.hidden; closeOverlays(); o.hidden = !open;
     if (open && o === overlays[0] && songBtns[si]) songBtns[si].focus();
+    if (open && o === overlays[2] && secBtns[curSecIdx()]) secBtns[curSecIdx()].focus();
   }
 
   var toastT;
@@ -288,10 +335,12 @@
   overlays.concat([$('loader')]).forEach(function (o) { o.addEventListener('click', function (e) { if (e.target === o && songs.length) { o.hidden = true; } }); });
   $('black').addEventListener('click', function () { toggleBlack(false); });
 
-  var numBuf = '', numT;
+  /* Song number: press S, type the number, then Enter (digits on their own jump to verses). */
+  var numBuf = '', numT, songEntry = false;
+  function endEntry() { clearTimeout(numT); numBuf = ''; songEntry = false; }
   function commitNumber() {
-    clearTimeout(numT);
-    var n = numBuf; numBuf = '';
+    var n = numBuf; endEntry();
+    if (!n) return;
     var idx = -1;
     songs.forEach(function (s, i) { if (idx < 0 && s.number === String(parseInt(n, 10))) idx = i; });
     if (idx >= 0) gotoSong(idx); else toast('No song ' + n);
@@ -304,17 +353,20 @@
     if (!$('loader').hidden) { if (k === 'Escape' && songs.length) $('loader').hidden = true; return; }
     if (!songs.length) return;
 
-    if (k === 'Escape') { if (!$('black').hidden) toggleBlack(false); else closeOverlays(); numBuf = ''; return; }
-    if (/^[0-9]$/.test(k) && !overlayOpen()) {
+    if (k === 'Escape') { if (!$('black').hidden) toggleBlack(false); else closeOverlays(); endEntry(); return; }
+    if (songEntry && /^[0-9]$/.test(k)) {
       numBuf = (numBuf + k).slice(0, 4); toast('Song ' + numBuf + ' ↵');
-      clearTimeout(numT); numT = setTimeout(commitNumber, 1400); return;
+      clearTimeout(numT); numT = setTimeout(commitNumber, 1600); return;
     }
-    if (k === 'Enter' && numBuf) { e.preventDefault(); commitNumber(); return; }
+    if (k === 'Enter' && songEntry) { e.preventDefault(); if (numBuf) commitNumber(); else endEntry(); return; }
+    if (/^[1-9]$/.test(k) && !overlayOpen() && !e.shiftKey) { jumpSection('verse', +k); return; }   // verse 1-9
+    if (k === '0' && !overlayOpen() && !e.shiftKey) { jumpSection('chorus'); return; }
 
     if (overlayOpen()) {
       if (k === 'ArrowDown' || k === 'ArrowUp') {
-        var i = songBtns.indexOf(document.activeElement);
-        if (i > -1) { e.preventDefault(); songBtns[Math.max(0, Math.min(songBtns.length - 1, i + (k === 'ArrowDown' ? 1 : -1)))].focus(); return; }
+        var btns = [].slice.call(document.querySelectorAll('.overlay:not([hidden]) li button'));
+        var i = btns.indexOf(document.activeElement);
+        if (i > -1) { e.preventDefault(); btns[Math.max(0, Math.min(btns.length - 1, i + (k === 'ArrowDown' ? 1 : -1)))].focus(); return; }
       }
       if (k === 'Tab' || k === 'Enter' || k === ' ') return;
     }
@@ -333,7 +385,9 @@
       case 'b': case 'B': case '.': toggleBlack(); break;
       case 't': case 'T': toggleTheme(); break;
       case 'm': case 'M': toggleMotion(); break;
-      case 'c': case 'C': toggleBar(); break;
+      case 'c': case 'C': if (e.shiftKey) toggleBar(); else jumpSection('chorus'); break;
+      case 'j': case 'J': toggleOverlay(overlays[2]); break;
+      case 's': case 'S': songEntry = true; numBuf = ''; toast('Song number, then Enter'); clearTimeout(numT); numT = setTimeout(function () { if (!numBuf) endEntry(); }, 4000); break;
       case 'f': case 'F': toggleFullscreen(); break;
       case 'o': case 'O': openLoader(); break;
       case '?': toggleOverlay(overlays[1]); break;

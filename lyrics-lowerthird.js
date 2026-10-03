@@ -39,6 +39,18 @@
   var songs = [];
   var si = 0, li = 0;
 
+  /* Sections: each played section (verse, chorus, bridge…) with where it starts, so a key can jump to it. */
+  function kindOf(sec) {
+    var k = String(sec.kind || '').toLowerCase();
+    if (k === 'chorus' || k === 'refrain') return 'chorus';
+    if (k === 'verse') return 'verse';
+    if (k) return 'other';
+    var l = sec.label || '';
+    if (/chorus|refrain/i.test(l)) return 'chorus';
+    if (/bridge|coda|tag|intro|outro|interlude|ending|amen/i.test(l)) return 'other';
+    return 'verse';
+  }
+
   function normalize(data) {
     var list = Array.isArray(data) ? data : data && data.songs;
     if (!Array.isArray(list)) throw new Error('songs.json must contain a "songs" list.');
@@ -47,15 +59,22 @@
       var byId = {};
       secs.forEach(function (x) { if (x && x.id) byId[x.id] = x; });
       var seq = Array.isArray(s.order) && s.order.length ? s.order.map(function (id) { return byId[id]; }).filter(Boolean) : secs;
-      var lines = [];
+      var lines = [], meta = [], unnumbered = [];
       seq.forEach(function (sec, k) {
         var ls = (sec.lines || []).map(String);
+        var kind = kindOf(sec), no = null;
+        if (kind === 'verse') {
+          if (sec.verse != null && !isNaN(+sec.verse)) no = +sec.verse;
+          else { var m = /(\d+)/.exec(sec.label || ''); if (m) no = +m[1]; }
+          if (no == null) { var u = unnumbered.indexOf(sec); if (u < 0) { unnumbered.push(sec); u = unnumbered.length - 1; } no = u + 1; }
+        }
+        meta.push({ label: sec.label || '', kind: kind, no: no, start: lines.length, first: ls[0] || '' });
         ls.forEach(function (t, j) { lines.push({ text: t, label: sec.label || '', sec: k, n: ls.length, j: j }); });
       });
       return {
         title: String(s.title || 'Song ' + (n + 1)), author: s.author ? String(s.author) : '', singer: s.singer ? String(s.singer) : '',
         number: s.number != null ? String(s.number) : '', book: s.book ? String(s.book) : '', edition: s.edition ? String(s.edition) : '',
-        lines: lines
+        lines: lines, meta: meta
       };
     }).filter(function (s) { return s.lines.length; });
     if (!out.length) throw new Error('No songs with lyrics were found.');
@@ -90,8 +109,11 @@
     return d;
   }
 
+  var secBuiltFor = -1;
   function setProgress() {
     var s = songs[si];
+    if (secBuiltFor !== si) { secBuiltFor = si; buildSecList(); }
+    highlightSec();
     ll.style.setProperty('--p', ((li + 1) / s.lines.length).toFixed(4));
     try { history.replaceState(null, '', location.search + '#' + (si + 1) + '.' + (li + 1)); } catch (e) { /* file:// */ }
   }
@@ -190,6 +212,32 @@
     else { setProgress(); toast('Song ' + (songs[si].number || (si + 1)) + ' · ' + songs[si].title); }
   }
 
+  /* ---------- Jump to a verse, the chorus, or any part ---------- */
+  var secBtns = [];
+  function curSecIdx() { return songs[si].lines[li].sec; }
+  function buildSecList() {
+    var ol = $('secItems'); ol.textContent = ''; secBtns = [];
+    songs[si].meta.forEach(function (m, i) {
+      var li_ = el('li'), b = el('button'); b.type = 'button';
+      b.appendChild(el('span', 'n', String(i + 1)));
+      b.appendChild(el('span', 't', m.label || ('Part ' + (i + 1))));
+      b.appendChild(el('span', 'b', m.first));
+      b.addEventListener('click', function () { closeOverlays(); setLine(m.start); });
+      li_.appendChild(b); ol.appendChild(li_); secBtns.push(b);
+    });
+  }
+  function highlightSec() { if (!secBtns.length) return; var c = curSecIdx(); secBtns.forEach(function (b, i) { b.classList.toggle('current', i === c); }); }
+  function jumpSection(kind, no) {
+    var s = songs[si], cs = curSecIdx(), cand = [];
+    s.meta.forEach(function (m, i) { if (m.kind === kind && (kind !== 'verse' || m.no === no)) cand.push(i); });
+    if (!cand.length) { toast(kind === 'chorus' ? 'No chorus in this song' : 'No verse ' + no + ' in this song'); return; }
+    var target;
+    if (cand.indexOf(cs) > -1) target = cs;                       // already there: start it again
+    else { var fwd = cand.filter(function (i) { return i > cs; }); target = fwd.length ? fwd[0] : cand[cand.length - 1]; }
+    setLine(s.meta[target].start);
+    if (visible()) toast(s.meta[target].label || (kind === 'chorus' ? 'Chorus' : 'Verse ' + no));
+  }
+
   /* ---------- Toast, list, overlays ---------- */
   var toastT;
   function toast(msg) {
@@ -211,13 +259,14 @@
   }
   function refreshList() { listBtns.forEach(function (b, i) { b.classList.toggle('current', i === si); }); }
 
-  var panels = [$('listPanel'), $('helpPanel')];
+  var panels = [$('listPanel'), $('helpPanel'), $('secPanel')];
   function overlayOpen() { return panels.some(function (p) { return !p.hidden; }); }
   function closeOverlays() { panels.forEach(function (p) { p.hidden = true; }); }
   function openPanel(p) {
     var was = !p.hidden; closeOverlays(); if (was) return;
     p.hidden = false;
     if (p === panels[0] && listBtns[si]) listBtns[si].focus();
+    if (p === panels[2] && secBtns[curSecIdx()]) secBtns[curSecIdx()].focus();
   }
   panels.concat([$('loader')]).forEach(function (p) { p.addEventListener('click', function (e) { if (e.target === p && songs.length) p.hidden = true; }); });
 
@@ -287,10 +336,13 @@
   function openHelp() { var w = window.open('help.html', '_blank'); if (!w) toast('Pop-up blocked. Open help.html'); }
 
   /* ---------- Keys ---------- */
-  var numBuf = '', numT;
+  /* Song number: press S, type the number, then Enter (digits on their own jump to verses). */
+  var numBuf = '', numT, songEntry = false;
+  function endEntry() { clearTimeout(numT); numBuf = ''; songEntry = false; }
   function commitNumber() {
-    clearTimeout(numT);
-    var n = String(parseInt(numBuf, 10)); numBuf = '';
+    var n = numBuf; endEntry();
+    if (!n) return;
+    n = String(parseInt(n, 10));
     var idx = -1;
     songs.forEach(function (s, i) { if (idx < 0 && s.number === n) idx = i; });
     if (idx >= 0) gotoSong(idx, true); else toast('No song ' + n);
@@ -303,17 +355,20 @@
     if (!$('loader').hidden) { if (k === 'Escape' && songs.length) $('loader').hidden = true; return; }
     if (!songs.length) return;
 
-    if (k === 'Escape') { if (overlayOpen()) closeOverlays(); else hide(); numBuf = ''; return; }
-    if (/^[0-9]$/.test(k) && !overlayOpen()) {
+    if (k === 'Escape') { if (overlayOpen()) closeOverlays(); else hide(); endEntry(); return; }
+    if (songEntry && /^[0-9]$/.test(k)) {
       numBuf = (numBuf + k).slice(0, 4); toast('Song ' + numBuf + ' ↵');
-      clearTimeout(numT); numT = setTimeout(commitNumber, 1400); return;
+      clearTimeout(numT); numT = setTimeout(commitNumber, 1600); return;
     }
-    if (k === 'Enter' && numBuf) { e.preventDefault(); commitNumber(); return; }
+    if (k === 'Enter' && songEntry) { e.preventDefault(); if (numBuf) commitNumber(); else endEntry(); return; }
+    if (/^[1-9]$/.test(k) && !overlayOpen() && !e.shiftKey) { jumpSection('verse', +k); return; }   // verse 1-9
+    if (k === '0' && !overlayOpen() && !e.shiftKey) { jumpSection('chorus'); return; }
 
     if (overlayOpen()) {
       if (k === 'ArrowDown' || k === 'ArrowUp') {
-        var i = listBtns.indexOf(document.activeElement);
-        if (i > -1) { e.preventDefault(); listBtns[Math.max(0, Math.min(listBtns.length - 1, i + (k === 'ArrowDown' ? 1 : -1)))].focus(); }
+        var btns = [].slice.call(document.querySelectorAll('.overlay:not([hidden]) li button'));
+        var i = btns.indexOf(document.activeElement);
+        if (i > -1) { e.preventDefault(); btns[Math.max(0, Math.min(btns.length - 1, i + (k === 'ArrowDown' ? 1 : -1)))].focus(); }
         return;
       }
       if (k === 'Tab' || k === 'Enter' || k === ' ') return;
@@ -330,6 +385,9 @@
       case 'p': case 'P': gotoSong(si - 1, false); break;
       case 'b': case 'B': case '.': if (visible()) hide(); else present(); break;
       case 'g': case 'G': openPanel(panels[0]); break;
+      case 'c': case 'C': jumpSection('chorus'); break;
+      case 'j': case 'J': openPanel(panels[2]); break;
+      case 's': case 'S': songEntry = true; numBuf = ''; toast('Song number, then Enter'); clearTimeout(numT); numT = setTimeout(function () { if (!numBuf) endEntry(); }, 4000); break;
       case 'i': case 'I': toggleInfo(); break;
       case 'v': case 'V': cycleBg(); break;
       case 't': case 'T': togglePlate(); break;

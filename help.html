@@ -90,7 +90,7 @@
         <li><strong>Move the window to the projector screen</strong>, then press <kbd>F</kbd> for fullscreen. Press <kbd>F</kbd> again or <kbd>Esc</kbd> to leave it.</li>
         <li><strong>Click once on the page</strong> so the browser listens to your keys. After that, use the keyboard only.</li>
         <li><strong>Move forward</strong> with <kbd>→</kbd> or <kbd>Space</kbd>, back with <kbd>←</kbd>.</li>
-        <li><strong>Need a different slide or song?</strong> Type its number and press <kbd>Enter</kbd>. For example <kbd>1</kbd><kbd>2</kbd><kbd>Enter</kbd> jumps to program item 12 or song number 12.</li>
+        <li><strong>Need a different slide?</strong> On the slideshow type its program item number and press <kbd>Enter</kbd>. For example <kbd>1</kbd><kbd>2</kbd><kbd>Enter</kbd> jumps to item 12. On the lyrics pages, digits jump to <em>verses</em> instead: <kbd>2</kbd> jumps to verse 2, and <kbd>C</kbd> to the chorus.</li>
         <li><strong>Forgot a key?</strong> Press <kbd>?</kbd> for a quick list on the slideshow and lyrics pages, or <kbd>H</kbd> on any page to open this guide in a new tab.</li>
       </ol>
       <div class="note"><strong>Tip.</strong> The mouse pointer hides by itself after about three seconds. The small message at the top right that appears after some keys is only feedback and disappears quickly.</div>
@@ -127,7 +127,7 @@
           <tr data-s><td class="k"><kbd>B</kbd> or <kbd>.</kbd></td><td>Black screen on or off (slideshow and lyrics). Moving to another slide or line also brings the picture back.</td></tr>
           <tr data-s><td class="k"><kbd>T</kbd></td><td>Dark or light theme (slideshow and lyrics).</td></tr>
           <tr data-s><td class="k"><kbd>M</kbd></td><td>Full or reduced animation (slideshow and lyrics). Reduced uses simple fades only.</td></tr>
-          <tr data-s><td class="k"><kbd>C</kbd></td><td>Show or hide the small on-screen controls bar (slideshow and lyrics). It is <strong>hidden by default</strong> so the screen stays clean.</td></tr>
+          <tr data-s><td class="k"><kbd>C</kbd></td><td>Show or hide the small on-screen controls bar (slideshow). It is <strong>hidden by default</strong> so the screen stays clean. On the lyrics page the same thing is <kbd>Shift</kbd> + <kbd>C</kbd>, because <kbd>C</kbd> jumps to the chorus there.</td></tr>
         </tbody>
       </table>
       </div>
@@ -182,11 +182,14 @@
           <tr data-s><td class="k"><kbd>Shift</kbd> + <kbd>←</kbd></td><td>Back to the start of this verse, or the previous verse if you are already at the start.</td></tr>
           <tr data-s><td class="k"><kbd>Home</kbd> / <kbd>End</kbd></td><td>First / last line of the song.</td></tr>
           <tr data-s><td class="k"><kbd>N</kbd> / <kbd>P</kbd></td><td>Next song / previous song.</td></tr>
-          <tr data-s><td class="k">number, then <kbd>Enter</kbd></td><td>Jump to the song with that <strong>song number</strong> (the number shown at the bottom right). It must match the <code>number</code> in <code>songs.json</code>.</td></tr>
+          <tr data-s><td class="k"><kbd>1</kbd> … <kbd>9</kbd></td><td>Jump to <strong>that verse</strong>: <kbd>1</kbd> is the first line of verse 1, <kbd>3</kbd> of verse 3, and so on. Use it to repeat an earlier verse or skip ahead. If the verse is not in the song, a message says so.</td></tr>
+          <tr data-s><td class="k"><kbd>C</kbd> or <kbd>0</kbd></td><td>Jump to the <strong>chorus</strong>. If the chorus comes several times, you go to the next one after where you are. Press it again to start that chorus again.</td></tr>
+          <tr data-s><td class="k"><kbd>J</kbd></td><td>List of every part of the song (verses, choruses, a bridge…). Choose one with <kbd>↑</kbd> <kbd>↓</kbd> and <kbd>Enter</kbd>, or click it. Use this for a part that has no number key, or to pick a particular repeat of the chorus.</td></tr>
+          <tr data-s><td class="k"><kbd>S</kbd>, number, <kbd>Enter</kbd></td><td>Jump to the song with that <strong>song number</strong> (the number shown at the bottom right). Press <kbd>S</kbd>, type for example <kbd>1</kbd><kbd>2</kbd>, then <kbd>Enter</kbd>. It must match the <code>number</code> in <code>songs.json</code>.</td></tr>
           <tr data-s><td class="k"><kbd>G</kbd></td><td>Song list. Use <kbd>↑</kbd> <kbd>↓</kbd> and <kbd>Enter</kbd>, or click a song.</td></tr>
           <tr data-s><td class="k"><kbd>L</kbd></td><td>Switch between <em>focus view</em> (the lines before and after are faint) and <em>one-line view</em> (only the current line).</td></tr>
           <tr data-s><td class="k"><kbd>O</kbd></td><td>Choose a <code>songs.json</code> file from the computer. You can also drag the file onto the page.</td></tr>
-          <tr data-s><td class="k"><kbd>F</kbd> <kbd>B</kbd> <kbd>.</kbd> <kbd>T</kbd> <kbd>M</kbd> <kbd>C</kbd> <kbd>H</kbd> <kbd>?</kbd></td><td>As in the common list above.</td></tr>
+          <tr data-s><td class="k"><kbd>F</kbd> <kbd>B</kbd> <kbd>.</kbd> <kbd>T</kbd> <kbd>M</kbd> <kbd>H</kbd> <kbd>?</kbd></td><td>As in the common list above. (<kbd>Shift</kbd> + <kbd>C</kbd> shows or hides the controls bar.)</td></tr>
           <tr data-s><td class="k">Swipe left / right</td><td>On a touch screen: next / previous line.</td></tr>
         </tbody>
       </table>
@@ -285,7 +288,10 @@
           <tr data-s><td class="k"><kbd>Shift</kbd> + <kbd>→</kbd> / <kbd>←</kbd></td><td>Next verse / back to the start of the verse (or the previous verse).</td></tr>
           <tr data-s><td class="k"><kbd>Home</kbd> / <kbd>End</kbd></td><td>First / last line of the song.</td></tr>
           <tr data-s><td class="k"><kbd>N</kbd> / <kbd>P</kbd></td><td>Next / previous song. If the bar is on screen, the title and number change smoothly and it starts at the first line.</td></tr>
-          <tr data-s><td class="k">number, then <kbd>Enter</kbd></td><td>Start the song with that <strong>song number</strong> and show its first line.</td></tr>
+          <tr data-s><td class="k"><kbd>1</kbd> … <kbd>9</kbd></td><td>Jump to <strong>that verse</strong>: <kbd>1</kbd> is the first line of verse 1, <kbd>3</kbd> of verse 3, and so on. Use it to repeat an earlier verse or skip ahead. If the bar is on screen it changes straight to that verse. If it is hidden, a message shows the line and you press <kbd>Space</kbd> to show it.</td></tr>
+          <tr data-s><td class="k"><kbd>C</kbd> or <kbd>0</kbd></td><td>Jump to the <strong>chorus</strong>. If the chorus comes several times, you go to the next one after where you are. Press it again to start that chorus again.</td></tr>
+          <tr data-s><td class="k"><kbd>J</kbd></td><td>List of every part of the song (verses, choruses, a bridge…). Choose one with <kbd>↑</kbd> <kbd>↓</kbd> and <kbd>Enter</kbd>, or click it. Use this for a part that has no number key, or to pick a particular repeat of the chorus.</td></tr>
+          <tr data-s><td class="k"><kbd>S</kbd>, number, <kbd>Enter</kbd></td><td>Start the song with that <strong>song number</strong> and show its first line. Press <kbd>S</kbd>, type for example <kbd>1</kbd><kbd>2</kbd>, then <kbd>Enter</kbd>. It must match the <code>number</code> in <code>songs.json</code>.</td></tr>
           <tr data-s><td class="k"><kbd>B</kbd> or <kbd>.</kbd></td><td>Hide the bar, or show it again, <strong>keeping your place</strong>. Use it for talking, prayer or applause between songs.</td></tr>
           <tr data-s><td class="k"><kbd>Esc</kbd></td><td>Hide the bar.</td></tr>
           <tr data-s><td class="k"><kbd>G</kbd></td><td>Song list. Click a song to start it.</td></tr>
@@ -352,7 +358,7 @@
         <li>If you use the lower third, open <code>lowerthird.html</code> in its own window, check the names, and press <kbd>V</kbd> to match your video program (transparent or green).</li>
         <li>If you show lyrics on live video, open <code>lyrics-lowerthird.html</code> in its own window and check each song’s first and last line.</li>
         <li>Start with the banner on screen. Press <kbd>Ctrl</kbd> + <kbd>Tab</kbd> to move on to the slideshow.</li>
-        <li>For a song, switch to the lyrics tab, press <kbd>G</kbd> or type the song number and <kbd>Enter</kbd>.</li>
+        <li>For a song, switch to the lyrics tab, press <kbd>G</kbd>, or press <kbd>S</kbd>, type the song number and press <kbd>Enter</kbd>.</li>
         <li>Between items, <kbd>B</kbd> gives a black screen. Press it again, or move to the next slide, to return.</li>
       </ul>
     </section>
@@ -409,6 +415,7 @@
           <tr data-s><td><code>book</code>, <code>edition</code></td><td>Book name and edition beside the number.</td></tr>
           <tr data-s><td><code>singer</code></td><td>Optional. A singer or group name, shown in the top row of the lyrics lower third.</td></tr>
           <tr data-s><td><code>sections</code></td><td>List of <code>{ "label": "...", "lines": [...] }</code>. The label (for example “Chorus”) shows at the bottom left.</td></tr>
+          <tr data-s><td><code>label</code> of a section</td><td>Used to find the part for the jump keys. A label like <code>Verse 2</code> is verse 2, and a label with <em>Chorus</em> or <em>Refrain</em> in it is the chorus. If you use other names, add <code>"verse": 2</code> to a section for a verse, or <code>"kind": "chorus"</code> for a chorus.</td></tr>
           <tr data-s><td><code>id</code> and <code>order</code></td><td>Optional. To repeat a chorus without typing it again, give each section an <code>id</code> and add <code>"order": ["v1", "c", "v2", "c"]</code> to the song.</td></tr>
         </tbody>
       </table>
@@ -448,7 +455,7 @@
       <h2>Troubleshooting</h2>
       <dl class="qa">
         <div data-s><dt>The keys do nothing.</dt><dd>Click once on the page so the browser window has focus, then try again. Make sure you are not typing in another window or in the search box.</dd></div>
-        <div data-s><dt>I am on the wrong slide or song.</dt><dd>Type the number and press <kbd>Enter</kbd>, or press <kbd>G</kbd> for the list. <kbd>Home</kbd> returns to the start.</dd></div>
+        <div data-s><dt>I am on the wrong slide, verse or song.</dt><dd>On the slideshow type the item number and <kbd>Enter</kbd>. On a lyrics page press the verse number, <kbd>C</kbd> for the chorus, <kbd>J</kbd> for the list of parts, or <kbd>G</kbd> for the list of songs. <kbd>Home</kbd> returns to the start.</dd></div>
         <div data-s><dt>The screen went black.</dt><dd>You pressed <kbd>B</kbd> or <kbd>.</kbd>. Press it again or press <kbd>Esc</kbd>.</dd></div>
         <div data-s><dt>There are no animations.</dt><dd>The computer may be set to reduce motion, so the pages use plain fades. Press <kbd>M</kbd> to switch to full animation.</dd></div>
         <div data-s><dt>The buttons bar is missing.</dt><dd>That is on purpose. Press <kbd>C</kbd> to show it. Press <kbd>C</kbd> again to hide it.</dd></div>
@@ -472,7 +479,8 @@
       <h2>Questions</h2>
       <dl class="qa">
         <div data-s><dt>How do I show program item 12 right now?</dt><dd>On the slideshow press <kbd>1</kbd> <kbd>2</kbd> <kbd>Enter</kbd>.</dd></div>
-        <div data-s><dt>How do I show a hymn by its number?</dt><dd>On the lyrics page type the number and press <kbd>Enter</kbd>. It must match the <code>number</code> in <code>songs.json</code>.</dd></div>
+        <div data-s><dt>How do I show a hymn by its number?</dt><dd>On a lyrics page press <kbd>S</kbd>, type the number, then press <kbd>Enter</kbd>. It must match the <code>number</code> in <code>songs.json</code>.</dd></div>
+        <div data-s><dt>The group goes back to verse 1 while I am on verse 3. What do I press?</dt><dd>Press <kbd>1</kbd>. It jumps straight to the first line of verse 1. Then use <kbd>Space</kbd> as usual. To go to the chorus press <kbd>C</kbd>, and for a bridge or any other part press <kbd>J</kbd> and choose it.</dd></div>
         <div data-s><dt>Can I run it from a USB stick?</dt><dd>Yes. Keep all the files together in one folder: the <code>.html</code>, <code>.css</code> and <code>.js</code> files and <code>songs.json</code>.</dd></div>
         <div data-s><dt>How do I show a guest who is not in the lower-third list?</dt><dd>Press <kbd>E</kbd>, type the label, name and detail, and press <kbd>Enter</kbd>.</dd></div>
         <div data-s><dt>Can I show the lyrics on the live video while a group sings?</dt><dd>Yes. Open <code>lyrics-lowerthird.html</code>, choose the song with <kbd>G</kbd> or by typing its number and <kbd>Enter</kbd>, then press <kbd>Space</kbd> at the end of each line as they sing.</dd></div>

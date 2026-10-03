@@ -181,3 +181,6 @@ body.nobar .controls { display: none; }
 .file span { display: inline-block; padding: 12px 20px; background: var(--gold); color: var(--navy); font: 700 16px var(--sans); border-radius: 3px; }
 .file input:focus-visible + span { outline: 2px solid #fff; outline-offset: 2px; }
 #dropzone.drag { outline: 3px dashed var(--gold); outline-offset: -8px; }
+
+#secItems .b { flex: 2; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+#secItems .n { flex: 0 0 30px; }

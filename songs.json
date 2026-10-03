@@ -1,5 +1,5 @@
 {
-  "_readme": "Edit this file to add songs. Each song has: title, optional author, number, book, edition, and sections (each with a label and a list of lines). To repeat a chorus without retyping it, give sections an id and add an 'order' list of ids, e.g. \"order\": [\"v1\", \"c\", \"v2\", \"c\"]. The two songs below are SAMPLES (public-domain English hymns); replace them and the book/edition with your own.",
+  "_readme": "Edit this file to add songs. Each song has: title, optional author and singer, number, book, edition, and sections (each with a label and a list of lines). To repeat a chorus without retyping it, give sections an id and add an 'order' list of ids, e.g. \"order\": [\"v1\", \"c\", \"v2\", \"c\"]. On the lyrics pages, keys 1-9 jump to 'Verse 1'-'Verse 9' (found from the label, or add \"verse\": 2 to a section), and C or 0 jumps to the chorus (a section whose label contains 'Chorus' or 'Refrain', or that has \"kind\": \"chorus\"). The three songs below are SAMPLES (public-domain English hymns); replace them and the book/edition with your own.",
   "songs": [
     {
       "id": "amazing-grace",
@@ -96,7 +96,70 @@
           ]
         }
       ],
-      "order": ["v1", "v2", "v3", "v4"]
+      "order": [
+        "v1",
+        "v2",
+        "v3",
+        "v4"
+      ]
+    },
+    {
+      "id": "blessed-assurance",
+      "title": "Blessed Assurance",
+      "author": "Fanny J. Crosby, 1873",
+      "number": 3,
+      "book": "Sample Hymn Book",
+      "edition": "1st Edition",
+      "sections": [
+        {
+          "id": "v1",
+          "label": "Verse 1",
+          "lines": [
+            "Blessed assurance, Jesus is mine!",
+            "O what a foretaste of glory divine!",
+            "Heir of salvation, purchase of God,",
+            "Born of His Spirit, washed in His blood."
+          ]
+        },
+        {
+          "id": "c",
+          "label": "Chorus",
+          "lines": [
+            "This is my story, this is my song,",
+            "Praising my Saviour all the day long;",
+            "This is my story, this is my song,",
+            "Praising my Saviour all the day long."
+          ]
+        },
+        {
+          "id": "v2",
+          "label": "Verse 2",
+          "lines": [
+            "Perfect submission, perfect delight,",
+            "Visions of rapture now burst on my sight;",
+            "Angels descending bring from above",
+            "Echoes of mercy, whispers of love."
+          ]
+        },
+        {
+          "id": "v3",
+          "label": "Verse 3",
+          "lines": [
+            "Perfect submission, all is at rest,",
+            "I in my Saviour am happy and blest,",
+            "Watching and waiting, looking above,",
+            "Filled with His goodness, lost in His love."
+          ]
+        }
+      ],
+      "order": [
+        "v1",
+        "c",
+        "v2",
+        "c",
+        "v3",
+        "c"
+      ]
     }
   ]
 }
