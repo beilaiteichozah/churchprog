@@ -110,10 +110,12 @@
   (function () {
     var s = slide('slide--info', 'Program details', 'Program details');
     var info = el('dl', 'info');
-    var brk = false;
+    var brk = false, ri = 0;
     DETAILS.forEach(function (row) {
       if (!row) { brk = true; return; }
-      add(info, add(el('div', 'row' + (brk ? ' break' : '')), el('dt', null, row[0]), el('dd', null, row[1])));
+      var r = add(el('div', 'row' + (brk ? ' break' : '')), el('dt', null, row[0]), el('dd', null, row[1]));
+      r.style.setProperty('--i', ri++);
+      info.appendChild(r);
       brk = false;
     });
     add(s, side(el('h2', null, TITLE)), add(el('div', 'main'), info));
@@ -126,8 +128,9 @@
     var first = blocks[0].label || blocks[0].text;
     var s = slide('slide--item' + (blocks.length > 1 ? ' slide--multi' : ''), 'Item ' + n + ': ' + first, first);
     var body = el('div', 'body');
-    blocks.forEach(function (b) {
+    blocks.forEach(function (b, bi) {
       var blk = el('div', 'block');
+      blk.style.setProperty('--i', bi);
       if (b.label) blk.appendChild(el('div', 'label', b.label));
       if (b.value) blk.appendChild(el('div', 'value' + (b.hymn ? ' hymn' : ''), b.value));
       if (b.text) blk.appendChild(el('div', 'text', b.text));
@@ -169,14 +172,21 @@
 
   function clamp(i) { return Math.max(0, Math.min(last, i)); }
 
+  var leaveTimer;
   function go(i) {
     i = clamp(i);
     if (i === cur) return;
+    var prevIdx = cur;
+    document.documentElement.setAttribute('data-dir', i < prevIdx ? 'back' : 'fwd');
     slides.forEach(function (s, k) {
+      s.classList.toggle('leaving', k === prevIdx);
       s.classList.toggle('active', k === i);
-      s.classList.toggle('before', k < i);
       s.setAttribute('aria-hidden', k === i ? 'false' : 'true');
     });
+    clearTimeout(leaveTimer);
+    leaveTimer = setTimeout(function () {
+      slides.forEach(function (s) { s.classList.remove('leaving'); });
+    }, 900);
     cur = i;
     counter.textContent = (i + 1) + ' / ' + slides.length;
     bar.style.width = (last ? (i / last) * 100 : 100) + '%';
@@ -258,6 +268,24 @@
     toast(t === 'dark' ? 'Dark theme' : 'Light theme');
   }
   try { var saved = localStorage.getItem('program-theme'); if (saved) setTheme(saved); } catch (e) { /* ignore */ }
+
+  function setMotion(m) {
+    document.documentElement.setAttribute('data-motion', m);
+    try { localStorage.setItem('program-motion', m); } catch (e) { /* ignore */ }
+  }
+  (function () {
+    var m = null;
+    try { m = localStorage.getItem('program-motion'); } catch (e) { /* ignore */ }
+    if (m !== 'full' && m !== 'reduced') {
+      m = (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) ? 'reduced' : 'full';
+    }
+    document.documentElement.setAttribute('data-motion', m);
+  })();
+  function toggleMotion() {
+    var m = document.documentElement.getAttribute('data-motion') === 'reduced' ? 'full' : 'reduced';
+    setMotion(m);
+    toast(m === 'full' ? 'Animation: full' : 'Animation: reduced');
+  }
 
   function toggleFullscreen() {
     var d = document, root = d.documentElement;
@@ -356,6 +384,7 @@
       case 'g': case 'G': case 'o': case 'O': toggle(indexEl); break;
       case 'b': case 'B': case '.': toggleBlack(); break;
       case 't': case 'T': toggleTheme(); break;
+      case 'm': case 'M': toggleMotion(); break;
       case 'h': case 'H': case '?': toggle(helpEl); break;
     }
   });
