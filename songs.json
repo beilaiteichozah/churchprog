@@ -1,0 +1,102 @@
+{
+  "_readme": "Edit this file to add songs. Each song has: title, optional author, number, book, edition, and sections (each with a label and a list of lines). To repeat a chorus without retyping it, give sections an id and add an 'order' list of ids, e.g. \"order\": [\"v1\", \"c\", \"v2\", \"c\"]. The two songs below are SAMPLES (public-domain English hymns); replace them and the book/edition with your own.",
+  "songs": [
+    {
+      "id": "amazing-grace",
+      "title": "Amazing Grace",
+      "author": "John Newton, 1779",
+      "number": 1,
+      "book": "Sample Hymn Book",
+      "edition": "1st Edition",
+      "sections": [
+        {
+          "label": "Verse 1",
+          "lines": [
+            "Amazing grace! how sweet the sound",
+            "That saved a wretch like me!",
+            "I once was lost, but now am found;",
+            "Was blind, but now I see."
+          ]
+        },
+        {
+          "label": "Verse 2",
+          "lines": [
+            "'Twas grace that taught my heart to fear,",
+            "And grace my fears relieved;",
+            "How precious did that grace appear",
+            "The hour I first believed."
+          ]
+        },
+        {
+          "label": "Verse 3",
+          "lines": [
+            "Through many dangers, toils and snares,",
+            "I have already come;",
+            "'Tis grace hath brought me safe thus far,",
+            "And grace will lead me home."
+          ]
+        },
+        {
+          "label": "Verse 4",
+          "lines": [
+            "The Lord has promised good to me,",
+            "His word my hope secures;",
+            "He will my shield and portion be,",
+            "As long as life endures."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "holy-holy-holy",
+      "title": "Holy, Holy, Holy",
+      "author": "Reginald Heber, 1826",
+      "number": 2,
+      "book": "Sample Hymn Book",
+      "edition": "1st Edition",
+      "sections": [
+        {
+          "id": "v1",
+          "label": "Verse 1",
+          "lines": [
+            "Holy, holy, holy! Lord God Almighty!",
+            "Early in the morning our song shall rise to Thee;",
+            "Holy, holy, holy! merciful and mighty!",
+            "God in three Persons, blessed Trinity!"
+          ]
+        },
+        {
+          "id": "v2",
+          "label": "Verse 2",
+          "lines": [
+            "Holy, holy, holy! all the saints adore Thee,",
+            "Casting down their golden crowns around the glassy sea;",
+            "Cherubim and seraphim falling down before Thee,",
+            "Which wert, and art, and evermore shalt be."
+          ]
+        },
+        {
+          "id": "v3",
+          "label": "Verse 3",
+          "lines": [
+            "Holy, holy, holy! though the darkness hide Thee,",
+            "Though the eye of sinful man Thy glory may not see,",
+            "Only Thou art holy; there is none beside Thee,",
+            "Perfect in power, in love, and purity."
+          ]
+        },
+        {
+          "id": "v4",
+          "label": "Verse 4",
+          "lines": [
+            "Holy, holy, holy! Lord God Almighty!",
+            "All Thy works shall praise Thy name, in earth, and sky, and sea;",
+            "Holy, holy, holy! merciful and mighty!",
+            "God in three Persons, blessed Trinity!"
+          ]
+        }
+      ],
+      "order": ["v1", "v2", "v3", "v4"]
+    }
+  ]
+}

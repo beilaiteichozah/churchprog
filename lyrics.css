@@ -1,0 +1,166 @@
+/* Lyrics page — fixed 1920x1080 artboard scaled to the screen. */
+
+:root {
+  --bg: #0e0d0c;
+  --ink: #f6f0e4;
+  --muted: #9c9386;
+  --line: rgba(246, 240, 228, .16);
+  --red: #c1272d;
+  --accent: #ef5b50;
+  --ui-bg: #1d1815;
+  --ui-ink: #f3ecde;
+  --ui-line: #4a4038;
+  --ease: cubic-bezier(.25, .8, .25, 1);
+  --sans: "Segoe UI", "Helvetica Neue", Helvetica, Arial, "Liberation Sans", sans-serif;
+}
+:root[data-theme="light"] {
+  --bg: #f4eee1;
+  --ink: #1e1a17;
+  --muted: #6d6354;
+  --line: rgba(30, 26, 23, .18);
+  --accent: #a31d24;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body {
+  height: 100%;
+  overflow: hidden;
+  background: #060505;
+  color: var(--ink);
+  font-family: var(--sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+body.idle { cursor: none; }
+
+.stage {
+  position: absolute;
+  left: 50%; top: 50%;
+  width: 1920px; height: 1080px;
+  transform: translate(-50%, -50%) scale(var(--s, 1));
+  background: var(--bg);
+  overflow: hidden;
+}
+
+/* Song progress rail along the left edge */
+.rail { position: absolute; left: 0; top: 0; bottom: 0; width: 10px; background: var(--line); opacity: .6; }
+.rail i { position: absolute; left: 0; top: 0; width: 100%; height: 0; background: var(--red); transition: height .7s var(--ease); }
+
+/* ---------- Title (always at the top) ---------- */
+.head { position: absolute; left: 160px; right: 160px; top: 58px; height: 250px; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.title {
+  max-width: 1500px;
+  font-size: 80px; line-height: 1.05; font-weight: 800;
+  letter-spacing: .05em; text-transform: uppercase;
+  text-wrap: balance;
+}
+.bar { width: 110px; height: 6px; margin-top: 26px; background: var(--red); transform-origin: center; }
+.author { margin-top: 18px; min-height: 30px; font-size: 26px; letter-spacing: .22em; text-transform: uppercase; color: var(--muted); }
+
+/* ---------- Lyric window ---------- */
+.window {
+  position: absolute; left: 140px; right: 140px; top: 320px; bottom: 236px;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 16%, #000 84%, transparent 100%);
+          mask-image: linear-gradient(to bottom, transparent 0, #000 16%, #000 84%, transparent 100%);
+}
+.track { position: absolute; left: 0; right: 0; top: 0; will-change: transform; transition: transform .9s var(--ease); }
+.track.instant { transition: none; }
+
+.ln {
+  max-width: 1580px; margin: 0 auto 40px;
+  text-align: center;
+  font-size: 88px; line-height: 1.14; font-weight: 700; letter-spacing: -.005em;
+  text-wrap: balance;
+  opacity: 0; transform: scale(.55);
+  transition: opacity .8s ease, transform .9s var(--ease), color .6s ease;
+}
+.ln.sec-start { margin-top: 110px; }
+.ln[data-d="0"]  { opacity: 1; transform: none; color: var(--ink); }
+.ln[data-d="1"]  { opacity: .3;  transform: scale(.6); }
+.ln[data-d="-1"] { opacity: .2;  transform: scale(.6); }
+.ln[data-d="2"]  { opacity: .1;  transform: scale(.52); }
+.ln[data-d="-2"] { opacity: .06; transform: scale(.52); }
+.window.single .ln:not([data-d="0"]) { opacity: 0; }
+
+/* ---------- Bottom left: section + line dots ---------- */
+.foot-left { position: absolute; left: 120px; bottom: 84px; }
+.sec-label { font-size: 36px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--accent); min-height: 44px; }
+.dots { display: flex; gap: 10px; margin-top: 18px; height: 12px; }
+.dots i { display: block; width: 12px; height: 12px; border-radius: 6px; background: var(--line); transition: width .5s var(--ease), background .4s ease; }
+.dots i.on { width: 46px; background: var(--red); }
+
+/* ---------- Bottom right: song number + book edition ---------- */
+.badge { position: absolute; right: 120px; bottom: 70px; display: flex; align-items: stretch; }
+.badge-text { align-self: center; text-align: right; padding-right: 28px; }
+.book { font-size: 30px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+.edition { margin-top: 6px; font-size: 25px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+.badge-num { min-width: 190px; padding: 14px 30px 18px; text-align: center; background: var(--red); color: #fff; }
+.badge-num small { display: block; font-size: 22px; letter-spacing: .34em; text-transform: uppercase; opacity: .85; padding-left: .34em; }
+.badge-num b { display: block; font-size: 96px; line-height: 1; font-weight: 800; letter-spacing: -.03em; }
+
+/* ---------- Song change animation ---------- */
+@keyframes rise   { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: none; } }
+@keyframes fade   { from { opacity: 0; } to { opacity: 1; } }
+@keyframes grow-x { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes slide-l{ from { opacity: 0; transform: translateX(60px); } to { opacity: 1; transform: none; } }
+@keyframes label  { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+
+.enter .title  { animation: rise .9s .1s var(--ease) both; }
+.enter .bar    { animation: grow-x .8s .45s var(--ease) both; }
+.enter .author { animation: fade .9s .65s both; }
+.enter .window { animation: fade .9s .5s both; }
+.enter .badge  { animation: slide-l .9s .7s var(--ease) both; }
+.enter .foot-left { animation: fade .9s .8s both; }
+.leaving .head, .leaving .window, .leaving .badge, .leaving .foot-left { opacity: 0; transition: opacity .3s ease; }
+.sec-label.swap { animation: label .6s var(--ease) both; }
+
+:root[data-motion="reduced"] *, :root[data-motion="reduced"] *::before, :root[data-motion="reduced"] *::after { animation: none !important; }
+:root[data-motion="reduced"] .track { transition: none; }
+:root[data-motion="reduced"] .ln { transition: opacity .25s ease; transform: none !important; }
+
+/* ---------- UI chrome ---------- */
+.controls {
+  position: fixed; left: 50%; bottom: 20px; transform: translateX(-50%); z-index: 20;
+  display: flex; align-items: center; gap: 2px; padding: 6px;
+  background: var(--ui-bg); border: 1px solid var(--ui-line); border-radius: 4px;
+  box-shadow: 0 4px 16px rgba(0,0,0,.35); transition: opacity .3s ease;
+}
+body.idle .controls { opacity: 0; pointer-events: none; }
+body.nobar .controls { display: none; }
+.controls button { font: 600 15px/1 var(--sans); color: var(--ui-ink); background: transparent; border: 0; border-radius: 3px; padding: 10px 14px; cursor: pointer; }
+.controls button:hover, .controls button:focus-visible { background: #3a312b; outline: 2px solid #e0453f; outline-offset: -2px; }
+.counter { min-width: 84px; text-align: center; font: 600 15px var(--sans); color: #b9ad9b; font-variant-numeric: tabular-nums; }
+.sep { width: 1px; height: 22px; background: var(--ui-line); margin: 0 4px; }
+
+.toast { position: fixed; top: 24px; right: 24px; z-index: 50; padding: 12px 20px; background: var(--ui-bg); color: var(--ui-ink); border-left: 6px solid #e0453f; border-radius: 2px; font: 700 24px var(--sans); opacity: 0; transition: opacity .2s; pointer-events: none; }
+.toast.show { opacity: 1; }
+
+.black { position: fixed; inset: 0; background: #000; z-index: 40; }
+.black[hidden], .overlay[hidden] { display: none; }
+
+.overlay { position: fixed; inset: 0; z-index: 30; display: grid; place-items: center; background: rgba(10, 8, 7, .82); padding: 24px; }
+.panel { width: min(900px, 100%); max-height: 100%; overflow: auto; padding: 26px 32px; background: var(--ui-bg); border-top: 6px solid var(--red); color: var(--ui-ink); }
+.panel.narrow { width: min(640px, 100%); }
+.panel h2 { font: 800 24px var(--sans); letter-spacing: .06em; text-transform: uppercase; margin-bottom: 16px; }
+.panel .hint, .panel .small { margin-top: 14px; font-size: 14px; line-height: 1.5; color: #b9ad9b; }
+.panel .msg { font-size: 18px; font-weight: 600; }
+.panel .msg.err { color: #f08c7e; }
+.panel code, .panel pre { font: 13px/1.5 Consolas, "Courier New", monospace; background: #2a231f; padding: 2px 6px; border-radius: 2px; }
+.panel pre { display: block; padding: 10px 12px; margin-top: 8px; white-space: pre-wrap; }
+.panel ol { list-style: none; }
+.panel li button { width: 100%; display: flex; align-items: baseline; gap: 16px; text-align: left; font: 500 17px/1.3 var(--sans); color: var(--ui-ink); background: transparent; border: 0; border-radius: 3px; padding: 10px 12px; cursor: pointer; }
+.panel li button:hover, .panel li button:focus-visible { background: #3a312b; outline: none; }
+.panel li button.current { background: var(--red); }
+.panel li .n { flex: 0 0 56px; text-align: right; font-weight: 800; color: #f08c7e; font-variant-numeric: tabular-nums; }
+.panel li button.current .n { color: #fff; }
+.panel li .t { flex: 1; font-weight: 700; }
+.panel li .b { font-size: 13px; color: #b9ad9b; }
+.panel dl { display: grid; grid-template-columns: auto 1fr; gap: 10px 22px; font-size: 16px; }
+.panel dt { font-weight: 700; color: #f08c7e; }
+.link-btn { font: inherit; color: #f08c7e; background: none; border: 0; text-decoration: underline; cursor: pointer; }
+.file { display: inline-block; margin: 16px 0 4px; cursor: pointer; }
+.file input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.file span { display: inline-block; padding: 12px 20px; background: var(--red); color: #fff; font: 700 16px var(--sans); border-radius: 3px; }
+.file input:focus-visible + span { outline: 2px solid #fff; outline-offset: 2px; }
+#dropzone.drag { outline: 3px dashed #f08c7e; outline-offset: -8px; }
