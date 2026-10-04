@@ -62,6 +62,7 @@ body.clean .toast { display: none; }
 
 .txt p { overflow: hidden; }
 .txt span { display: inline-block; white-space: nowrap; }
+.txt span.wrap { display: block; white-space: normal; text-wrap: balance; }
 .role { display: flex; align-items: center; gap: 16px; font-size: 25px; line-height: 1.4; font-weight: 700; letter-spacing: .24em; text-transform: uppercase; color: var(--role); }
 .role::before { content: ""; flex: 0 0 34px; height: 3px; background: currentColor; }
 .role:empty::before { display: none; }
