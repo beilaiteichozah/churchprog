@@ -112,6 +112,7 @@
       $('edition').textContent = s.edition;
       $('number').textContent = s.number;
       $('badge').style.visibility = (s.number || s.book || s.edition) ? 'visible' : 'hidden';
+      $('badge').classList.toggle('no-num', !s.number);   // edition or book without a number: no empty "No." block
       track.textContent = '';
       lineEls = s.lines.map(function (ln, i) {
         var p = el('p', 'ln' + (i && ln.sec !== s.lines[i - 1].sec ? ' sec-start' : ''), ln.text);

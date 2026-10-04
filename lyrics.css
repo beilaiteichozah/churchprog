@@ -113,6 +113,8 @@ body.idle { cursor: none; }
 .book { font-size: 30px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
 .edition { margin-top: 6px; font-size: 25px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
 .badge-num { min-width: 190px; padding: 14px 30px 18px; text-align: center; background: var(--badge-bg); color: var(--badge-ink); }
+.badge.no-num .badge-num { display: none; }
+.badge.no-num .badge-text { padding-right: 0; }
 .badge-num small { display: block; font-size: 22px; letter-spacing: .34em; text-transform: uppercase; opacity: .85; padding-left: .34em; }
 .badge-num b { display: block; font-size: 96px; line-height: 1; font-weight: 800; letter-spacing: -.03em; }
 

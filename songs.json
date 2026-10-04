@@ -566,6 +566,57 @@
           ]
         }
       ]
+    },
+    {
+      "id": "eima-chakaona-va-dei-miah-thei-ei-11th",
+      "title": "Eima chakaona vâ dei miah thei ei",
+      "edition": "11th Edition",
+      "sections": [
+        {
+          "id": "v1",
+          "label": "Verse 1",
+          "lines": [
+            "Khih deih ta awhsi a leipa hawhna cha,",
+            "Ama khaihna cha noh thlaraw lia lei;",
+            "Cha hawh khizaw hriapasa siesai aw pi,",
+            "Eima chakaona vâ dei miah thei ei.",
+            "Eima chakaona, eima chakaona,",
+            "Eima chakaona vâ dei miah thei ei;",
+            "Cha hawh khizaw hriapasa siesai aw pi,",
+            "Eima chakaona vâ dei miah thei ei."
+          ]
+        },
+        {
+          "id": "v2",
+          "label": "Verse 2",
+          "lines": [
+            "Miah ama my ma, mo hro miah thla hr'ei sa,",
+            "Chi eima tu chiehpa ama hria no;",
+            "Chi tuh tu p'enawh hriapasa tawh sie byuh,",
+            "Eima chakaona vâ dei miah thei ei."
+          ]
+        },
+        {
+          "id": "v3",
+          "label": "Verse 3",
+          "lines": [
+            "Hro chhôh bie hmeiseih eima reipazy kha,",
+            "Khizaw lia chi eima tupa dei châ;",
+            "Hezy sie laih aw keimo miah my khai no,",
+            "Sâhhria thei nah eima hrianazy chhao."
+          ]
+        },
+        {
+          "id": "v4",
+          "label": "Verse 4",
+          "lines": [
+            "Miah Pachhatuh lôsôhzy a pakhy ti,",
+            "Thaphana lakho eima kho tita;",
+            "Cha ti ano zituh ngâchhihpazy cha,",
+            "Ama chakaona vâ athei aw ei."
+          ]
+        }
+      ]
     }
   ]
 }
