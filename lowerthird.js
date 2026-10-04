@@ -49,18 +49,23 @@
   function setState(s) { state = s; lt.setAttribute('data-state', s); }
 
   /* ---------- Rendering ---------- */
+  function fitText(el, base, min, wrapSize, max) {
+    el.classList.remove('wrap'); el.style.fontSize = '';
+    var size = base;
+    while (el.offsetWidth > max && size > min) { size -= 2; el.style.fontSize = size + 'px'; }
+    if (el.offsetWidth > max) { el.classList.add('wrap'); el.style.fontSize = wrapSize + 'px'; }
+  }
+
   function fill(e) {
     $('role').textContent = e.role || '';
     $('name').textContent = e.name || '';
     $('detail').textContent = e.detail || '';
     lt.toggleAttribute('data-nodetail', !e.detail);
-    // shrink very long names so they never run off the screen
-    var nameEl = $('name'); nameEl.style.fontSize = '';
-    var size = 64, max = 1690 - 118 - 104;
-    while (nameEl.offsetWidth > max && size > 36) { size -= 2; nameEl.style.fontSize = size + 'px'; }
-    var det = $('detail'); det.style.fontSize = '';
-    var dsize = 31;
-    while (det.offsetWidth > max && dsize > 20) { dsize -= 1; det.style.fontSize = dsize + 'px'; }
+    // long text: shrink first, then wrap onto a second line, so nothing is ever cut off
+    var max = 1690 - 118 - 104;   // widest the text can be inside the plate
+    fitText($('role'), 25, 18, 20, max);
+    fitText($('name'), 64, 40, 46, max);
+    fitText($('detail'), 31, 22, 26, max);
   }
 
   function enter(e) {
