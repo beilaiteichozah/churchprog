@@ -1,10 +1,10 @@
 /* Church Live Hosting Program — projector slideshow
-   All the words come from config.js. Edit that file, not this one. */
-(function () {
+   All the words come from config.json. Edit that file (or use editor.html), not this one. */
+ChurchData.ready(function () {
   'use strict';
 
   /* ------------------------------------------------------------------
-     Content (from config.js)
+     Content (from config.json)
   ------------------------------------------------------------------ */
   var U = window.CHURCH_UTIL;
   var CHURCH = U.church.name || '';
@@ -417,4 +417,4 @@
 
   window.addEventListener('hashchange', function () { go(fromHash()); });
   go(fromHash());
-})();
+});

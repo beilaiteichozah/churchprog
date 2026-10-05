@@ -12,7 +12,9 @@ Plain HTML, CSS and JavaScript. No build step, no dependencies, no internet conn
 
 - [What is in the box](#what-is-in-the-box)
 - [Quick start](#quick-start)
-- [Make it your church's: `config.js`](#make-it-your-churchs-configjs)
+- [Editor Dashboard](#editor-dashboard)
+- [Where the data lives](#where-the-data-lives)
+- [Make it your church's: `config.json`](#make-it-your-churchs-configjson)
 - [Songs and hymns: `songs.json`](#songs-and-hymns-songsjson)
 - [Colours and themes](#colours-and-themes)
 - [Keyboard shortcuts](#keyboard-shortcuts)
@@ -37,6 +39,7 @@ Plain HTML, CSS and JavaScript. No build step, no dependencies, no internet conn
 | Song lyrics | `lyrics.html` | One lyric line at a time for the congregation, with the song title on top and the hymn number at the bottom right. |
 | Name lower third | `lowerthird.html` | A name graphic (speaker, singer, choir…) for the bottom of a live picture, with a transparent background. |
 | Lyrics lower third | `lyrics-lowerthird.html` | The lyrics, one line at a time, in a bar at the bottom of a live picture while a singer or choir sings. |
+| **Editor Dashboard** | `editor.html` | Edit all the data in forms (church, event, colours, program, lower-third names, songs) and save it to the JSON files. |
 | Help | `help.html` | The full on-screen guide: shortcut keys, setup, troubleshooting. Searchable and printable. |
 
 All screens are designed for a **16:9 projector (1920 × 1080)**. On other shapes they keep their proportions and add bars at the sides; text is never stretched.
@@ -49,13 +52,13 @@ All screens are designed for a **16:9 projector (1920 × 1080)**. On other shape
 2. Open `index.html` in Chrome or Edge by double-clicking it.
 3. Move the window to the projector screen and press **F** for fullscreen.
 4. Move on with **→** or **Space**; go back with **←**.
-5. Open `config.js` in any text editor (Notepad is fine), change the sample words to yours, save, and press **F5** in the browser.
+5. Open `editor.html`, change the sample content to yours, and press **Ctrl + S**. (Or edit `config.json` and `songs.json` in any text editor and press **F5**.)
 
-**Lyrics pages and `songs.json`.** Browsers do not let a page read `songs.json` straight from a folder (`file://`). The lyrics pages then ask you to choose the file once (or drag it onto the page; press **O** any time) and remember it. If you edit `songs.json`, choose it again, or serve the folder so the newest file is always read:
+**Opening from a folder.** Browsers do not let a page read the JSON files straight from a folder (`file://`). The first time, each page shows a box: choose `config.json` and `songs.json` (select both together). They are remembered in this browser and every page uses them. Or serve the folder so the newest files are always read, and the box never appears:
 
 ```sh
 python3 -m http.server 8000
-# then open http://localhost:8000/lyrics.html
+# then open http://localhost:8000/index.html
 ```
 
 Any static web server works. Nothing is loaded from the internet.
@@ -64,47 +67,78 @@ Press **H** on any page for the Help page, or **?** for a quick key list.
 
 ---
 
-## Make it your church's: `config.js`
+## Editor Dashboard
 
-`config.js` is the one file to edit for your church. The slideshow, the banner and the name lower third are all built from it.
+Open `editor.html` to change everything in forms, without touching JSON:
 
-```js
-window.CHURCH_CONFIG = {
-  locale: 'en',                                   // language of the written date
+| Tab | What you edit |
+| --- | --- |
+| **Church & event** | Church name and place, headline, title, date, time, venue, extra details (host, chairman…), language and the words for Date / Venue / Time. |
+| **Colours** | A colour preset and your own colours, with a live preview. |
+| **Program** | The items of the service, in order, with role-and-person, hymn and plain-line blocks. Reorder, duplicate and delete. |
+| **Lower thirds** | The names shown over live video, plus the auto-hide time. “Fill from the program” adds everyone listed in the program. |
+| **Songs** | Hymns and songs: details, a box per verse or chorus, the play order, and “Paste the whole song” to split pasted text into parts. |
+| **Files & preview** | Save, connect your folder, download or import the JSON files, check for mistakes, and open every page. |
 
-  church: { name: 'Grace Community Church', place: '12 Main Street, Springfield' },
+**Saving.** Press **Save** (or **Ctrl + S**).
 
-  event: {
-    headline: ['Sunday Morning', 'Worship Service'],   // big title, one or two lines
-    connector: '',                                     // small word between headline and title, or ''
-    title: 'A Service of Praise and Thanksgiving',
-    date: '2026-10-04',                                // YYYY-MM-DD
-    dateText: '',                                      // optional: replaces the written date
-    time: '10:00 am – 12:00 noon',
-    venue: 'Main Sanctuary',
-    details: [['Host', 'Pastor Sample Name'], ['Worship leader', 'Sample Leader']]
+- In **Chrome or Edge**, press **Connect folder** once and choose the project folder. Save then writes `config.json` and `songs.json` straight into it. The folder is remembered.
+- In other browsers, Save keeps the data in this browser and **Download config.json / songs.json** (Files tab) gives you the files to copy into the project folder.
+
+The pages show your saved data straight away. The editor warns about things that look wrong (a song with no title, a lower third pointing at a missing item, duplicate hymn numbers…) and about unsaved changes when you close the tab.
+
+---
+
+## Where the data lives
+
+Everything you can change is stored in **two JSON files**. No content is written inside the pages' code.
+
+| File | Holds |
+| --- | --- |
+| `config.json` | Church, event, language, colours, **program items**, **lower-third names** (the name graphic). |
+| `songs.json` | **Lyrics**: every hymn and song, used by the lyrics page and by the **lyrics lower third** (lyrics over live video). |
+
+Every page loads these files when it opens (`data.js` does the loading), so a change to a file shows after you press **F5**.
+
+**If the file and the browser's copy differ.** The browser keeps a copy of the last data it read or saved, so pages also work when opened from a folder. The rule is simple: if you change a JSON file by hand (or replace it), **the file wins**; otherwise the copy saved from the Editor Dashboard is used. After you save to the connected folder, the file and the copy are the same.
+
+---
+
+## Make it your church's: `config.json`
+
+`config.json` holds the church, the event, the colours, the program and the lower-third names. The slideshow, the banner and the name lower third are all built from it. Edit it in the Editor Dashboard, or in a text editor (keep the commas and quote marks exactly).
+
+```json
+{
+  "locale": "en",
+  "church": { "name": "Grace Community Church", "place": "12 Main Street, Springfield" },
+  "event": {
+    "headline": ["Sunday Morning", "Worship Service"],
+    "connector": "",
+    "title": "A Service of Praise and Thanksgiving",
+    "date": "2026-10-04",
+    "dateText": "",
+    "time": "10:00 am – 12:00 noon",
+    "venue": "Main Sanctuary",
+    "details": [["Host", "Pastor Sample Name"], ["Worship leader", "Sample Leader"]]
   },
-
-  labels: { date: 'Date', venue: 'Venue', time: 'Time' },
-
-  theme: { preset: 'navy', colors: {} },
-
-  program: [ /* one entry per item, see below */ ],
-
-  lowerThirds: { autoHide: 10, entries: [ /* names over live video, see below */ ] }
-};
+  "labels": { "date": "Date", "venue": "Venue", "time": "Time" },
+  "theme": { "preset": "navy", "colors": {} },
+  "program": [],
+  "lowerThirds": { "autoHide": 10, "entries": [] }
+}
 ```
 
 | Setting | What it does |
 | --- | --- |
-| `locale` | Language of the written date (`'en'`, `'fr'`, `'es'`, `'sw'`, `'hi'`…). |
+| `locale` | Language of the written date (`"en"`, `"fr"`, `"es"`, `"sw"`, `"hi"`…). |
 | `church.name`, `church.place` | Shown on every page. |
 | `event.headline` | The big title. One or two lines. Long lines shrink to fit. |
-| `event.connector` | A small word between the headline and the title (for example `'and'` or `'&'`). Leave `''` for none. |
-| `event.title` | The line under the headline. Leave `''` for none. |
+| `event.connector` | A small word between the headline and the title (for example `"and"`). Leave `""` for none. |
+| `event.title` | The line under the headline. Leave `""` for none. |
 | `event.date` | `YYYY-MM-DD`. Written out in your language, and shown big on the banner. |
 | `event.time`, `event.venue` | Shown on the title slide, the details slide and the banner. |
-| `event.details` | Extra rows `['Label', 'Value']` for the details slide and the banner (host, chairman, worship leader…). |
+| `event.details` | Extra rows `["Label", "Value"]` for the details slide and the banner. |
 | `labels` | The words for Date, Venue and Time. Change them to translate. |
 | `theme` | A colour preset and optional custom colours. See [Colours and themes](#colours-and-themes). |
 | `program` | The items of the service. |
@@ -114,21 +148,18 @@ window.CHURCH_CONFIG = {
 
 Each item is a list of blocks. An item with more than one block is shown a little smaller so everything fits. Typing the item number then **Enter** jumps to it on the slideshow.
 
-```js
-// a role and a person (sub is optional)
-{ label: 'Scripture reading', value: 'Sample Reader', sub: 'Psalm 100' }
-
-// a hymn title, shown in a lighter weight
-{ label: 'Opening hymn', value: 'Sample Hymn One', hymn: true }
-
-// a plain line, with an optional small note under it
-{ text: 'Welcome and call to worship', note: 'Please stand' }
+```json
+{ "label": "Scripture reading", "value": "Sample Reader", "sub": "Psalm 100" }
+{ "label": "Opening hymn", "value": "Sample Hymn One", "hymn": true }
+{ "text": "Welcome and call to worship", "note": "Please stand" }
 ```
+
+The first is a role and a person (`sub` is optional), the second a hymn title (shown in a lighter weight), the third a plain line with an optional small note.
 
 ### Name lower thirds
 
-```js
-{ item: 8, role: 'Speaker', name: 'Pastor Sample Name', detail: 'Senior Pastor' }
+```json
+{ "item": 8, "role": "Speaker", "name": "Pastor Sample Name", "detail": "Senior Pastor" }
 ```
 
 `role` is the small label (Speaker, Singer, Choir, Prayer…), `name` the large line, `detail` an optional smaller line, and `item` the program item number so that typing the number then **Enter** shows it. `autoHide` is the seconds before the graphic hides itself (`0` = stay until hidden). Long names shrink to fit and then wrap, so nothing is cut off.
@@ -182,7 +213,7 @@ The three songs in the folder are **original sample texts** written only to show
 
 ## Colours and themes
 
-Choose a preset in `config.js`:
+Choose a preset in the Editor Dashboard (**Colours** tab) or in `config.json`:
 
 | Preset | Look |
 | --- | --- |
@@ -194,7 +225,7 @@ Choose a preset in `config.js`:
 Use your own colours by adding any of these to `theme.colors`:
 
 ```js
-theme: { preset: 'navy', colors: { highlight: '#f2c14e', accent: '#1f8a70' } }
+"theme": { "preset": "navy", "colors": { "highlight": "#f2c14e", "accent": "#1f8a70" } }
 ```
 
 | Key | Used for |
@@ -335,7 +366,7 @@ Add after the page name, starting with `?` and joining several with `&`, for exa
 
 ## Another language
 
-Everything you type (church name, program, hymns, names) is shown exactly as written, in any language and script. To translate the fixed words, set `locale` (for the written date) and `labels` (Date, Venue, Time) in `config.js`. The key help text and the Help page are in English; you can edit `help.html` to translate them.
+Everything you type (church name, program, hymns, names) is shown exactly as written, in any language and script. To translate the fixed words, set `locale` (for the written date) and `labels` (Date, Venue, Time) in `config.json` (or on the **Church & event** tab). The key help text and the Help page are in English; you can edit `help.html` to translate them.
 
 ---
 
@@ -355,9 +386,10 @@ These choices are saved in the browser on that computer and come back next time:
 
 ```
 church-live-hosting-program/
-├── config.js          ← EDIT THIS: church, event, colours, program, names
-├── songs.json         ← EDIT THIS: hymns and songs
-├── theme.js           colours, page title and date helpers (shared by every page)
+├── config.json        ← DATA: church, event, colours, program, lower-third names
+├── songs.json         ← DATA: hymns and songs (lyrics)
+├── editor.html · editor.css · editor.js        Editor Dashboard (edits the two JSON files)
+├── data.js            loads the JSON files, applies colours (shared by every page)
 ├── index.html · style.css · script.js          Program slideshow
 ├── banner.html · banner.css · banner.js        Main banner
 ├── lyrics.html · lyrics.css · lyrics.js        Song lyrics page
@@ -367,7 +399,7 @@ church-live-hosting-program/
 └── README.md
 ```
 
-Each page has its own HTML, CSS and JavaScript file. Every page reads `config.js` and `theme.js`; the two lyrics pages also read `songs.json`. The folder can be hosted on any static web host. No server-side code is needed.
+Each page has its own HTML, CSS and JavaScript file. Every page loads `data.js`, which reads `config.json`; the lyrics pages also read `songs.json`. The folder can be hosted on any static web host. No server-side code is needed.
 
 ---
 
@@ -393,8 +425,10 @@ Recent Chrome or Edge are best (and the OBS browser source is Chromium-based). F
 | Problem | Fix |
 | --- | --- |
 | The keys do nothing | Click once on the page so the browser window has focus. |
-| I changed `config.js` but nothing changed | Save the file and press **F5** (or **Ctrl + R**) in the browser. |
-| The page is blank, or the words are missing | There is a typing mistake in `config.js`, usually a missing comma, quote or bracket. Press **F12** and look at the Console for the line. |
+| I changed a JSON file but nothing changed | Save the file and press **F5** (or **Ctrl + R**) in the browser. |
+| A page says a data file “could not be read” | There is a typing mistake in the JSON file, usually a missing comma, quote or bracket. The message tells you the position. Fix it, or open the file in the Editor Dashboard's Files tab to check. |
+| A page asks me to choose `config.json` and `songs.json` | The browser blocks reading files from a folder. Choose both files once, or open the folder through a local web server (see Quick start). |
+| The Editor Dashboard says “Saved in this browser” only | Connect the folder (Chrome or Edge) so Save writes the files, or use **Download** and copy the files into the project folder. |
 | The lyrics page asks me to load songs | The browser blocked reading `songs.json` from a folder. Choose the file in the box, or serve the folder (see Quick start). |
 | "The songs file could not be read" | A mistake in `songs.json`, usually a missing comma, quote or bracket. The message says what is wrong. |
 | The screen went black | You pressed **B** or **.**. Press it again or press **Esc**. |

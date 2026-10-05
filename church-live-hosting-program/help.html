@@ -6,8 +6,7 @@
   <title>Help</title>
   <meta name="description" content="How to use the program slideshow, main banner and lyrics pages: shortcut keys, setup, editing and troubleshooting.">
   <link rel="stylesheet" href="help.css">
-  <script src="config.js"></script>
-  <script src="theme.js"></script>
+  <script src="data.js"></script>
 </head>
 <body>
 
@@ -107,8 +106,9 @@
           <tr data-s><td><strong>Program slideshow</strong></td><td><code>index.html</code></td><td>Shows the order of the program, one item per slide. It has a title slide with the church name, the date, venue and time, the details slide, one slide for each program item, and a closing slide. The title reads as three parts: <em>Rev. Haidau Chori Palyupalihna</em>, <em>Nata</em> (and), <em>Byhnâ Paawsana Program</em>.</td></tr>
           <tr data-s><td><strong>Main banner</strong></td><td><code>banner.html</code></td><td>A dark poster-style screen with a large cross, the title, the date plate and the details. Use it on the wall before the service starts and after it ends.</td></tr>
           <tr data-s><td><strong>Song lyrics</strong></td><td><code>lyrics.html</code></td><td>Shows one lyric line at a time with a smooth glide. The song title stays at the top. The song number and book edition are at the bottom right. Songs come from <code>songs.json</code>.</td></tr>
-          <tr data-s><td><strong>Lower third</strong></td><td><code>lowerthird.html</code></td><td>A name graphic for the bottom of the picture: a small label such as <em>Speaker</em> or <em>Singer</em>, the name, and an optional line for the title or group. It has a see-through background so it can sit over a camera or video. Names are in <code>lowerthird-data.js</code>.</td></tr>
+          <tr data-s><td><strong>Lower third</strong></td><td><code>lowerthird.html</code></td><td>A name graphic for the bottom of the picture: a small label such as <em>Speaker</em> or <em>Singer</em>, the name, and an optional line for the title or group. It has a see-through background so it can sit over a camera or video. Names are in <code>config.json</code>, and you can edit them in the Editor Dashboard.</td></tr>
           <tr data-s><td><strong>Lyrics lower third</strong></td><td><code>lyrics-lowerthird.html</code></td><td>A bar at the bottom of the picture that shows the song lyrics <strong>one line at a time</strong> while a singer or group sings on live video. It shows the song title, and the singer if you set one. The hymn-book number, book and edition are left out unless you turn them on, because not every song comes from a book. The bar has a see-through background. Songs come from <code>songs.json</code>, the same file as the lyrics page.</td></tr>
+          <tr data-s><td><strong>Editor Dashboard</strong></td><td><code>editor.html</code></td><td>Forms to change the church, event, colours, program, lower-third names and songs, and save them to <code>config.json</code> and <code>songs.json</code>. Press <kbd>Ctrl</kbd> + <kbd>S</kbd> to save.</td></tr>
           <tr data-s><td><strong>Help</strong></td><td><code>help.html</code></td><td>This page.</td></tr>
         </tbody>
       </table>
@@ -260,13 +260,13 @@
       </table>
       </div>
       <h3>Changing the names</h3>
-      <p>Open <code>config.js</code> in a text editor and find <code>lowerThirds</code>. Each line is one name:</p>
-<pre><code>{ item: 8, role: 'Speaker', name: 'Pastor Sample Name', detail: 'Senior Pastor' },</code></pre>
+      <p>Open <code>config.json</code> in a text editor and find <code>lowerThirds</code>, or use the <em>Lower thirds</em> tab of the Editor Dashboard. Each name looks like this:</p>
+<pre><code>{ "item": 8, "role": "Speaker", "name": "Pastor Sample Name", "detail": "Senior Pastor" },</code></pre>
       <ul>
         <li><code>item</code> is the program item number, used by “type a number then Enter”.</li>
         <li><code>role</code> is the small label. Change it as you like, for example to <em>Prayer</em> or <em>Choir</em>.</li>
-        <li><code>detail</code> may be left empty (<code>''</code>).</li>
-        <li><code>settings.autoHide</code> at the top sets the default seconds before it hides itself.</li>
+        <li><code>detail</code> may be left empty (<code>""</code>).</li>
+        <li><code>lowerThirds.autoHide</code> sets the default seconds before it hides itself.</li>
       </ul>
       <p>Save the file and press <kbd>F5</kbd> in the browser.</p>
     </section>
@@ -371,8 +371,11 @@
       <h2>Changing the content</h2>
       <p>The pages are plain files. Open them in any text editor such as Notepad, change the text, save, then press <kbd>F5</kbd> (or <kbd>Ctrl</kbd> + <kbd>R</kbd>) in the browser to see the change.</p>
 
-      <h3>Your church, event, colours and program: <code>config.js</code></h3>
-      <p>This is the one file to edit for your church. Everything on the slideshow, the banner and the name lower third comes from it. It is full of sample content. Replace it with your own.</p>
+      <h3>The Editor Dashboard <code>editor.html</code></h3>
+      <p>The easiest way to change anything is the <strong>Editor Dashboard</strong>. Open <code>editor.html</code>, change the church and event, colours, program items, lower-third names and songs in forms, and press <kbd>Ctrl</kbd> + <kbd>S</kbd> to save. In Chrome or Edge, press <em>Connect folder</em> once and choose this folder: Save then writes <code>config.json</code> and <code>songs.json</code> directly. Otherwise Save keeps the data in this browser and <em>Download files</em> gives you the two files to copy into the folder.</p>
+
+      <h3>Your church, event, colours and program: <code>config.json</code></h3>
+      <p>All of this is stored in <code>config.json</code>, and the hymns in <code>songs.json</code>. You can edit them in the Editor Dashboard or in any text editor. It ships with sample content. Replace it with your own. If you edit a JSON file by hand, press <kbd>F5</kbd> on the pages afterwards; a file you changed by hand always wins over a copy saved from the Editor Dashboard.</p>
       <ul>
         <li><code>church</code> holds the church <code>name</code> and <code>place</code>.</li>
         <li><code>event</code> holds the <code>headline</code> (one or two lines), an optional small <code>connector</code> word such as “and”, the <code>title</code> line, the <code>date</code> (written <code>YYYY-MM-DD</code>), the <code>time</code>, the <code>venue</code>, and extra <code>details</code> rows such as the host or chairman.</li>
@@ -381,16 +384,16 @@
         <li><code>program</code> holds the items, one after another. Each item is a list of blocks.</li>
         <li><code>lowerThirds</code> holds the names shown over live video (see the lower third section above).</li>
       </ul>
-<pre><code>// a role and a person
-{ label: 'Choir', value: 'Grace Community Choir', sub: 'Optional line under it' }
+<pre><code>a role and a person:
+{ "label": "Choir", "value": "Grace Community Choir", "sub": "Optional line under it" }
 
-// a hymn title (shown in a lighter weight)
-{ label: 'Opening hymn', value: 'Sample Hymn One', hymn: true }
+a hymn title (shown in a lighter weight):
+{ "label": "Opening hymn", "value": "Sample Hymn One", "hymn": true }
 
-// a plain line, with an optional note under it
-{ text: 'Welcome and call to worship', note: 'Optional small note' }</code></pre>
+a plain line, with an optional note under it:
+{ "text": "Welcome and call to worship", "note": "Optional small note" }</code></pre>
       <p>An item with more than one block is shown a little smaller so everything fits.</p>
-      <p>To use your own colours, add them to <code>theme</code>, for example <code>colors: { highlight: '#f2c14e', accent: '#1f8a70' }</code>. The keys are <code>base</code>, <code>baseDeep</code>, <code>slate</code>, <code>accent</code>, <code>accentLight</code> and <code>highlight</code>.</p>
+      <p>To use your own colours, add them to <code>theme</code>, for example <code>"colors": { "highlight": "#f2c14e", "accent": "#1f8a70" }</code>. The keys are <code>base</code>, <code>baseDeep</code>, <code>slate</code>, <code>accent</code>, <code>accentLight</code> and <code>highlight</code>.</p>
 
       <h3>Song lyrics: <code>songs.json</code></h3>
       <p>Each song needs a title and sections. A section is a label and a list of lines. The page shows one line at a time. Everything else is optional, so a song that is not from a hymn book needs no number, book or edition.</p>
