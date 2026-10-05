@@ -380,8 +380,8 @@ More answers are in the built-in Help page (`help.html`), which also has a searc
 
 ## Copyright and content notice
 
-**Copyright © 2026 Laitei ([laiei.dev](https://laiei.dev)). All rights reserved.**
+**Copyright © 2026 Laitei ([laitei.dev](https://laitei.dev)).**
 
-The design, layout, styling, source code (HTML, CSS and JavaScript) and documentation in this repository are the work of Laitei. No licence to copy, modify, redistribute or reuse them is granted unless Laitei gives it in writing. To ask about permission, contact Laitei through laiei.dev.
+The design, layout, styling, source code (HTML, CSS and JavaScript) and documentation in this repository are the work of Laitei. Laitei is happy to give permission to use them: if you would like to use, copy or adapt them, just ask Laitei through laitei.dev.
 
 **Third-party content.** The copyright above applies to the software and its design only. The program details, names, and the song texts and hymns in `songs.json` and the other data files belong to their respective composers, authors, publishers and to the church that supplied them. They are included only to run this church program and remain the property of their owners; this notice does not transfer or claim any rights in them. The Rev. Haidau 80th book cover colours are used as a colour reference only.

@@ -412,8 +412,8 @@ More answers are in the built-in Help page, which also has a search box (**/**).
 
 ## Copyright
 
-**Copyright © 2026 Laitei ([laiei.dev](https://laiei.dev)). All rights reserved.**
+**Copyright © 2026 Laitei ([laitei.dev](https://laitei.dev)).**
 
-The design, layout, styling, source code (HTML, CSS and JavaScript) and documentation in this folder are the work of Laitei. No licence to copy, modify, redistribute or reuse them is granted unless Laitei gives it in writing. To ask about permission, contact Laitei through laiei.dev.
+The design, layout, styling, source code (HTML, CSS and JavaScript) and documentation in this folder are the work of Laitei. Laitei is happy to give permission to use them: if you would like to use, copy or adapt them, just ask Laitei through laitei.dev.
 
 **Third-party content.** This notice covers the software and its design only. Hymn and song texts, names and other content that a church adds belong to their respective composers, authors, publishers and owners; the sample texts shipped here are original placeholders. A church is responsible for having the right to display the songs it adds.
