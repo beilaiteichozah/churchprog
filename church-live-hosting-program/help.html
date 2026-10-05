@@ -14,7 +14,7 @@
   <div class="wrap">
     <p class="eyebrow"><i class="mark" aria-hidden="true"></i>Church Live Hosting Program</p>
     <h1>Help &amp; Guide</h1>
-    <p class="lede">Everything about the Byhnâ Paawsana Program screens (slideshow, banner, lyrics, lower third and lyrics lower third): what each page does, every shortcut key, how to set up the projector, how to change the content, and what to do when something goes wrong.</p>
+    <p class="lede">Everything about the Church Live Hosting Program (slideshow, banner, lyrics, lower third, lyrics lower third and the Editor Dashboard): what each page does, every shortcut key, how to set up the projector, how to change the content, and what to do when something goes wrong.</p>
     <p class="lede small">There are no buttons on the screens. You control everything from the keyboard, so you can run a service without touching the mouse.</p>
 
     <div class="cards">
@@ -48,6 +48,12 @@
         <span>Song lyrics one line at a time at the bottom of live video.</span>
         <em>Open lyrics-lowerthird.html →</em>
       </a>
+      <a class="card" href="editor.html">
+        <span class="card-k">Page 6</span>
+        <strong>Editor Dashboard</strong>
+        <span>Forms to change the church, program, lower-third names and songs.</span>
+        <em>Open editor.html →</em>
+      </a>
     </div>
   </div>
 </header>
@@ -73,6 +79,7 @@
       <li><a href="#remote">Presenter remote</a></li>
       <li><a href="#setup">Projector setup</a></li>
       <li><a href="#service-day">Service-day checklist</a></li>
+      <li><a href="#editor">Editor Dashboard</a></li>
       <li><a href="#edit">Changing the content</a></li>
       <li><a href="#print">Print or save as PDF</a></li>
       <li><a href="#remembered">What is remembered</a></li>
@@ -88,6 +95,7 @@
       <h2>Quick start</h2>
       <ol class="steps">
         <li><strong>Open a page</strong> in a modern browser such as Chrome or Edge. Double-click <code>index.html</code>, <code>banner.html</code>, <code>lyrics.html</code>, <code>lowerthird.html</code> or <code>lyrics-lowerthird.html</code>. No internet is needed.</li>
+        <li><strong>Make it yours.</strong> Open <code>editor.html</code> (the Editor Dashboard), replace the sample church, program, names and songs with your own, and press <kbd>Ctrl</kbd> + <kbd>S</kbd>. See <a href="#editor">Editor Dashboard</a>.</li>
         <li><strong>Move the window to the projector screen</strong>, then press <kbd>F</kbd> for fullscreen. Press <kbd>F</kbd> again or <kbd>Esc</kbd> to leave it.</li>
         <li><strong>Click once on the page</strong> so the browser listens to your keys. After that, use the keyboard only.</li>
         <li><strong>Move forward</strong> with <kbd>→</kbd> or <kbd>Space</kbd>, back with <kbd>←</kbd>.</li>
@@ -103,7 +111,7 @@
       <table class="plain">
         <thead><tr><th>Page</th><th>File</th><th>What it is for</th></tr></thead>
         <tbody>
-          <tr data-s><td><strong>Program slideshow</strong></td><td><code>index.html</code></td><td>Shows the order of the program, one item per slide. It has a title slide with the church name, the date, venue and time, the details slide, one slide for each program item, and a closing slide. The title reads as three parts: <em>Rev. Haidau Chori Palyupalihna</em>, <em>Nata</em> (and), <em>Byhnâ Paawsana Program</em>.</td></tr>
+          <tr data-s><td><strong>Program slideshow</strong></td><td><code>index.html</code></td><td>Shows the order of the program, one item per slide. It has a title slide with the church name, the date, venue and time, the details slide, one slide for each program item, and a closing slide. The title is the headline, an optional small connector word and the title line from <code>config.json</code>.</td></tr>
           <tr data-s><td><strong>Main banner</strong></td><td><code>banner.html</code></td><td>A dark poster-style screen with a large cross, the title, the date plate and the details. Use it on the wall before the service starts and after it ends.</td></tr>
           <tr data-s><td><strong>Song lyrics</strong></td><td><code>lyrics.html</code></td><td>Shows one lyric line at a time with a smooth glide. The song title stays at the top. The song number and book edition are at the bottom right. Songs come from <code>songs.json</code>.</td></tr>
           <tr data-s><td><strong>Lower third</strong></td><td><code>lowerthird.html</code></td><td>A name graphic for the bottom of the picture: a small label such as <em>Speaker</em> or <em>Singer</em>, the name, and an optional line for the title or group. It has a see-through background so it can sit over a camera or video. Names are in <code>config.json</code>, and you can edit them in the Editor Dashboard.</td></tr>
@@ -367,12 +375,49 @@
       </ul>
     </section>
 
+    <section class="block" id="editor" data-section>
+      <h2>Editor Dashboard <code>editor.html</code></h2>
+      <p>The Editor Dashboard is a normal web page (not a projector screen) where you change everything in forms, without touching any code. All of it is stored in two JSON files: <code>config.json</code> (church, event, colours, program, lower-third names) and <code>songs.json</code> (hymns and lyrics). Every page reads these two files.</p>
+
+      <h3>The tabs</h3>
+      <div class="table-wrap">
+      <table class="plain">
+        <thead><tr><th>Tab</th><th>What you change</th></tr></thead>
+        <tbody>
+          <tr data-s><td><strong>Church &amp; event</strong></td><td>Church name and place, the big headline (one or two lines), a small connector word such as “and”, the title line, date, time, venue, extra details such as the host or chairman, the language of the date, and the words for Date, Venue and Time.</td></tr>
+          <tr data-s><td><strong>Colours</strong></td><td>A colour preset (navy, forest, burgundy, charcoal) and your own colours, with a live preview.</td></tr>
+          <tr data-s><td><strong>Program</strong></td><td>The items of the service, in order. Each item has one or more blocks: <em>role and person</em>, <em>hymn</em> or <em>plain line</em>. Move, duplicate or delete items. The slideshow shows one slide per item.</td></tr>
+          <tr data-s><td><strong>Lower thirds</strong></td><td>The names shown over live video (label, name, title or group, and the program item number), and the auto-hide time. <em>Fill from the program</em> adds everyone listed in the program.</td></tr>
+          <tr data-s><td><strong>Songs</strong></td><td>Title, composer, author, Bible reference, singer, and hymn-book number, book and edition. Each verse or chorus has its own box, one line per row. <em>Paste the whole song</em> splits pasted text into parts. The play order repeats a chorus without retyping it.</td></tr>
+          <tr data-s><td><strong>Files &amp; preview</strong></td><td>Save, connect your folder, download or import the two files, see warnings, and open every page.</td></tr>
+        </tbody>
+      </table>
+      </div>
+
+      <h3>Saving</h3>
+      <p>Press <kbd>Ctrl</kbd> + <kbd>S</kbd> or the <em>Save</em> button. The top bar says <em>Unsaved changes</em> until you do.</p>
+      <ul>
+        <li><strong>Chrome or Edge:</strong> press <em>Connect folder</em> once and choose the project folder. Save then writes <code>config.json</code> and <code>songs.json</code> straight into it. The folder is remembered; the browser may ask permission again next time.</li>
+        <li><strong>Other browsers:</strong> Save keeps the data in this browser, and <em>Download config.json</em> and <em>Download songs.json</em> (Files tab) give you the files to copy into the project folder.</li>
+        <li>The pages show your saved data straight away. Press <kbd>F5</kbd> on a page that is already open.</li>
+        <li>If you edit a JSON file by hand in a text editor, that file always wins over the copy saved by the editor.</li>
+      </ul>
+
+      <h3>Tips</h3>
+      <ul>
+        <li>Type each hymn exactly as it is in your hymn book, and only add songs your church is allowed to display.</li>
+        <li>Moving or deleting a program item changes the numbers of the items after it. Check the item numbers on the <em>Lower thirds</em> tab afterwards.</li>
+        <li>The <em>Files &amp; preview</em> tab lists things that look wrong (a song with no title, a lower third pointing at a missing item, two hymns with the same number).</li>
+        <li>If you close the tab with unsaved changes, the browser asks first.</li>
+        <li><em>Start a blank project</em> (Files tab) empties everything so you can begin from nothing. Nothing is written until you press Save.</li>
+      </ul>
+    </section>
+
     <section class="block" id="edit" data-section>
       <h2>Changing the content</h2>
       <p>The pages are plain files. Open them in any text editor such as Notepad, change the text, save, then press <kbd>F5</kbd> (or <kbd>Ctrl</kbd> + <kbd>R</kbd>) in the browser to see the change.</p>
 
-      <h3>The Editor Dashboard <code>editor.html</code></h3>
-      <p>The easiest way to change anything is the <strong>Editor Dashboard</strong>. Open <code>editor.html</code>, change the church and event, colours, program items, lower-third names and songs in forms, and press <kbd>Ctrl</kbd> + <kbd>S</kbd> to save. In Chrome or Edge, press <em>Connect folder</em> once and choose this folder: Save then writes <code>config.json</code> and <code>songs.json</code> directly. Otherwise Save keeps the data in this browser and <em>Download files</em> gives you the two files to copy into the folder.</p>
+      <p>The easiest way to change anything is the <a href="#editor">Editor Dashboard</a>. The rest of this section is for editing the JSON files by hand.</p>
 
       <h3>Your church, event, colours and program: <code>config.json</code></h3>
       <p>All of this is stored in <code>config.json</code>, and the hymns in <code>songs.json</code>. You can edit them in the Editor Dashboard or in any text editor. It ships with sample content. Replace it with your own. If you edit a JSON file by hand, press <kbd>F5</kbd> on the pages afterwards; a file you changed by hand always wins over a copy saved from the Editor Dashboard.</p>
@@ -452,7 +497,9 @@ a plain line, with an optional note under it:
         <li>Dark or light theme, and full or reduced animation (separately for the slideshow and lyrics).</li>
         <li>Whether the controls bar is shown.</li>
         <li>For the lower third and the lyrics lower third: the background, navy or light plate and animation. The lower third also remembers auto-hide, and the lyrics lower third whether the title row and the hymn-book details are shown.</li>
-        <li>The lyrics view (focus or one line) and the last <code>songs.json</code> you chose when opening from a folder.</li>
+        <li>The lyrics view (focus or one line).</li>
+        <li>A copy of <code>config.json</code> and <code>songs.json</code>: the last data a page read or the Editor Dashboard saved. It lets the pages work when opened straight from a folder. If you change a JSON file by hand, the file wins.</li>
+        <li>The folder you connected in the Editor Dashboard (Chrome or Edge).</li>
         <li>Where you were. The web address changes as you move, for example <code>index.html#12</code> or <code>lyrics.html#2.5</code>. Reloading the page returns to the same place.</li>
       </ul>
       <p>To reset everything, clear the site data for the page in the browser’s settings.</p>
@@ -466,8 +513,11 @@ a plain line, with an optional note under it:
         <div data-s><dt>The screen went black.</dt><dd>You pressed <kbd>B</kbd> or <kbd>.</kbd>. Press it again or press <kbd>Esc</kbd>.</dd></div>
         <div data-s><dt>There are no animations.</dt><dd>The computer may be set to reduce motion, so the pages use plain fades. Press <kbd>M</kbd> to switch to full animation.</dd></div>
         <div data-s><dt>The buttons bar is missing.</dt><dd>That is on purpose. Press <kbd>C</kbd> to show it. Press <kbd>C</kbd> again to hide it.</dd></div>
-        <div data-s><dt>The lyrics page or the lyrics lower third asks me to load songs.</dt><dd>The browser blocked reading <code>songs.json</code> from a folder. Choose the file in the box, or open the page through a local web server (see “Changing the content”).</dd></div>
-        <div data-s><dt>It says the songs file could not be read.</dt><dd>There is a mistake in <code>songs.json</code>, usually a missing comma, quote mark or bracket. The message says what is wrong. Fix the file and press <kbd>O</kbd> to load it again.</dd></div>
+        <div data-s><dt>A page asks me to choose <code>config.json</code> and <code>songs.json</code>.</dt><dd>The browser blocks reading files from a folder. Choose both files together in the box (once). Or open the folder through a local web server, for example <code>python3 -m http.server 8000</code>, and the box never appears.</dd></div>
+        <div data-s><dt>It says a data file could not be read.</dt><dd>There is a mistake in <code>config.json</code> or <code>songs.json</code>, usually a missing comma, quote mark or bracket. The message says what is wrong. Fix the file and press <kbd>F5</kbd>. Saving from the Editor Dashboard never writes a broken file.</dd></div>
+        <div data-s><dt>I changed something in the Editor Dashboard but a page still shows the old data.</dt><dd>Press <kbd>Ctrl</kbd> + <kbd>S</kbd> in the editor (the top bar must not say <em>Unsaved changes</em>), then press <kbd>F5</kbd> on the page. Pages on another computer, or opened from a different address, only see the files, so connect your folder or copy the downloaded files into it.</dd></div>
+        <div data-s><dt>The Editor Dashboard says “Saved in this browser” only.</dt><dd>No folder is connected, so the files themselves are unchanged. In Chrome or Edge press <em>Connect folder</em> and choose the project folder. In other browsers use <em>Download</em> on the Files tab and copy the two files into the folder.</dd></div>
+        <div data-s><dt>“Connect folder” is missing.</dt><dd>Only Chrome and Edge can write into a folder. Use <em>Download</em> on the Files tab instead.</dd></div>
         <div data-s><dt>Fullscreen does not start.</dt><dd>Browsers only allow fullscreen after you press a key or click on the page itself. Click the page and press <kbd>F</kbd> again. Inside a small preview window, fullscreen can be blocked; open the file in its own browser tab.</dd></div>
         <div data-s><dt>There are black bars at the sides.</dt><dd>The projector is not 16:9. The page keeps its proportions rather than stretching. Set the projector to 1920 × 1080 if possible.</dd></div>
         <div data-s><dt>The text looks a little different on another computer.</dt><dd>The pages use the fonts installed on the computer. Test on the computer you will use for the service.</dd></div>
@@ -485,10 +535,13 @@ a plain line, with an optional note under it:
     <section class="block" id="faq" data-section>
       <h2>Questions</h2>
       <dl class="qa">
+        <div data-s><dt>How do I add a new hymn or song?</dt><dd>Open the Editor Dashboard, go to <em>Songs</em>, press <em>New song</em>, type the title and paste the words with <em>Paste the whole song</em>, then press <kbd>Ctrl</kbd> + <kbd>S</kbd>. If it is from a hymn book, fill in the number so <kbd>S</kbd>, the number, <kbd>Enter</kbd> finds it.</dd></div>
+        <div data-s><dt>How do I change the program, the date or the church name?</dt><dd>In the Editor Dashboard: <em>Church &amp; event</em> for the church, title, date, time and venue, and <em>Program</em> for the items. Save, then press <kbd>F5</kbd> on the slideshow and banner.</dd></div>
+        <div data-s><dt>How do I use my church colours?</dt><dd>In the Editor Dashboard open <em>Colours</em>, choose a preset and change any colour. All pages follow it.</dd></div>
         <div data-s><dt>How do I show program item 12 right now?</dt><dd>On the slideshow press <kbd>1</kbd> <kbd>2</kbd> <kbd>Enter</kbd>.</dd></div>
         <div data-s><dt>How do I show a hymn by its number?</dt><dd>On a lyrics page press <kbd>S</kbd>, type the number, then press <kbd>Enter</kbd>. It must match the <code>number</code> in <code>songs.json</code>.</dd></div>
         <div data-s><dt>The group goes back to verse 1 while I am on verse 3. What do I press?</dt><dd>Press <kbd>1</kbd>. It jumps straight to the first line of verse 1. Then use <kbd>Space</kbd> as usual. To go to the chorus press <kbd>C</kbd>, and for a bridge or any other part press <kbd>J</kbd> and choose it.</dd></div>
-        <div data-s><dt>Can I run it from a USB stick?</dt><dd>Yes. Keep all the files together in one folder: the <code>.html</code>, <code>.css</code> and <code>.js</code> files and <code>songs.json</code>.</dd></div>
+        <div data-s><dt>Can I run it from a USB stick?</dt><dd>Yes. Keep all the files together in one folder: the <code>.html</code>, <code>.css</code> and <code>.js</code> files and the two JSON files, <code>config.json</code> and <code>songs.json</code>.</dd></div>
         <div data-s><dt>How do I show a guest who is not in the lower-third list?</dt><dd>Press <kbd>E</kbd>, type the label, name and detail, and press <kbd>Enter</kbd>.</dd></div>
         <div data-s><dt>Can I show the lyrics on the live video while a group sings?</dt><dd>Yes. Open <code>lyrics-lowerthird.html</code>, choose the song with <kbd>G</kbd> or by typing its number and <kbd>Enter</kbd>, then press <kbd>Space</kbd> at the end of each line as they sing.</dd></div>
         <div data-s><dt>Does it need internet?</dt><dd>No. Nothing is loaded from the internet.</dd></div>
