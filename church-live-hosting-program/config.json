@@ -1,0 +1,181 @@
+{
+  "_readme": "Church Live Hosting Program: church, event, colours, program and lower-third names. Edit this file in a text editor, or use the Editor Dashboard (editor.html). Keep the commas and quote marks exactly. 'event.headline' is one or two lines; 'event.date' is YYYY-MM-DD; 'theme.preset' is navy, forest, burgundy or charcoal and 'theme.colors' may override base, baseDeep, slate, accent, accentLight, highlight. Each program item is a list of blocks: {label, value, sub, hymn} or {text, note}. Each lower-third entry is {item, role, name, detail}.",
+  "locale": "en",
+  "church": {
+    "name": "Grace Community Church",
+    "place": "12 Main Street, Springfield"
+  },
+  "event": {
+    "headline": [
+      "Sunday Morning",
+      "Worship Service"
+    ],
+    "connector": "",
+    "title": "A Service of Praise and Thanksgiving",
+    "date": "2026-10-04",
+    "dateText": "",
+    "time": "10:00 am – 12:00 noon",
+    "venue": "Main Sanctuary",
+    "details": [
+      [
+        "Host",
+        "Pastor Sample Name"
+      ],
+      [
+        "Worship leader",
+        "Sample Leader"
+      ]
+    ]
+  },
+  "labels": {
+    "date": "Date",
+    "venue": "Venue",
+    "time": "Time"
+  },
+  "theme": {
+    "preset": "navy",
+    "colors": {}
+  },
+  "program": [
+    [
+      {
+        "text": "Welcome and call to worship"
+      }
+    ],
+    [
+      {
+        "label": "Opening hymn",
+        "value": "Sample Hymn One",
+        "hymn": true
+      }
+    ],
+    [
+      {
+        "label": "Opening prayer",
+        "value": "Elder Sample Name",
+        "sub": "Church elder"
+      }
+    ],
+    [
+      {
+        "label": "Scripture reading",
+        "value": "Sample Reader",
+        "sub": "Psalm 100"
+      }
+    ],
+    [
+      {
+        "label": "Choir",
+        "value": "Grace Community Choir"
+      }
+    ],
+    [
+      {
+        "label": "Announcements",
+        "value": "Sample Name",
+        "sub": "Church secretary"
+      }
+    ],
+    [
+      {
+        "label": "Hymn",
+        "value": "Sample Hymn Two",
+        "hymn": true
+      }
+    ],
+    [
+      {
+        "label": "Sermon",
+        "value": "Pastor Sample Name",
+        "sub": "Senior Pastor"
+      },
+      {
+        "text": "Sample sermon theme"
+      }
+    ],
+    [
+      {
+        "label": "Special song",
+        "value": "Youth Group"
+      }
+    ],
+    [
+      {
+        "label": "Offering and thanksgiving",
+        "value": "Deacon Sample Name"
+      }
+    ],
+    [
+      {
+        "label": "Closing hymn",
+        "value": "Sample Hymn Three",
+        "hymn": true
+      }
+    ],
+    [
+      {
+        "label": "Benediction",
+        "value": "Pastor Sample Name"
+      }
+    ]
+  ],
+  "lowerThirds": {
+    "autoHide": 10,
+    "entries": [
+      {
+        "item": 1,
+        "role": "Welcome",
+        "name": "Pastor Sample Name",
+        "detail": "Senior Pastor"
+      },
+      {
+        "item": 3,
+        "role": "Prayer",
+        "name": "Elder Sample Name",
+        "detail": "Church elder"
+      },
+      {
+        "item": 4,
+        "role": "Scripture",
+        "name": "Sample Reader",
+        "detail": "Psalm 100"
+      },
+      {
+        "item": 5,
+        "role": "Choir",
+        "name": "Grace Community Choir",
+        "detail": ""
+      },
+      {
+        "item": 6,
+        "role": "Announcements",
+        "name": "Sample Name",
+        "detail": "Church secretary"
+      },
+      {
+        "item": 8,
+        "role": "Speaker",
+        "name": "Pastor Sample Name",
+        "detail": "Senior Pastor"
+      },
+      {
+        "item": 9,
+        "role": "Special song",
+        "name": "Youth Group",
+        "detail": ""
+      },
+      {
+        "item": 10,
+        "role": "Offering",
+        "name": "Deacon Sample Name",
+        "detail": ""
+      },
+      {
+        "item": 12,
+        "role": "Benediction",
+        "name": "Pastor Sample Name",
+        "detail": "Senior Pastor"
+      }
+    ]
+  }
+}

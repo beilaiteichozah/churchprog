@@ -1,11 +1,11 @@
 /* Main banner — scaling and small helpers.
    F fullscreen · R replay entrance · P print / save as PDF · H help */
-(function () {
+ChurchData.ready(function () {
   'use strict';
   var stage = document.getElementById('stage');
   var U = window.CHURCH_UTIL;
 
-  /* ---------- Fill the words from config.js ---------- */
+  /* ---------- Fill the words from config.json ---------- */
   function $(id) { return document.getElementById(id); }
   function span(cls, text) { var e = document.createElement('span'); e.className = cls; e.textContent = text; return e; }
 
@@ -101,4 +101,4 @@
   }
   document.addEventListener('visibilitychange', function () { if (document.visibilityState === 'visible') keepAwake(); });
   keepAwake();
-})();
+});
