@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Main Banner</title>
+  <meta name="description" content="Main banner for the church service or event.">
+  <link rel="stylesheet" href="banner.css">
+  <script src="config.js"></script>
+  <script src="theme.js"></script>
+</head>
+<body>
+  <main id="stage" class="stage" aria-label="Main banner">
+
+    <!-- Cross artwork -->
+    <svg class="art" viewBox="0 0 1920 1080" aria-hidden="true" focusable="false">
+      <path class="outline" d="M1410 -100 H1710 V330 H1860 V630 H1710 V1180 H1410 V630 H1260 V330 H1410 Z"/>
+      <rect class="arm arm-h" x="1260" y="330" width="600" height="300"/>
+      <rect class="arm arm-v" x="1410" y="-100" width="300" height="1280"/>
+    </svg>
+
+    <!-- Date plate in the centre of the cross (filled from config.js) -->
+    <div class="plate" id="plate">
+      <span class="plate-day" id="plateDay"></span>
+      <span class="plate-month" id="plateMonth"></span>
+      <span class="plate-year" id="plateYear"></span>
+    </div>
+
+    <div class="content">
+      <header class="head">
+        <p class="church"><i class="mark" aria-hidden="true"></i><span id="church"></span></p>
+        <p class="place" id="place"></p>
+      </header>
+
+      <section class="title">
+        <h1 id="headline"></h1>
+        <p class="and" id="connector"><span class="mask"><span class="line" id="connectorText"></span></span></p>
+        <p class="program" id="program"><span class="mask"><span class="line" id="programText"></span></span></p>
+      </section>
+
+      <dl class="facts" id="facts"></dl>
+    </div>
+  </main>
+
+  <script src="banner.js"></script>
+</body>
+</html>

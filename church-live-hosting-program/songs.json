@@ -1,0 +1,141 @@
+{
+  "_readme": "Songs for the Church Live Hosting Program. Replace the sample songs with your own. Each song has a title and sections (each with a label and a list of lines). Optional: composer, author, singer, reference and, for songs from a hymn book, number, book and edition. Sections are shown in the order written. To repeat a chorus without retyping it, give sections an id and add an 'order' list of ids, e.g. \"order\": [\"v1\", \"c\", \"v2\", \"c\"]. On the lyrics pages, keys 1-9 jump to 'Verse 1'-'Verse 9' (found from the label, or add \"verse\": 2 to a section), and C or 0 jumps to the chorus (a section whose label contains 'Chorus' or 'Refrain', or that has \"kind\": \"chorus\"). Check commas and quote marks: one missing comma makes the whole file unreadable.",
+  "songs": [
+    {
+      "id": "sample-hymn-one",
+      "title": "Sample Hymn One",
+      "composer": "Sample Composer",
+      "number": 1,
+      "book": "Sample Hymnal",
+      "edition": "First Edition",
+      "sections": [
+        {
+          "id": "v1",
+          "label": "Verse 1",
+          "lines": [
+            "We gather here at the break of day",
+            "With open hands and hearts to pray",
+            "The light of morning fills the room",
+            "And every shadow turns to bloom"
+          ]
+        },
+        {
+          "id": "c",
+          "label": "Chorus",
+          "lines": [
+            "Sing it out, sing it out",
+            "Let the whole earth hear",
+            "Sing it out, sing it out",
+            "Our God is always near"
+          ]
+        },
+        {
+          "id": "v2",
+          "label": "Verse 2",
+          "lines": [
+            "Through every season, joy and tears",
+            "You have been with us all the years",
+            "Your faithful word, our steady ground",
+            "Where peace and mercy still are found"
+          ]
+        },
+        {
+          "id": "v3",
+          "label": "Verse 3",
+          "lines": [
+            "So lift the song and lift it high",
+            "Let every voice rise to the sky",
+            "One family, one hope, one call",
+            "Praise to the Giver of us all"
+          ]
+        }
+      ],
+      "order": [
+        "v1",
+        "c",
+        "v2",
+        "c",
+        "v3",
+        "c"
+      ]
+    },
+    {
+      "id": "sample-hymn-two",
+      "title": "Sample Hymn Two",
+      "composer": "Sample Composer",
+      "number": 2,
+      "book": "Sample Hymnal",
+      "edition": "First Edition",
+      "sections": [
+        {
+          "id": "v1",
+          "label": "Verse 1",
+          "lines": [
+            "Where two or three are gathered near",
+            "The quiet word is gladly heard",
+            "A candle in the evening glow",
+            "Shows us the way that we should go"
+          ]
+        },
+        {
+          "id": "v2",
+          "label": "Verse 2",
+          "lines": [
+            "Give thanks for bread upon the table",
+            "Give thanks for those who make us able",
+            "To carry burdens, share the load",
+            "And walk together on the road"
+          ]
+        },
+        {
+          "id": "v3",
+          "label": "Verse 3",
+          "lines": [
+            "When night is long and hope is thin",
+            "Your steady love will lead us in",
+            "And we will rise with the new day",
+            "To serve and sing along the way"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sample-hymn-three",
+      "title": "Sample Hymn Three",
+      "author": "Sample Author",
+      "reference": "(Psalm 100)",
+      "sections": [
+        {
+          "id": "v1",
+          "label": "Verse 1",
+          "lines": [
+            "Come with gladness, come with singing",
+            "Bring your thanks and bring your praise",
+            "Every heart and every voice",
+            "In one chorus now we raise"
+          ]
+        },
+        {
+          "id": "c",
+          "label": "Chorus",
+          "lines": [
+            "Blessed be the name above all names",
+            "Blessed be the One who reigns",
+            "Blessed be the name above all names",
+            "Forever and ever, amen"
+          ]
+        },
+        {
+          "id": "v2",
+          "label": "Verse 2",
+          "lines": [
+            "Open gates and open doors",
+            "Welcome all who come in peace",
+            "From the least to the greatest",
+            "Let our songs of joy not cease"
+          ]
+        }
+      ]
+    }
+  ]
+}
