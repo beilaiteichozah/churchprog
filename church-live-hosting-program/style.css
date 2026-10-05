@@ -1,0 +1,312 @@
+/* Church Live Hosting Program — projector slideshow
+   Flat, print-style design on a fixed 1920x1080 stage scaled to the screen. */
+
+:root {
+  /* Colours are set from config.js (theme.js); these are the defaults. */
+  --navy: #1e2440;
+  --navy-deep: #171d37;
+  --slate: #3f4a68;
+  --teal: #2f8a8f;
+  --teal-light: #5fa3ab;
+  --gold: #e8b44c;
+
+  --paper: var(--navy);
+  --ink: #f7f9fb;
+  --muted: #aebdc9;
+  --rule: #3a4668;
+  --brand: var(--teal);
+  --on-brand: #ffffff;
+  --label: var(--gold);
+  --ui-bg: var(--navy-deep);
+  --ui-ink: #f1f5f8;
+  --ui-line: #3a4668;
+  --sans: "Segoe UI", "Helvetica Neue", Helvetica, Arial, "Liberation Sans", sans-serif;
+  --dir: 1;
+  --heavy: "Arial Black", "Segoe UI Black", "Helvetica Neue", Arial, sans-serif;
+}
+
+:root[data-dir="back"] { --dir: -1; }
+
+:root[data-theme="light"] {
+  --paper: #edf3f5;
+  --ink: #1a2142;
+  --muted: #52607c;
+  --rule: #cbd8de;
+  --label: #8f5f00;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+  background: #0d1226;      /* letterbox bars on non-16:9 projectors */
+  color: var(--ink);
+  font-family: var(--sans);
+  -webkit-font-smoothing: antialiased;
+}
+body.idle { cursor: none; }
+
+/* ---------- Stage ---------- */
+.stage {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 1920px;
+  height: 1080px;
+  transform: translate(-50%, -50%) scale(var(--s, 1));
+  transform-origin: center center;
+}
+
+.slide {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: var(--paper);
+  opacity: 0;
+  visibility: hidden;
+}
+.slide.leaving { opacity: 1; visibility: visible; z-index: 1; }   /* old slide stays under the wipe */
+.slide.active  { opacity: 1; visibility: visible; z-index: 2; }
+
+/* Teal side panel shared by details and item slides */
+.side {
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 640px;
+  padding: 70px 64px;
+  background: var(--brand);
+  color: var(--on-brand);
+}
+.side .org {
+  font-size: 30px;
+  line-height: 1.35;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+.side .org span { display: block; font-weight: 400; opacity: .8; letter-spacing: .06em; font-size: 26px; text-transform: none; margin-top: 10px; }
+
+.main { position: absolute; left: 640px; right: 0; top: 0; bottom: 0; padding: 0 110px 0 120px; }
+
+.running {
+  position: absolute;
+  left: 120px; right: 110px; top: 60px;
+  padding-bottom: 18px;
+  display: flex; justify-content: space-between;
+  font-size: 22px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted);
+}
+.running em { font-style: normal; font-weight: 700; color: var(--label); margin: 0 .35em; }
+.running::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 2px; background: var(--rule); }
+.foot {
+  position: absolute;
+  left: 120px; right: 110px; bottom: 56px;
+  display: flex; justify-content: space-between; align-items: baseline;
+  font-size: 26px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted);
+}
+.foot b { font-size: 38px; letter-spacing: 0; color: var(--ink); }
+
+/* ---------- Flat cross ---------- */
+.cross { position: relative; width: 70px; height: 100px; }
+.cross::before, .cross::after { content: ""; position: absolute; background: currentColor; }
+.cross::before { left: 30px; top: 0; width: 10px; height: 100px; }
+.cross::after  { left: 0; top: 26px; width: 70px; height: 10px; }
+
+/* ---------- Title ---------- */
+.slide--title, .slide--end {
+  /* these two slides keep the cover colours in both themes */
+  --muted: #aebdc9;
+  background: linear-gradient(180deg, var(--slate) 0%, var(--navy) 60%, #1d6a78 100%);
+  color: var(--on-brand);
+}
+.t-main { position: absolute; left: 120px; right: 120px; top: 90px; }
+.t-main .cross { margin-bottom: 44px; color: var(--gold); }
+.t-main .church { font-size: 44px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; }
+.t-main .place { margin-top: 10px; font-size: 34px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+.t-main h1 {
+  margin-top: 62px;
+  font-family: var(--heavy);
+  font-size: 108px;
+  line-height: 1.04;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -.01em;
+  color: var(--gold);
+}
+.t-main h1 .ln { display: block; white-space: nowrap; }
+.link { display: flex; align-items: center; gap: 26px; margin-top: 30px; font-size: 34px; font-weight: 700; letter-spacing: .32em; text-transform: uppercase; }
+.link { color: var(--muted); }
+.link::before, .link::after { content: ""; height: 2px; background: currentColor; opacity: .55; }
+.link::before { width: 70px; }
+.link::after  { width: 300px; }
+.t-main h2 { margin-top: 28px; font-size: 70px; line-height: 1.05; font-weight: 800; text-transform: uppercase; letter-spacing: .01em; }
+
+.t-band {
+  position: absolute; left: 0; right: 0; bottom: 0; height: 190px;
+  background: var(--navy-deep); color: #f7f9fb;
+  display: flex; justify-content: space-between; gap: 40px;
+  padding: 0 120px; align-items: center;
+}
+.t-band div { border-left: 4px solid var(--gold); padding-left: 24px; }
+.t-band dt { font-size: 26px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--gold); }
+.t-band dd { margin-top: 6px; font-size: 38px; line-height: 1.15; font-weight: 700; white-space: nowrap; }
+
+/* ---------- Details ---------- */
+.slide--info .stack { margin-top: 70px; }
+.slide--info .stack .part { font-family: var(--heavy); font-size: 58px; line-height: 1.04; font-weight: 900; text-transform: uppercase; letter-spacing: -.01em; }
+.slide--info .stack .link { margin: 26px 0; font-size: 28px; }
+.slide--info .stack .link::after { flex: 1; width: auto; }
+.info { position: absolute; left: 120px; right: 110px; top: 50%; transform: translateY(-50%); }
+.info .row { padding: 26px 0; border-bottom: 2px solid var(--rule); display: grid; grid-template-columns: 270px 1fr; column-gap: 30px; align-items: baseline; }
+.info .row:first-child { border-top: 2px solid var(--rule); }
+.info .row.break { margin-top: 56px; border-top: 2px solid var(--rule); }
+.info dt { font-size: 32px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--label); }
+.info dd { font-size: 52px; line-height: 1.15; font-weight: 700; }
+
+/* ---------- Item ---------- */
+.side .num {
+  position: absolute;
+  left: 56px; bottom: 36px;
+  font-family: var(--heavy);
+  font-weight: 900;
+  font-size: 360px;
+  line-height: .85;
+  letter-spacing: -.05em;
+  color: var(--on-brand);
+}
+.body {
+  position: absolute;
+  left: 120px; right: 110px; top: 150px; bottom: 140px;
+  display: flex; flex-direction: column; justify-content: center; gap: 54px;
+}
+.block .label { font-size: 54px; line-height: 1.2; font-weight: 700; color: var(--label); margin-bottom: 16px; text-wrap: balance; }
+.block .value { font-size: 108px; line-height: 1.06; font-weight: 800; letter-spacing: -.01em; text-wrap: balance; }
+.block .value.hymn { font-weight: 400; }
+.block .sub { margin-top: 20px; font-size: 56px; line-height: 1.2; color: var(--muted); }
+.block .text { font-size: 98px; line-height: 1.08; font-weight: 800; letter-spacing: -.01em; text-wrap: balance; }
+.block .note { margin-top: 30px; padding-left: 28px; border-left: 6px solid var(--gold); font-size: 54px; line-height: 1.25; color: var(--muted); text-wrap: balance; }
+
+.slide--multi .body { gap: 40px; }
+.slide--multi .block .label { font-size: 42px; margin-bottom: 8px; }
+.slide--multi .block .value { font-size: 80px; }
+.slide--multi .block .sub { font-size: 42px; margin-top: 8px; }
+.slide--multi .block .text { font-size: 66px; color: var(--ink); padding: 8px 0 8px 28px; border-left: 6px solid var(--gold); font-weight: 700; }
+
+/* ---------- Closing ---------- */
+.slide--end .t-main { top: 50%; transform: translateY(-50%); }
+.slide--end .t-main h1 { margin-top: 50px; font-size: 96px; }
+.slide--end .t-main h2 { font-size: 60px; }
+
+/* ---------- UI chrome ---------- */
+.progress { position: fixed; left: 0; right: 0; bottom: 0; height: 6px; background: rgba(0,0,0,.25); z-index: 5; }
+.progress i { display: block; height: 100%; width: 0; background: var(--gold); transition: width .3s ease; }
+
+.controls {
+  position: fixed; left: 50%; bottom: 22px; transform: translateX(-50%); z-index: 20;
+  display: flex; align-items: center; gap: 2px; padding: 6px;
+  background: var(--ui-bg); border: 1px solid var(--ui-line); border-radius: 4px;
+  box-shadow: 0 4px 16px rgba(0,0,0,.35);
+  transition: opacity .3s ease;
+}
+body.idle .controls { opacity: 0; pointer-events: none; }
+body.nobar .controls, body.nobar .progress { display: none; }
+.controls button {
+  font: 600 15px/1 var(--sans); color: var(--ui-ink);
+  background: transparent; border: 0; border-radius: 3px; padding: 10px 14px; cursor: pointer;
+}
+.controls button:hover, .controls button:focus-visible { background: #2a3354; outline: 2px solid var(--gold); outline-offset: -2px; }
+.counter { min-width: 76px; text-align: center; font: 600 15px var(--sans); color: #aebdc9; font-variant-numeric: tabular-nums; }
+.sep { width: 1px; height: 22px; background: var(--ui-line); margin: 0 4px; }
+
+.toast {
+  position: fixed; top: 24px; right: 24px; z-index: 30; padding: 12px 20px;
+  background: var(--ui-bg); color: var(--ui-ink); border-left: 6px solid var(--gold); border-radius: 2px;
+  font: 700 26px var(--sans); opacity: 0; transition: opacity .2s; pointer-events: none;
+}
+.toast.show { opacity: 1; }
+
+.black { position: fixed; inset: 0; background: #000; z-index: 40; }
+.black[hidden], .overlay[hidden] { display: none; }
+
+.overlay { position: fixed; inset: 0; z-index: 30; display: grid; place-items: center; background: rgba(10, 8, 7, .8); padding: 24px; }
+.panel { width: min(1100px, 100%); max-height: 100%; overflow: auto; padding: 26px 32px; background: var(--ui-bg); border-top: 6px solid var(--gold); color: var(--ui-ink); }
+.panel.narrow { width: min(640px, 100%); }
+.panel h2 { font: 800 24px var(--sans); letter-spacing: .06em; text-transform: uppercase; margin-bottom: 16px; }
+.panel .hint { margin-top: 16px; font-size: 14px; color: #aebdc9; }
+.panel ol { list-style: none; columns: 2; column-gap: 28px; }
+.panel li { break-inside: avoid; }
+.panel li button {
+  width: 100%; display: flex; gap: 12px; text-align: left; font: 500 16px/1.3 var(--sans); color: var(--ui-ink);
+  background: transparent; border: 0; border-radius: 3px; padding: 7px 10px; cursor: pointer;
+}
+.panel li button:hover, .panel li button:focus-visible { background: #2a3354; outline: none; }
+.panel li button.current { background: var(--teal); }
+.panel li .n { flex: 0 0 34px; text-align: right; font-weight: 700; color: var(--gold); font-variant-numeric: tabular-nums; }
+.panel li button.current .n { color: #fff; }
+.panel dl { display: grid; grid-template-columns: auto 1fr; gap: 10px 22px; font-size: 16px; }
+.panel dt { font-weight: 700; color: var(--gold); }
+
+@media (max-width: 760px) { .panel ol { columns: 1; } .controls button { padding: 9px 10px; } }
+
+/* ---------- Animation ----------
+   Entrance only. Elements rest in their final state, so turning animation
+   off (reduced motion, print) simply shows the finished slide. */
+@keyframes wipe-fwd  { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+@keyframes wipe-back { from { clip-path: inset(0 0 0 100%); } to { clip-path: inset(0 0 0 0); } }
+@keyframes fade      { from { opacity: 0; } to { opacity: 1; } }
+@keyframes slide-in  { from { opacity: 0; transform: translateX(calc(var(--dir) * 70px)); } to { opacity: 1; transform: none; } }
+@keyframes rise-in   { from { opacity: 0; transform: translateY(46px); } to { opacity: 1; transform: none; } }
+@keyframes slide-up  { from { transform: translateY(100%); } to { transform: none; } }
+@keyframes num-in    { from { transform: translateY(115%); } to { transform: none; } }
+@keyframes grow-x    { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes grow-y    { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+
+.slide.active { animation: wipe-fwd .7s cubic-bezier(.77, 0, .18, 1) both; }
+:root[data-dir="back"] .slide.active { animation-name: wipe-back; }
+
+/* Item slides */
+.slide--item .side .org { animation: slide-in .7s .35s cubic-bezier(.2, .8, .2, 1) both; }
+.slide--item .num       { animation: num-in .85s .45s cubic-bezier(.16, 1, .3, 1) both; }
+.slide--item .running   { animation: fade .6s .5s both; }
+.slide--item .running::after { transform-origin: left; animation: grow-x .9s .45s cubic-bezier(.7, 0, .2, 1) both; }
+.slide--item .block     { animation: slide-in .75s calc(.5s + var(--i, 0) * .15s) cubic-bezier(.2, .8, .2, 1) both; }
+.slide--item .foot      { animation: fade .6s 1.05s both; }
+
+/* Details slide */
+.slide--info .side .org { animation: slide-in .7s .35s cubic-bezier(.2, .8, .2, 1) both; }
+.slide--info .stack     { animation: rise-in .8s .5s cubic-bezier(.2, .8, .2, 1) both; }
+.slide--info .row       { animation: slide-in .75s calc(.45s + var(--i, 0) * .11s) cubic-bezier(.2, .8, .2, 1) both; }
+
+/* Title and closing slides */
+.t-main .cross::before  { transform-origin: top; animation: grow-y .6s .4s cubic-bezier(.7, 0, .2, 1) both; }
+.t-main .cross::after   { transform-origin: center; animation: grow-x .5s .85s cubic-bezier(.7, 0, .2, 1) both; }
+.t-main .church         { animation: slide-in .75s .6s cubic-bezier(.2, .8, .2, 1) both; }
+.t-main .place          { animation: slide-in .75s .72s cubic-bezier(.2, .8, .2, 1) both; }
+.t-main h1              { animation: rise-in .85s .9s cubic-bezier(.2, .8, .2, 1) both; }
+.t-main .link           { animation: slide-in .75s 1.05s cubic-bezier(.2, .8, .2, 1) both; }
+.t-main h2              { animation: rise-in .85s 1.2s cubic-bezier(.2, .8, .2, 1) both; }
+.t-band                 { animation: slide-up .75s .8s cubic-bezier(.16, 1, .3, 1) both; }
+.t-band div             { animation: rise-in .65s 1.4s cubic-bezier(.2, .8, .2, 1) both; }
+.t-band div:nth-child(2) { animation-delay: 1.52s; }
+.t-band div:nth-child(3) { animation-delay: 1.64s; }
+
+/* Reduced motion (OS setting, or the M key): plain fade, no movement */
+:root[data-motion="reduced"] *,
+:root[data-motion="reduced"] *::before,
+:root[data-motion="reduced"] *::after { animation: none !important; }
+:root[data-motion="reduced"] .slide.active { animation: fade .3s both !important; }
+
+/* ---------- Print / save as PDF: one slide per page ---------- */
+@page { size: 1920px 1080px; margin: 0; }
+@media print {
+  html, body { height: auto; overflow: visible; background: none; }
+  *, *::before, *::after { animation: none !important; }
+  .controls, .progress, .toast, .black, .overlay { display: none !important; }
+  .stage { position: static; transform: none; width: 1920px; height: auto; }
+  .slide, .slide.active {
+    position: relative; width: 1920px; height: 1080px;
+    opacity: 1; visibility: visible; clip-path: none;
+    page-break-after: always; break-after: page;
+    -webkit-print-color-adjust: exact; print-color-adjust: exact;
+  }
+}

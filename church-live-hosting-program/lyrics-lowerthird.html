@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lyrics Lower Third</title>
+  <meta name="description" content="Song lyrics one line at a time in a lower-third bar for live video. Transparent background; songs come from songs.json.">
+  <link rel="stylesheet" href="lyrics-lowerthird.css">
+  <script src="config.js"></script>
+  <script src="theme.js"></script>
+</head>
+<body>
+  <main id="stage" class="stage" aria-label="Lyrics lower third">
+    <div class="ll" id="ll" data-state="hidden">
+      <div class="mark" id="mark">
+        <small>No.</small><b id="num"></b>
+        <i class="cross" aria-hidden="true"></i>
+      </div>
+      <div class="plate">
+        <p class="tag" id="tag"><span class="song" id="song"></span><span class="meta" id="meta"></span></p>
+        <div class="lyric" id="lyric" aria-live="polite"></div>
+        <i class="prog" id="prog" aria-hidden="true"></i>
+      </div>
+    </div>
+  </main>
+
+  <div id="toast" class="toast" role="status"></div>
+
+  <section id="listPanel" class="overlay" hidden aria-label="Songs">
+    <div class="panel">
+      <h2>Songs</h2>
+      <ol id="items"></ol>
+      <p class="hint">Click a song to start it. Press <b>Esc</b> to close. <button type="button" class="link-btn" id="reload">Load a different songs.json…</button></p>
+    </div>
+  </section>
+
+  <section id="secPanel" class="overlay" hidden aria-label="Parts of the song">
+    <div class="panel narrow">
+      <h2>Jump to</h2>
+      <ol id="secItems"></ol>
+      <p class="hint">Click a part or press Enter. Esc closes.</p>
+    </div>
+  </section>
+
+  <section id="helpPanel" class="overlay" hidden aria-label="Keyboard shortcuts">
+    <div class="panel narrow">
+      <h2>Keyboard shortcuts</h2>
+      <dl>
+        <dt>→ ↓ Space PgDn Enter</dt><dd>Show the lyrics bar / next line</dd>
+        <dt>← ↑ Backspace PgUp</dt><dd>Previous line</dd>
+        <dt>Shift + → / ←</dt><dd>Next / previous verse</dd>
+        <dt>Home / End</dt><dd>First / last line</dd>
+        <dt>N / P</dt><dd>Next / previous song</dd>
+        <dt>1 – 9</dt><dd>Jump to that verse (repeat or skip back)</dd>
+        <dt>0 or C</dt><dd>Jump to the chorus</dd>
+        <dt>J</dt><dd>Pick any part of the song</dd>
+        <dt>S, 12, Enter</dt><dd>Start song number 12</dd>
+        <dt>B or .</dt><dd>Hide / show the bar (keeps your place)</dd>
+        <dt>Esc</dt><dd>Hide the bar</dd>
+        <dt>G</dt><dd>Song list</dd>
+        <dt>I</dt><dd>Song title row on / off</dd>
+        <dt>D</dt><dd>Hymn-book number, book and edition on / off</dd>
+        <dt>V</dt><dd>Background: transparent, checker, dark, green</dd>
+        <dt>T</dt><dd>Navy / light plate</dd>
+        <dt>M</dt><dd>Full / reduced animation</dd>
+        <dt>F</dt><dd>Fullscreen</dd>
+        <dt>O</dt><dd>Load a songs.json file</dd>
+        <dt>H</dt><dd>Open the full Help page (new tab)</dd>
+      </dl>
+      <p class="hint">Press Esc to close.</p>
+    </div>
+  </section>
+
+  <section id="loader" class="overlay" hidden aria-label="Load songs">
+    <div class="panel narrow" id="dropzone">
+      <h2>Load songs</h2>
+      <p class="msg" id="loaderMsg">The songs could not be loaded automatically.</p>
+      <p class="small">Browsers block reading <code>songs.json</code> when this page is opened straight from a folder. Choose the file here, or drop it on this box. It is remembered for next time.</p>
+      <label class="file"><input type="file" id="fileInput" accept=".json,application/json"><span>Choose songs.json</span></label>
+      <p class="small">Or open the page through a local web server so it loads by itself:</p>
+      <pre>python3 -m http.server 8000
+# then open http://localhost:8000/lyrics-lowerthird.html</pre>
+    </div>
+  </section>
+
+  <script src="lyrics-lowerthird.js"></script>
+</body>
+</html>

@@ -1,0 +1,150 @@
+/* Lyrics lower third — 1920x1080 artboard, transparent by default so it can sit over live video. */
+
+:root {
+  /* Colours are set from config.js (theme.js); these are the defaults. */
+  --navy: #1e2440;
+  --navy-deep: #171d37;
+  --teal: #2f8a8f;
+  --teal-light: #5fa3ab;
+  --gold: #e8b44c;
+
+  --mark: var(--gold);
+  --mark-ink: var(--navy);
+  --plate: var(--navy);
+  --ink: #f7f9fb;
+  --muted: #aebdc9;
+  --role: var(--gold);
+  --prog: var(--teal-light);
+  --sans: "Segoe UI", "Helvetica Neue", Helvetica, Arial, "Liberation Sans", sans-serif;
+  --ease: cubic-bezier(.7, 0, .2, 1);
+  --ease-out: cubic-bezier(.16, 1, .3, 1);
+  --ui-bg: var(--navy-deep);
+  --ui-ink: #f1f5f8;
+  --ui-line: #3a4668;
+}
+:root[data-plate="light"] {
+  --plate: #f3f7f9;
+  --ink: #1a2142;
+  --muted: #52607c;
+  --role: #8f5f00;
+  --prog: var(--teal);
+}
+
+/* Preview backgrounds (V key). "transparent" leaves the page empty for a video overlay. */
+:root[data-bg="transparent"], :root[data-bg="transparent"] body { background: transparent; }
+:root[data-bg="dark"],  :root[data-bg="dark"] body  { background: #2b3556; }
+:root[data-bg="green"], :root[data-bg="green"] body { background: #00b140; }
+:root[data-bg="checker"], :root[data-bg="checker"] body {
+  background: conic-gradient(#d9d9d9 25%, #fff 0 50%, #d9d9d9 0 75%, #fff 0) 0 0 / 40px 40px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; overflow: hidden; font-family: var(--sans); -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+body.idle { cursor: none; }
+body.clean .toast, body.clean .overlay { display: none; }
+
+.stage { position: absolute; left: 50%; top: 50%; width: 1920px; height: 1080px; transform: translate(-50%, -50%) scale(var(--s, 1)); }
+
+/* ---------- The bar ---------- */
+.ll {
+  position: absolute; left: 120px; right: 120px; bottom: 90px;
+  display: flex; align-items: stretch; visibility: hidden;
+  filter: drop-shadow(0 10px 22px rgba(0, 0, 0, .3));
+}
+.ll[data-state="in"], .ll[data-state="shown"], .ll[data-state="out"] { visibility: visible; }
+
+.mark { flex: 0 0 150px; display: grid; place-content: center; text-align: center; background: var(--mark); color: var(--mark-ink); transform-origin: bottom; }
+.mark small { display: block; font-size: 22px; letter-spacing: .32em; padding-left: .32em; text-transform: uppercase; opacity: .8; }
+.mark b { display: block; font-size: 84px; line-height: 1; font-weight: 800; letter-spacing: -.03em; }
+.mark .cross { display: none; position: relative; width: 46px; height: 66px; }
+.mark .cross::before, .mark .cross::after { content: ""; position: absolute; background: var(--mark-ink); }
+.mark .cross::before { left: 19px; top: 0; width: 8px; height: 66px; }
+.mark .cross::after  { left: 0; top: 17px; width: 46px; height: 8px; }
+.mark.nonum { flex-basis: 118px; }
+.mark.nonum small, .mark.nonum b { display: none; }
+.mark.nonum .cross { display: block; }
+
+.plate { position: relative; flex: 1; min-width: 0; padding: 18px 56px 28px 44px; background: var(--plate); color: var(--ink); }
+
+.tag { display: flex; align-items: baseline; gap: 20px; overflow: hidden; white-space: nowrap; font-size: 25px; line-height: 1.4; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--role); }
+.tag .song { flex: 0 1 auto; overflow: hidden; text-overflow: ellipsis; }
+.tag .meta { flex: 1 1 0; min-width: 0; overflow: hidden; text-overflow: ellipsis; font-size: .88em; font-weight: 500; letter-spacing: .12em; color: var(--muted); }
+.tag .meta:empty { display: none; }
+.ll.noinfo .tag { display: none; }
+
+.lyric { position: relative; height: 144px; margin-top: 6px; overflow: hidden; }
+.ll.noinfo .lyric { margin-top: 0; }
+.lyric .ln {
+  position: absolute; inset: 0; display: flex; align-items: center;
+  font-size: 60px; line-height: 1.16; font-weight: 700; letter-spacing: -.005em;
+  opacity: 1; transform: none;
+  transition: opacity .35s ease-out, transform .5s var(--ease-out);   /* the new line rising in */
+}
+.lyric .ln span { display: block; width: 100%; text-wrap: balance; }
+
+.prog { position: absolute; left: 0; right: 0; bottom: 0; height: 6px; background: var(--prog); transform-origin: left; transform: scaleX(var(--p, 0)); transition: transform .6s var(--ease-out); }
+
+/* ---------- Animation: rests in the final state ---------- */
+@keyframes ll-mark-in  { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+@keyframes ll-mark-out { from { transform: scaleY(1); } to { transform: scaleY(0); } }
+@keyframes ll-plate-in  { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+@keyframes ll-plate-out { from { clip-path: inset(0 0 0 0); } to { clip-path: inset(0 100% 0 0); } }
+@keyframes ll-rise { from { opacity: 0; transform: translateY(36px); } to { opacity: 1; transform: none; } }
+@keyframes ll-lift { from { opacity: 1; transform: none; } to { opacity: 0; transform: translateY(-36px); } }
+@keyframes ll-fade-out { from { opacity: 1; } to { opacity: 0; } }
+
+.ll[data-state="in"] .mark  { animation: ll-mark-in .5s var(--ease-out) both; }
+.ll[data-state="in"] .plate { animation: ll-plate-in .8s .2s var(--ease) both; }
+.ll[data-state="in"] .tag   { animation: ll-rise .6s .6s var(--ease-out) both; }
+.ll[data-state="in"] .lyric .ln.first { animation: ll-rise .7s .75s var(--ease-out) both; }
+
+.ll[data-state="out"] .tag, .ll[data-state="out"] .lyric .ln, .ll[data-state="out"] .mark small, .ll[data-state="out"] .mark b { animation: ll-fade-out .3s ease-in both; }
+.ll[data-state="out"] .plate { animation: ll-plate-out .55s .12s var(--ease) both; }
+.ll[data-state="out"] .mark  { animation: ll-mark-out .4s .45s var(--ease) both; }
+
+/* One lyric line replaces another, one after the other (never both on screen at once):
+   the old line lifts away and fades out first (.leave), then the new line rises in (.pre -> normal). */
+.lyric .ln.pre   { opacity: 0; transform: translateY(28px); }
+.lyric .ln.leave { opacity: 0; transform: translateY(-22px); transition: opacity .2s ease-in, transform .24s ease-in; pointer-events: none; }
+.swap { animation: ll-rise .55s var(--ease-out) both; }
+
+/* Reduced motion (OS setting or M key): plain fades */
+:root[data-motion="reduced"] .ll, :root[data-motion="reduced"] .ll * { animation: none !important; }
+:root[data-motion="reduced"] .ll { opacity: 0; visibility: visible; transition: opacity .35s ease; }
+:root[data-motion="reduced"] .ll[data-state="in"], :root[data-motion="reduced"] .ll[data-state="shown"] { opacity: 1; }
+:root[data-motion="reduced"] .ll[data-state="hidden"] { visibility: hidden; transition: opacity .35s ease, visibility 0s .35s; }
+:root[data-motion="reduced"] .lyric .ln, :root[data-motion="reduced"] .lyric .ln.pre, :root[data-motion="reduced"] .lyric .ln.leave { transform: none !important; transition: opacity .2s ease; }
+:root[data-motion="reduced"] .prog { transition: none; }
+
+/* ---------- Operator UI (never shown in ?clean mode) ---------- */
+.toast { position: fixed; top: 24px; right: 24px; z-index: 50; max-width: 70vw; padding: 12px 20px; background: var(--ui-bg); color: var(--ui-ink); border-left: 6px solid var(--gold); border-radius: 2px; font: 700 22px/1.3 var(--sans); opacity: 0; transition: opacity .2s; pointer-events: none; }
+.toast.show { opacity: 1; }
+.overlay { position: fixed; inset: 0; z-index: 30; display: grid; place-items: center; background: rgba(10, 14, 32, .84); padding: 24px; }
+.overlay[hidden] { display: none; }
+.panel { width: min(900px, 100%); max-height: 100%; overflow: auto; padding: 26px 32px; background: var(--ui-bg); border-top: 6px solid var(--gold); color: var(--ui-ink); }
+.panel.narrow { width: min(600px, 100%); }
+.panel h2 { font: 800 24px var(--sans); letter-spacing: .06em; text-transform: uppercase; margin-bottom: 16px; }
+.panel .hint, .panel .small { margin-top: 14px; font-size: 14px; line-height: 1.5; color: #aebdc9; }
+.panel .msg { font-size: 18px; font-weight: 600; }
+.panel .msg.err { color: var(--gold); }
+.panel code, .panel pre { font: 13px/1.5 Consolas, "Courier New", monospace; background: #262f50; padding: 2px 6px; border-radius: 2px; }
+.panel pre { display: block; padding: 10px 12px; margin-top: 8px; white-space: pre-wrap; }
+.panel ol { list-style: none; }
+.panel li button { width: 100%; display: flex; align-items: baseline; gap: 16px; text-align: left; font: 500 17px/1.3 var(--sans); color: var(--ui-ink); background: transparent; border: 0; border-radius: 3px; padding: 10px 12px; cursor: pointer; }
+.panel li button:hover, .panel li button:focus-visible { background: #2a3354; outline: none; }
+.panel li button.current { background: var(--teal); }
+.panel li .n { flex: 0 0 56px; text-align: right; font-weight: 800; color: var(--gold); }
+.panel li button.current .n { color: #fff; }
+.panel li .t { flex: 1; font-weight: 700; }
+.panel li .b { font-size: 13px; color: #aebdc9; }
+.panel dl { display: grid; grid-template-columns: auto 1fr; gap: 9px 22px; font-size: 15px; }
+.panel dt { font-weight: 700; color: var(--gold); }
+.link-btn { font: inherit; color: var(--gold); background: none; border: 0; text-decoration: underline; cursor: pointer; }
+.file { display: inline-block; margin: 16px 0 4px; cursor: pointer; }
+.file input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.file span { display: inline-block; padding: 12px 20px; background: var(--gold); color: var(--navy); font: 700 16px var(--sans); border-radius: 3px; }
+.file input:focus-visible + span { outline: 2px solid #fff; outline-offset: 2px; }
+#dropzone.drag { outline: 3px dashed var(--gold); outline-offset: -8px; }
+
+#secItems .b { flex: 2; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+#secItems .n { flex: 0 0 30px; }
