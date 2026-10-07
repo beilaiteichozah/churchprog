@@ -3,44 +3,49 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Byhnâ Paawsana Program · Mara Evangelical Church</title>
-  <meta name="description" content="Rev. Haidau Chori Palyupalihna Nata — Byhnâ Paawsana Program, 4th October 2026. Start here: program slideshow, main banner, song lyrics and lower thirds.">
+  <title>Church Live Hosting Program</title>
+  <meta name="description" content="Start here: the program slideshow, main banner, lyrics, lower thirds and the Editor Dashboard, all driven from config.json and songs.json.">
   <link rel="stylesheet" href="home.css">
+  <script src="data.js"></script>
 </head>
 <body>
 
 <header class="hero" id="top">
   <div class="wrap hero-grid">
     <div class="hero-text">
-      <p class="church"><i class="mark" aria-hidden="true"></i>Mara Evangelical Church</p>
-      <p class="place">Lialaipi Pastor Bia, Lialaipi</p>
+      <p class="church"><i class="mark" aria-hidden="true"></i><span id="church"></span></p>
+      <p class="place" id="place" hidden></p>
 
-      <h1>Rev. Haidau Chori <span>Palyupalihna</span></h1>
-      <p class="and">Nata</p>
-      <p class="program">Byhnâ Paawsana Program</p>
+      <h1 id="headline"></h1>
+      <p class="and" id="connector" hidden><span id="connectorText"></span></p>
+      <p class="program" id="program" hidden></p>
 
-      <dl class="facts">
-        <div><dt>Date</dt><dd>4th October, 2026 (Sunday)</dd></div>
-        <div><dt>A su</dt><dd>Lialaipi Vaihpi Achhyna O</dd></div>
-        <div><dt>Daihti</dt><dd>12:00 noon – 2:00 pm</dd></div>
-      </dl>
+      <dl class="facts" id="facts"></dl>
     </div>
 
-    <div class="cross" aria-hidden="true">
+    <div class="cross" id="cross" aria-hidden="true">
       <svg viewBox="0 0 400 400" focusable="false">
         <rect class="arm-v" x="125" y="0" width="150" height="400"/>
         <rect class="arm-h" x="25" y="125" width="350" height="150"/>
       </svg>
-      <div class="plate">
-        <span class="plate-day">4th</span>
-        <span class="plate-month">October</span>
-        <span class="plate-year">2026</span>
+      <div class="plate" id="plate">
+        <span class="plate-day" id="plateDay"></span>
+        <span class="plate-month" id="plateMonth"></span>
+        <span class="plate-year" id="plateYear"></span>
       </div>
     </div>
   </div>
 </header>
 
 <main class="wrap">
+
+  <section class="help-strip edit-strip" aria-labelledby="g-edit">
+    <div>
+      <h2 id="g-edit">Editor Dashboard</h2>
+      <p>Change the church, the date, the colours, the program, the lower-third names and the songs in simple forms, then save. Every page below follows your changes.</p>
+    </div>
+    <a class="btn" href="editor.html" data-key="e">Open the Editor <kbd>E</kbd></a>
+  </section>
 
   <section class="group" aria-labelledby="g-screen">
     <h2 id="g-screen">On the projector</h2>
@@ -49,7 +54,7 @@
       <a class="card" href="program.html" data-key="1">
         <span class="card-k"><kbd>1</kbd></span>
         <strong>Program slideshow</strong>
-        <span class="card-d">The order of the program, one item per slide: title, details, items 1–21 and a closing slide.</span>
+        <span class="card-d">The order of service, one program item per slide, with a title slide, a details slide and a closing slide.</span>
         <em>program.html →</em>
       </a>
       <a class="card" href="banner.html" data-key="2">
@@ -97,8 +102,7 @@
 </main>
 
 <footer class="wrap foot">
-  <p>Tip: press <kbd>1</kbd>–<kbd>5</kbd> to open a page, <kbd>H</kbd> for Help. <kbd>Ctrl</kbd> + click opens a page in a new tab.</p>
-  <p>© 2026 <a href="https://laitei.dev">Laitei</a> · Song texts and program details belong to their owners.</p>
+  <p>Tip: press <kbd>E</kbd> for the Editor, <kbd>1</kbd>–<kbd>5</kbd> to open a page, <kbd>H</kbd> for Help. <kbd>Ctrl</kbd> + click opens a page in a new tab.</p>
 </footer>
 
 <script src="home.js"></script>

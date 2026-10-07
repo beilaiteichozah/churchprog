@@ -1,7 +1,7 @@
 /* Lyrics lower third — 1920x1080 artboard, transparent by default so it can sit over live video. */
 
 :root {
-  /* Palette taken from the Rev. Haidau 80th book cover. */
+  /* Colours are set from config.js (theme.js); these are the defaults. */
   --navy: #1e2440;
   --navy-deep: #171d37;
   --teal: #2f8a8f;

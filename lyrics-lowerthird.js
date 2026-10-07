@@ -3,14 +3,13 @@
    Press ? for the keys, H for the full Help page.
    URL options:  ?bg=transparent|checker|dark|green  ?plate=dark|light  ?clean=1 (no on-screen feedback)
                  ?no=12 (start at song number 12)  ?line=3  ?show=1  ?singer=Name  ?info=0  ?book=1 (show hymn-book number/edition)  ?src=other.json */
-(function () {
+ChurchData.ready(function () {
   'use strict';
 
   var $ = function (id) { return document.getElementById(id); };
   var root = document.documentElement;
   var params = new URLSearchParams(location.search);
   var SRC = params.get('src') || 'songs.json';
-  var CACHE_KEY = 'lyrics-songs-json';       // shared with lyrics.html
   var ll = $('ll'), stage = $('stage'), lyric = $('lyric');
 
   function pref(k, v) { try { if (v === undefined) return localStorage.getItem('ll-' + k); localStorage.setItem('ll-' + k, v); } catch (e) { /* ignore */ } return null; }
@@ -280,7 +279,7 @@
     var data;
     try { data = normalize(JSON.parse(text)); } catch (e) { return String(e.message || e); }
     songs = data;
-    if (remember) { try { localStorage.setItem(CACHE_KEY, text); } catch (e) { /* ignore */ } }
+    if (remember) ChurchData.putText('songs', text);
     $('loader').hidden = true;
     buildList();
     var m = /^#(\d+)(?:\.(\d+))?$/.exec(location.hash);
@@ -296,8 +295,7 @@
     return null;
   }
   function needFile(msg) {
-    var cached = null;
-    try { cached = localStorage.getItem(CACHE_KEY); } catch (e) { /* ignore */ }
+    var cached = ChurchData.storedText('songs');
     if (cached && !msg.force && start(cached, false) === null) { toast('Loaded saved songs'); return; }
     $('loaderMsg').textContent = msg.text; $('loaderMsg').className = 'msg'; $('loader').hidden = false;
   }
@@ -423,8 +421,7 @@
   keepAwake();
 
   /* ---------- Go ---------- */
-  fetch(SRC, { cache: 'no-store' })
-    .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.text(); })
-    .then(function (t) { var err = start(t, true); if (err) needFile({ text: 'songs.json was found but could not be read: ' + err, force: true }); })
+  ChurchData.resolveText('songs', SRC)
+    .then(function (r) { var err = start(r.text, false); if (err) needFile({ text: 'songs.json was found but could not be read: ' + err, force: true }); })
     .catch(function () { needFile({ text: 'The songs could not be loaded automatically.' }); });
-})();
+});

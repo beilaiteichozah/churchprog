@@ -1,60 +1,21 @@
-/* Byhnâ Paawsana Program — projector slideshow
-   Edit the PROGRAM data below to change the wording. */
-(function () {
+/* Church Live Hosting Program — projector slideshow
+   All the words come from config.json. Edit that file (or use editor.html), not this one. */
+ChurchData.ready(function () {
   'use strict';
 
   /* ------------------------------------------------------------------
-     Content
-     block types:
-       { label, value, sub, hymn }  role label + person (or hymn title)
-       { text, note }               plain line, optional italic note
+     Content (from config.json)
   ------------------------------------------------------------------ */
-  var CHURCH = 'Mara Evangelical Church';
-  var PLACE = 'Lialaipi Pastor Bia, Lialaipi';
-  // The title has three parts: honoring Rev. Haidau  +  "Nata" (and)  +  the blessing service program
-  var HONOR = 'Rev. Haidau Chori Palyupalihna';
-  var AND = 'Nata';
-  var HW = HONOR.split(' ');
-  var HONOR_A = HW.slice(0, -1).join(' ');   // "Rev. Haidau Chori"
-  var HONOR_B = HW[HW.length - 1];           // "Palyupalihna"
-  var TITLE = 'Byhnâ Paawsana Program';
-  var DATE = '4th October, 2026 (Sunday)';
-
-  var DETAILS = [
-    ['Date', DATE],
-    ['A su', 'Lialaipi Vaihpi Achhyna O'],
-    ['Daihti', '12:00 noon – 2:00 pm'],
-    null,
-    ['Directors', 'Machâ Hnau Aw & Machâ Abizah'],
-    ['Chairman', 'Machâ Râhki, Bia Chairman']
-  ];
-
-  var PROGRAM = [
-    [{ text: 'Chairman tawhta Program phuahna' }],
-    [{ text: 'Rev. Haidau & Pinô Sive atyuna su raopa lâta pangaina',
-       note: 'Zawpi a duahpa ta "Khazohpa cha a pha, a pha" tahpa zawpi hla sa awpa' }],
-    [{ label: 'Zawpi Hla sana', value: 'Hy, Beipa Chônôchai eima cha reihthai', hymn: true }],
-    [{ label: 'Daihti pathaona thlahchhâna', value: 'Rev. Dr. Vazilai', sub: 'Director, COME' }],
-    [{ label: 'Rev. Haidau Châbu Tlâhzawna', value: 'Rev. Dr. L. B. Siama', sub: 'Moderator' },
-     { text: 'A Thâtih Pachhopa reina' },
-     { label: 'Local Lâta Châbu Piena', value: 'Pinô Sive', sub: '(Mrs. Haidau)' }],
-    [{ label: 'Hla Paryhna (Choir)', value: 'Lialaipi Kô Machâzy Akaona (LKMA)' }],
-    [{ label: 'Byhnâ Awna Opi sana Report', value: 'Machâ Seihnai', sub: 'Chairman, Building Board' }],
-    [{ label: 'Hla solo', value: 'Ls. Centenary', sub: 'Aphapaaw Local KTP' }],
-    [{ label: 'O Hlana', value: 'Rev. A. Rakhai', sub: 'Biatuhpa Pastor' }],
-    [{ label: 'Hla Paryhpa (Choir)', value: 'Lialaipi Vaihpi KTP' }],
-    [{ label: 'Lialaipi sawzy châta Byhnâ Awna', value: 'Rev. Haidau Chori' }],
-    [{ label: 'KNP Jubilee Hlapy', value: 'Lialaipi Bia KNP Jubilee Hlapy' }],
-    [{ label: 'Palyupalihna Message', value: 'Rev. Sa E Hmô', sub: '(Associate Gen. Secy)' }],
-    [{ label: 'Hla Solo', value: 'Ls. Ngôthekhai', sub: 'Lialaipi Vaihpi KTP' }],
-    [{ label: 'Bietana reina', value: 'Chairman, Global Lialaipi Akaona' }],
-    [{ label: 'Hla Paryhna (Choir)', value: 'Aphapaaw KTP' }],
-    [{ label: 'Alykheina Short Speech', value: 'Rev. C. Sitlô', sub: 'Pastor, Aphapaaw Local' }],
-    [{ label: 'Hla Solo', value: 'Ls. Khaidaw', sub: 'Lialaipi Vaihpi KTP' }],
-    [{ label: 'Zawpi Reithaina Hlasana', value: 'Khih dei ta Awhsi a diapa hawh', hymn: true }],
-    [{ label: 'Byhnâ awna', value: 'Rev. Satu Ve U', sub: 'Senior Pastor' }],
-    [{ label: 'Thopi nata Viahchhâ Hlâna', value: 'Machâ Sauma', sub: 'Hyutuhpa, Aphapaaw Local' }]
-  ];
+  var U = window.CHURCH_UTIL;
+  var CHURCH = U.church.name || '';
+  var PLACE = U.church.place || '';
+  var HL = U.headline();                       // one or two headline lines
+  var HONOR = HL.join(' ');
+  var AND = U.event.connector || '';           // small word between headline and title ('' = none)
+  var TITLE = U.event.title || '';
+  var DATE = U.dateText();
+  var DETAILS = U.details();
+  var PROGRAM = (U.cfg.program || []).filter(function (b) { return b && b.length; });
 
   /* ------------------------------------------------------------------
      DOM helpers
@@ -68,6 +29,13 @@
   function add(parent) {
     for (var i = 1; i < arguments.length; i++) if (arguments[i]) parent.appendChild(arguments[i]);
     return parent;
+  }
+
+  // the big headline: one <span class="ln"> per line
+  function headline() {
+    var h = el('h1');
+    HL.slice(0, 2).forEach(function (t) { h.appendChild(el('span', 'ln', t)); });
+    return h;
   }
 
   /* ------------------------------------------------------------------
@@ -102,11 +70,11 @@
       el('div', 'cross'),
       el('p', 'church', CHURCH),
       el('p', 'place', PLACE),
-      add(el('h1'), el('span', 'ln', HONOR_A), el('span', 'ln', HONOR_B)),
-      add(el('div', 'link'), el('span', null, AND)),
-      el('h2', null, TITLE));
+      headline(),
+      AND ? add(el('div', 'link'), el('span', null, AND)) : null,
+      TITLE ? el('h2', null, TITLE) : null);
     var band = el('dl', 't-band');
-    [DETAILS[0], DETAILS[1], DETAILS[2]].forEach(function (row) {
+    DETAILS.filter(Boolean).slice(0, 3).forEach(function (row) {
       add(band, add(el('div'), el('dt', null, row[0]), el('dd', null, row[1])));
     });
     add(s, main, band);
@@ -126,8 +94,8 @@
     });
     var stack = add(el('div', 'stack'),
       el('p', 'part', HONOR),
-      add(el('div', 'link'), el('span', null, AND)),
-      el('p', 'part', TITLE));
+      AND ? add(el('div', 'link'), el('span', null, AND)) : null,
+      TITLE ? el('p', 'part', TITLE) : null);
     add(s, side(stack), add(el('div', 'main'), info));
   })();
 
@@ -154,9 +122,9 @@
     count.appendChild(document.createTextNode(' / ' + total));
     add(foot, el('span', null, DATE), count);
     var run = el('span', 'run');
-    run.appendChild(document.createTextNode(HONOR + ' '));
-    run.appendChild(el('em', null, AND));
-    run.appendChild(document.createTextNode(' ' + TITLE));
+    run.appendChild(document.createTextNode(HONOR));
+    if (AND) { run.appendChild(document.createTextNode(' ')); run.appendChild(el('em', null, AND)); }
+    if (TITLE) run.appendChild(document.createTextNode((AND ? ' ' : '  ·  ') + TITLE));
     var panel = side(el('div', 'num', String(n)));
     add(s, panel, add(el('div', 'main'),
       add(el('div', 'running'), run),
@@ -171,9 +139,9 @@
       el('div', 'cross'),
       el('p', 'church', CHURCH),
       el('p', 'place', PLACE),
-      add(el('h1'), el('span', 'ln', HONOR_A), el('span', 'ln', HONOR_B)),
-      add(el('div', 'link'), el('span', null, AND)),
-      el('h2', null, TITLE)));
+      headline(),
+      AND ? add(el('div', 'link'), el('span', null, AND)) : null,
+      TITLE ? el('h2', null, TITLE) : null));
   })();
 
   var last = slides.length - 1;
@@ -449,4 +417,4 @@
 
   window.addEventListener('hashchange', function () { go(fromHash()); });
   go(fromHash());
-})();
+});

@@ -3,9 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Main Banner · Byhnâ Paawsana Program · Mara Evangelical Church</title>
-  <meta name="description" content="Main banner for the Byhnâ Paawsana Program of Rev. Haidau Chori Palyupalihna Nata, 4th October 2026.">
+  <title>Main Banner</title>
+  <meta name="description" content="Main banner for the church service or event.">
   <link rel="stylesheet" href="banner.css">
+  <script src="data.js"></script>
 </head>
 <body>
   <main id="stage" class="stage" aria-label="Main banner">
@@ -17,35 +18,26 @@
       <rect class="arm arm-v" x="1410" y="-100" width="300" height="1280"/>
     </svg>
 
-    <!-- Date plate in the centre of the cross -->
-    <div class="plate" aria-label="4th October 2026">
-      <span class="plate-day">4th</span>
-      <span class="plate-month">October</span>
-      <span class="plate-year">2026</span>
+    <!-- Date plate in the centre of the cross (filled from config.json) -->
+    <div class="plate" id="plate">
+      <span class="plate-day" id="plateDay"></span>
+      <span class="plate-month" id="plateMonth"></span>
+      <span class="plate-year" id="plateYear"></span>
     </div>
 
     <div class="content">
       <header class="head">
-        <p class="church"><i class="mark" aria-hidden="true"></i>Mara Evangelical Church</p>
-        <p class="place">Lialaipi Pastor Bia, Lialaipi</p>
+        <p class="church"><i class="mark" aria-hidden="true"></i><span id="church"></span></p>
+        <p class="place" id="place"></p>
       </header>
 
       <section class="title">
-        <h1>
-          <span class="mask"><span class="line">Rev. Haidau Chori</span></span>
-          <span class="mask"><span class="line">Palyupalihna</span></span>
-        </h1>
-        <p class="and"><span class="mask"><span class="line">Nata</span></span></p>
-        <p class="program"><span class="mask"><span class="line">Byhnâ Paawsana Program</span></span></p>
+        <h1 id="headline"></h1>
+        <p class="and" id="connector"><span class="mask"><span class="line" id="connectorText"></span></span></p>
+        <p class="program" id="program"><span class="mask"><span class="line" id="programText"></span></span></p>
       </section>
 
-      <dl class="facts">
-        <div class="fact"><dt>Date</dt><dd>4th October, 2026 (Sunday)</dd></div>
-        <div class="fact"><dt>A su</dt><dd>Lialaipi Vaihpi Achhyna O</dd></div>
-        <div class="fact"><dt>Daihti</dt><dd>12:00 noon – 2:00 pm</dd></div>
-        <div class="fact"><dt>Directors</dt><dd>Machâ Hnau Aw &amp; Machâ Abizah</dd></div>
-        <div class="fact"><dt>Chairman</dt><dd>Machâ Râhki, Bia Chairman</dd></div>
-      </dl>
+      <dl class="facts" id="facts"></dl>
     </div>
   </main>
 

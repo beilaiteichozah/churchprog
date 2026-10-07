@@ -1,15 +1,15 @@
 /* Lower third — keyboard-operated name graphic.
-   Names come from lowerthird-data.js.  Press ? for the keys, H for the full Help page.
+   Names come from config.json (lowerThirds).  Press ? for the keys, H for the full Help page.
    URL options:  ?bg=transparent|checker|dark|green   ?hide=SECONDS (0 = stay)   ?plate=dark|light
                  ?pos=left|center|right   ?item=N&show=1 (select / show item N)   ?clean=1 (no on-screen feedback) */
-(function () {
+ChurchData.ready(function () {
   'use strict';
 
   var $ = function (id) { return document.getElementById(id); };
   var root = document.documentElement;
   var params = new URLSearchParams(location.search);
   var lt = $('lt'), stage = $('stage');
-  var data = window.LOWER_THIRDS || { entries: [] };
+  var data = (window.CHURCH_UTIL.cfg.lowerThirds) || { entries: [] };
   var entries = (data.entries || []).filter(function (e) { return e && e.name; });
   var settings = data.settings || {};
 
@@ -257,7 +257,7 @@
   if (hashN) cur = Math.min(entries.length, Math.max(1, +hashN[1])) - 1;
   if (itemP) { entries.forEach(function (e, i) { if (e.item === itemP && cur === 0 && !hashN) cur = i; }); }
   refreshList();
-  if (!entries.length) toast('No names found in lowerthird-data.js');
+  if (!entries.length) toast('No names found in config.json (lowerThirds)');
   else if (params.has('show')) later(function () { present(currentEntry()); }, 150);
   else toast('Space show / hide · → next · E custom · ? keys');
-})();
+});

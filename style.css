@@ -1,9 +1,8 @@
-/* Byhnâ Paawsana Program — projector slideshow
+/* Church Live Hosting Program — projector slideshow
    Flat, print-style design on a fixed 1920x1080 stage scaled to the screen. */
 
 :root {
-  /* Palette taken from the Rev. Haidau 80th book cover:
-     slate blue, deep navy, teal and golden yellow. */
+  /* Colours are set from config.js (theme.js); these are the defaults. */
   --navy: #1e2440;
   --navy-deep: #171d37;
   --slate: #3f4a68;

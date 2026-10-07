@@ -1,10 +1,9 @@
 /* Lyrics page — one line at a time, songs loaded from songs.json.
    See the help overlay (?) for keyboard shortcuts. */
-(function () {
+ChurchData.ready(function () {
   'use strict';
 
   var SRC = new URLSearchParams(location.search).get('src') || 'songs.json';
-  var CACHE_KEY = 'lyrics-songs-json';
 
   var $ = function (id) { return document.getElementById(id); };
   var stage = $('stage'), track = $('track'), win = $('window');
@@ -71,16 +70,14 @@
   }
 
   function load() {
-    return fetch(SRC, { cache: 'no-store' })
-      .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.text(); })
-      .then(function (t) { return { text: t, cache: false }; });
+    return ChurchData.resolveText('songs', SRC);
   }
 
   function start(text, remember) {
     var data;
     try { data = normalize(JSON.parse(text)); } catch (e) { return String(e.message || e); }
     songs = data;
-    if (remember) { try { localStorage.setItem(CACHE_KEY, text); } catch (e) { /* ignore */ } }
+    if (remember) ChurchData.putText('songs', text);
     $('loader').hidden = true;
     buildSongList();
     var m = /^#(\d+)(?:\.(\d+))?$/.exec(location.hash);
@@ -91,8 +88,7 @@
   }
 
   function needFile(reason) {
-    var cached = null;
-    try { cached = localStorage.getItem(CACHE_KEY); } catch (e) { /* ignore */ }
+    var cached = ChurchData.storedText('songs');
     if (cached && !reason.force && start(cached, false) === null) { toast('Loaded saved songs'); return; }
     $('loaderMsg').textContent = reason.msg;
     $('loader').hidden = false;
@@ -424,7 +420,7 @@
 
   /* ---------- Go ---------- */
   load().then(function (r) {
-    var err = start(r.text, true);
+    var err = start(r.text, false);
     if (err) needFile({ msg: 'songs.json was found but could not be read: ' + err, force: true });
   }).catch(function () {
     needFile({ msg: 'The songs could not be loaded automatically.' });
@@ -432,4 +428,4 @@
 
   // Make fonts/layout settle, then re-centre the current line
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { place(); });
-})();
+});

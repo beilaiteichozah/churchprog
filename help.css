@@ -1,7 +1,7 @@
 /* Help page — a normal scrolling document (not a projector artboard). */
 
 :root {
-  /* Palette taken from the Rev. Haidau 80th book cover:
+  /* Colours are set from config.js (theme.js); these are the defaults:
      navy, slate blue, teal and golden yellow. */
   --navy: #1e2440;
   --navy-deep: #171d37;

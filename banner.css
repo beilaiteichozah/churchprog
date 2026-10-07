@@ -1,7 +1,7 @@
 /* Main banner — fixed 1920x1080 artboard scaled to the screen. */
 
 :root {
-  /* Palette taken from the Rev. Haidau 80th book cover. */
+  /* Colours are set from config.js (theme.js); these are the defaults. */
   --navy: #1e2440;
   --navy-deep: #171d37;
   --slate: #3f4a68;
@@ -114,6 +114,10 @@ h1 .mask:nth-child(2) .line { animation-delay: .72s; }
 .fact:nth-child(3) { animation-delay: 1.45s; }
 .fact:nth-child(4) { animation-delay: 1.55s; }
 .fact:nth-child(5) { animation-delay: 1.65s; }
+.fact:nth-child(6) { animation-delay: 1.75s; }
+.fact:nth-child(7) { animation-delay: 1.85s; }
+.fact:nth-child(8) { animation-delay: 1.95s; }
+[hidden] { display: none !important; }
 
 @media (prefers-reduced-motion: reduce) {
   .stage *, .stage *::before, .stage *::after { animation: none !important; }

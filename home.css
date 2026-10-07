@@ -134,3 +134,7 @@ h2 { font-size: 26px; line-height: 1.2; font-weight: 800; letter-spacing: -.01em
   a, .card em, .facts dt { color: #000; }
   .btn { display: none; }
 }
+
+/* ---------- Config-driven bits ---------- */
+[hidden] { display: none !important; }
+.edit-strip { background: rgba(232, 180, 76, .12); border-left-color: var(--gold); }
