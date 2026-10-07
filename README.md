@@ -32,7 +32,8 @@ Plain HTML, CSS and JavaScript. No build step, no dependencies, no internet conn
 
 | Page | File | What it is for |
 | --- | --- | --- |
-| Program slideshow | `index.html` | The order of the program, one item per slide: title slide, details slide, items 1–21, closing slide (24 slides). |
+| Home | `index.html` | The page that opens first: the title and date, and a card for every screen below. Press **1**–**5** to open a page, **H** for Help. Not for the projector. |
+| Program slideshow | `program.html` | The order of the program, one item per slide: title slide, details slide, items 1–21, closing slide (24 slides). |
 | Main banner | `banner.html` | A dark poster-style screen with a gold and teal cross, the title, the date plate and the details. For the wall before the service starts and after it ends. |
 | Song lyrics | `lyrics.html` | One lyric line at a time with a smooth glide. The song title stays at the top; song number and edition (if any) are at the bottom right. Songs come from `songs.json`. |
 | Name lower third | `lowerthird.html` | A name graphic for the bottom of a live picture: a small label (Speaker, Singer, Choir…), the name, and an optional detail line. Transparent background for video overlay. |
@@ -46,7 +47,7 @@ All screens are designed for a **16:9 projector (1920 × 1080)**. On other shape
 ## Quick start
 
 1. Download or clone this repository and keep **all files together in one folder** (it also runs from a USB stick).
-2. Open `index.html` (or any page above) in a modern browser by double-clicking it.
+2. Open `index.html` (the home page) and choose a screen, or open any page above directly, in a modern browser by double-clicking it.
 3. Move the browser window to the projector screen and press **F** for fullscreen.
 4. Move forward with **→** or **Space**, back with **←**.
 
@@ -80,7 +81,7 @@ Click once on the page first so the browser window has focus. Moving to another 
 | **M** | Full / reduced animation (reduced uses simple fades only). |
 | **C** | Show/hide the small on-screen controls bar on the slideshow (hidden by default). On the lyrics page this is **Shift + C**. |
 
-### Program slideshow (`index.html`)
+### Program slideshow (`program.html`)
 
 | Key | Action |
 | --- | --- |
@@ -91,7 +92,7 @@ Click once on the page first so the browser window has focus. Moving to another 
 | **G** or **O** | Program list; choose with **↑ ↓ Enter** or click. **Esc** closes. |
 | **P** | Print / save as PDF, one slide per page |
 
-Slide order: slide 1 is the title, slide 2 the details, slides 3–23 are items 1–21, slide 24 is the closing slide. The address changes as you move (for example `index.html#12`), so reloading returns to the same place.
+Slide order: slide 1 is the title, slide 2 the details, slides 3–23 are items 1–21, slide 24 is the closing slide. The address changes as you move (for example `program.html#12`), so reloading returns to the same place.
 
 ### Main banner (`banner.html`)
 
@@ -306,7 +307,7 @@ These choices are saved in the browser on that computer and come back next time:
 - Whether the controls bar is shown.
 - For the lower thirds: the background, plate and animation. The name lower third also remembers auto-hide; the lyrics lower third remembers whether the title row and hymn-book details are shown.
 - The lyrics view (focus or one line), and the last `songs.json` you chose when opening from a folder.
-- Where you were: the address changes as you move (for example `index.html#12` or `lyrics.html#2.5`), so reloading returns to the same place.
+- Where you were: the address changes as you move (for example `program.html#12` or `lyrics.html#2.5`), so reloading returns to the same place.
 
 To reset everything, clear the site data for the page in the browser's settings.
 
@@ -322,7 +323,8 @@ Press **P** on the slideshow or the banner. In the print window choose *Landscap
 
 ```
 .
-├── index.html · style.css · script.js          Program slideshow
+├── index.html · home.css · home.js             Home page (links to every screen)
+├── program.html · style.css · script.js        Program slideshow
 ├── banner.html · banner.css · banner.js        Main banner
 ├── lyrics.html · lyrics.css · lyrics.js        Song lyrics page
 ├── lowerthird.html · .css · .js                Name lower third
