@@ -177,3 +177,6 @@ dialog textarea { min-height: 260px; margin: 10px 0; font-family: ui-monospace, 
   .kv { grid-template-columns: minmax(0, 1fr); }
 }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .toast { transition: none; } }
+
+.top .home { padding: 8px 14px; color: #c9d3e0; font-weight: 700; text-decoration: none; border-radius: 4px; }
+.top .home:hover, .top .home:focus-visible { color: #fff; background: rgba(255, 255, 255, .1); }

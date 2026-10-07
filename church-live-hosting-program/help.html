@@ -18,11 +18,11 @@
     <p class="lede small">There are no buttons on the screens. You control everything from the keyboard, so you can run a service without touching the mouse.</p>
 
     <div class="cards">
-      <a class="card" href="index.html">
+      <a class="card" href="program.html">
         <span class="card-k">Page 1</span>
         <strong>Program slideshow</strong>
         <span>A title slide, a details slide, one slide per program item and a closing slide.</span>
-        <em>Open index.html →</em>
+        <em>Open program.html →</em>
       </a>
       <a class="card" href="banner.html">
         <span class="card-k">Page 2</span>
@@ -94,7 +94,7 @@
     <section class="block" id="quick-start" data-section>
       <h2>Quick start</h2>
       <ol class="steps">
-        <li><strong>Open a page</strong> in a modern browser such as Chrome or Edge. Double-click <code>index.html</code>, <code>banner.html</code>, <code>lyrics.html</code>, <code>lowerthird.html</code> or <code>lyrics-lowerthird.html</code>. No internet is needed.</li>
+        <li><strong>Open a page</strong> in a modern browser such as Chrome or Edge. Double-click <code>index.html</code> (the home page, with a card for every screen and the Editor), or open one directly: <code>program.html</code>, <code>banner.html</code>, <code>lyrics.html</code>, <code>lowerthird.html</code> or <code>lyrics-lowerthird.html</code>. No internet is needed.</li>
         <li><strong>Make it yours.</strong> Open <code>editor.html</code> (the Editor Dashboard), replace the sample church, program, names and songs with your own, and press <kbd>Ctrl</kbd> + <kbd>S</kbd>. See <a href="#editor">Editor Dashboard</a>.</li>
         <li><strong>Move the window to the projector screen</strong>, then press <kbd>F</kbd> for fullscreen. Press <kbd>F</kbd> again or <kbd>Esc</kbd> to leave it.</li>
         <li><strong>Click once on the page</strong> so the browser listens to your keys. After that, use the keyboard only.</li>
@@ -111,7 +111,8 @@
       <table class="plain">
         <thead><tr><th>Page</th><th>File</th><th>What it is for</th></tr></thead>
         <tbody>
-          <tr data-s><td><strong>Program slideshow</strong></td><td><code>index.html</code></td><td>Shows the order of the program, one item per slide. It has a title slide with the church name, the date, venue and time, the details slide, one slide for each program item, and a closing slide. The title is the headline, an optional small connector word and the title line from <code>config.json</code>.</td></tr>
+          <tr data-s><td><strong>Home</strong></td><td><code>index.html</code></td><td>The page that opens first. It shows the church, title and date from <code>config.json</code> and a card for every screen and for the Editor Dashboard. Press <kbd>E</kbd> for the Editor, <kbd>1</kbd> to <kbd>5</kbd> to open a page, or <kbd>H</kbd> for this Help page. It is not meant for the projector.</td></tr>
+          <tr data-s><td><strong>Program slideshow</strong></td><td><code>program.html</code></td><td>Shows the order of the program, one item per slide. It has a title slide with the church name, the date, venue and time, the details slide, one slide for each program item, and a closing slide. The title is the headline, an optional small connector word and the title line from <code>config.json</code>.</td></tr>
           <tr data-s><td><strong>Main banner</strong></td><td><code>banner.html</code></td><td>A dark poster-style screen with a large cross, the title, the date plate and the details. Use it on the wall before the service starts and after it ends.</td></tr>
           <tr data-s><td><strong>Song lyrics</strong></td><td><code>lyrics.html</code></td><td>Shows one lyric line at a time with a smooth glide. The song title stays at the top. The song number and book edition are at the bottom right. Songs come from <code>songs.json</code>.</td></tr>
           <tr data-s><td><strong>Lower third</strong></td><td><code>lowerthird.html</code></td><td>A name graphic for the bottom of the picture: a small label such as <em>Speaker</em> or <em>Singer</em>, the name, and an optional line for the title or group. It has a see-through background so it can sit over a camera or video. Names are in <code>config.json</code>, and you can edit them in the Editor Dashboard.</td></tr>
@@ -144,7 +145,7 @@
     </section>
 
     <section class="block" id="keys-slideshow" data-section>
-      <h2>Program slideshow <code>index.html</code></h2>
+      <h2>Program slideshow <code>program.html</code></h2>
       <div class="table-wrap">
       <table class="keys">
         <thead><tr><th>Keys</th><th>What it does</th></tr></thead>
@@ -161,7 +162,7 @@
       </table>
       </div>
       <h3>Slide order</h3>
-      <p>Slide 1 is the title, slide 2 the details, then one slide for each program item (so item 1 is slide 3), and the last slide is the closing slide. The small number at the bottom right of each item slide is the <em>item</em> number. A web address such as <code>index.html#5</code> opens the page at <em>slide</em> 5.</p>
+      <p>Slide 1 is the title, slide 2 the details, then one slide for each program item (so item 1 is slide 3), and the last slide is the closing slide. The small number at the bottom right of each item slide is the <em>item</em> number. A web address such as <code>program.html#5</code> opens the page at <em>slide</em> 5.</p>
     </section>
 
     <section class="block" id="keys-banner" data-section>
@@ -362,7 +363,7 @@
     <section class="block" id="service-day" data-section>
       <h2>Service-day checklist</h2>
       <ul class="check">
-        <li>Open <code>banner.html</code>, <code>index.html</code> and <code>lyrics.html</code> in three tabs, each with the right slide or song.</li>
+        <li>Open <code>banner.html</code>, <code>program.html</code> and <code>lyrics.html</code> in three tabs, each with the right slide or song.</li>
         <li>Press <kbd>F</kbd> on each tab once so you know fullscreen works on the projector.</li>
         <li>Run through the lyrics for every song you will use: first line, a verse jump, last line.</li>
         <li>Test your clicker on the slideshow and on the lyrics page.</li>
@@ -500,7 +501,7 @@ a plain line, with an optional note under it:
         <li>The lyrics view (focus or one line).</li>
         <li>A copy of <code>config.json</code> and <code>songs.json</code>: the last data a page read or the Editor Dashboard saved. It lets the pages work when opened straight from a folder. If you change a JSON file by hand, the file wins.</li>
         <li>The folder you connected in the Editor Dashboard (Chrome or Edge).</li>
-        <li>Where you were. The web address changes as you move, for example <code>index.html#12</code> or <code>lyrics.html#2.5</code>. Reloading the page returns to the same place.</li>
+        <li>Where you were. The web address changes as you move, for example <code>program.html#12</code> or <code>lyrics.html#2.5</code>. Reloading the page returns to the same place.</li>
       </ul>
       <p>To reset everything, clear the site data for the page in the browser’s settings.</p>
     </section>

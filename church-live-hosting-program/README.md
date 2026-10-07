@@ -34,7 +34,8 @@ Plain HTML, CSS and JavaScript. No build step, no dependencies, no internet conn
 
 | Page | File | What it is for |
 | --- | --- | --- |
-| Program slideshow | `index.html` | The order of service, one program item per slide, with a title slide, a details slide and a closing slide. |
+| Home | `index.html` | The page that opens first: the church, title and date, and a card for every screen and for the Editor Dashboard. Press **E** for the Editor, **1**–**5** to open a page, **H** for Help. Not for the projector. |
+| Program slideshow | `program.html` | The order of service, one program item per slide, with a title slide, a details slide and a closing slide. |
 | Main banner | `banner.html` | A poster-style screen for the wall before the service starts and after it ends: church, title, big date plate and details. |
 | Song lyrics | `lyrics.html` | One lyric line at a time for the congregation, with the song title on top and the hymn number at the bottom right. |
 | Name lower third | `lowerthird.html` | A name graphic (speaker, singer, choir…) for the bottom of a live picture, with a transparent background. |
@@ -49,7 +50,7 @@ All screens are designed for a **16:9 projector (1920 × 1080)**. On other shape
 ## Quick start
 
 1. Download or copy this folder and keep **all files together** (it also runs from a USB stick).
-2. Open `index.html` in Chrome or Edge by double-clicking it.
+2. Open `index.html` (the home page) in Chrome or Edge by double-clicking it, then choose a screen. Open `program.html` for the slideshow.
 3. Move the window to the projector screen and press **F** for fullscreen.
 4. Move on with **→** or **Space**; go back with **←**.
 5. Open `editor.html`, change the sample content to yours, and press **Ctrl + S**. (Or edit `config.json` and `songs.json` in any text editor and press **F5**.)
@@ -378,7 +379,7 @@ Press **P** on the slideshow or the banner. In the print window choose *Landscap
 
 ## What the pages remember
 
-These choices are saved in the browser on that computer and come back next time: theme and animation, whether the controls bar is shown, the lower-third background, plate and auto-hide, the lyrics view, and the last `songs.json` you chose when opening from a folder. The address changes as you move (for example `index.html#5` or `lyrics.html#2.5`), so reloading returns to the same place. To reset everything, clear the site data for the page in the browser's settings.
+These choices are saved in the browser on that computer and come back next time: theme and animation, whether the controls bar is shown, the lower-third background, plate and auto-hide, the lyrics view, and the last `songs.json` you chose when opening from a folder. The address changes as you move (for example `program.html#5` or `lyrics.html#2.5`), so reloading returns to the same place. To reset everything, clear the site data for the page in the browser's settings.
 
 ---
 
@@ -390,7 +391,8 @@ church-live-hosting-program/
 ├── songs.json         ← DATA: hymns and songs (lyrics)
 ├── editor.html · editor.css · editor.js        Editor Dashboard (edits the two JSON files)
 ├── data.js            loads the JSON files, applies colours (shared by every page)
-├── index.html · style.css · script.js          Program slideshow
+├── index.html · home.css · home.js             Home page (links to every screen and the Editor)
+├── program.html · style.css · script.js        Program slideshow
 ├── banner.html · banner.css · banner.js        Main banner
 ├── lyrics.html · lyrics.css · lyrics.js        Song lyrics page
 ├── lowerthird.html · .css · .js                Name lower third

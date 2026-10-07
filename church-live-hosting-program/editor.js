@@ -595,7 +595,7 @@ ChurchData.ready(function () {
   function tabFiles() {
     const src = k => origin[k] === 'file' ? h('span', { class: 'badge ok', text: 'the file in the folder' }) : origin[k] === 'browser' ? h('span', { class: 'badge warn', text: 'the copy saved in this browser' }) : h('span', { class: 'badge', text: 'a blank start' });
     const pages = [
-      ['index.html', 'Program slideshow', 'The order of service'], ['banner.html', 'Main banner', 'Wall screen before and after'],
+      ['index.html', 'Home', 'Start page with links to everything'], ['program.html', 'Program slideshow', 'The order of service'], ['banner.html', 'Main banner', 'Wall screen before and after'],
       ['lyrics.html', 'Lyrics', 'One line at a time'], ['lowerthird.html', 'Name lower third', 'Names over live video'],
       ['lyrics-lowerthird.html', 'Lyrics lower third', 'Hymn lines over live video'], ['help.html', 'Help', 'Keys and setup']
     ];
